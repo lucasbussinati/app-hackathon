@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-sand-50 text-sage-900 antialiased;
+    font-feature-settings: "ss01", "cv02";
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-sage-600 px-6 py-3 text-white font-medium shadow-soft transition-all hover:bg-sage-700 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-sage-200 bg-white/60 px-5 py-2.5 text-sage-700 font-medium hover:bg-white transition-all;
+  }
+  .card {
+    @apply bg-white/80 backdrop-blur-md rounded-3xl border border-sage-100 shadow-soft;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-sage-200 bg-white/60 text-sage-700;
+  }
+}
