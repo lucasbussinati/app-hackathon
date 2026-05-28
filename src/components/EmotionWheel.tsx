@@ -8,6 +8,7 @@ import {
   getSecondaries,
   getTertiaries,
 } from "../data/emotions";
+import { t } from "../i18n";
 
 interface Props {
   selected: string[];
@@ -45,7 +46,7 @@ export default function EmotionWheel({ selected, onToggle }: Props) {
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         className="w-full h-auto touch-manipulation"
-        aria-label="Wheel of emotions"
+        aria-label={t.wheel.aria}
       >
         <defs>
           <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -200,7 +201,7 @@ export default function EmotionWheel({ selected, onToggle }: Props) {
           fontWeight={700}
           fill="#3b5538"
         >
-          You
+          {t.wheel.center}
         </text>
         <text
           x={CENTER}
@@ -209,7 +210,7 @@ export default function EmotionWheel({ selected, onToggle }: Props) {
           fontSize={9.5}
           fill="#5e8358"
         >
-          {selected.length === 0 ? "tap any wedge" : `${selected.length} picked`}
+          {selected.length === 0 ? t.wheel.empty : t.wheel.picked(selected.length)}
         </text>
       </svg>
     </div>

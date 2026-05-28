@@ -1,5 +1,6 @@
 import { BODY_REGIONS } from "../data/bodyRegions";
 import type { BodyRegion } from "../data/types";
+import { t } from "../i18n";
 
 interface Props {
   selected: BodyRegion[];
@@ -9,7 +10,7 @@ interface Props {
 export default function BodyMap({ selected, onToggle }: Props) {
   return (
     <div className="relative mx-auto w-full max-w-[220px] select-none">
-      <svg viewBox="0 0 200 480" className="w-full h-auto" aria-label="Human body silhouette">
+      <svg viewBox="0 0 200 480" className="w-full h-auto" aria-label={t.bodyMap.aria}>
         <defs>
           <linearGradient id="body-grad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#e6ede5" />
@@ -76,7 +77,7 @@ export default function BodyMap({ selected, onToggle }: Props) {
 
       <div className="mt-3 flex flex-wrap justify-center gap-1.5">
         {selected.length === 0 ? (
-          <p className="text-xs text-sage-600">Tap any area where you feel discomfort.</p>
+          <p className="text-xs text-sage-600">{t.bodyMap.hint}</p>
         ) : (
           selected.map((id) => {
             const region = BODY_REGIONS.find((r) => r.id === id)!;

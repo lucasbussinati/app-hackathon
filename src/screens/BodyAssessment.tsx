@@ -2,17 +2,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAssessment } from "../store/assessment";
 import BodyMap from "../components/BodyMap";
 import { DISCOMFORT_TYPES } from "../data/bodyRegions";
+import { t } from "../i18n";
 
 const INTENSITIES = [
-  { id: "mild", label: "Mild", emoji: "🌱" },
-  { id: "moderate", label: "Moderate", emoji: "🌿" },
-  { id: "intense", label: "Intense", emoji: "🌶️" },
+  { id: "mild", label: t.body.intensities.mild, emoji: "🌱" },
+  { id: "moderate", label: t.body.intensities.moderate, emoji: "🌿" },
+  { id: "intense", label: t.body.intensities.intense, emoji: "🌶️" },
 ] as const;
 
 const DURATIONS = [
-  { id: "acute", label: "Just today", emoji: "⏱️" },
-  { id: "recurring", label: "On and off", emoji: "🔁" },
-  { id: "chronic", label: "Ongoing", emoji: "📆" },
+  { id: "acute", label: t.body.durations.acute, emoji: "⏱️" },
+  { id: "recurring", label: t.body.durations.recurring, emoji: "🔁" },
+  { id: "chronic", label: t.body.durations.chronic, emoji: "📆" },
 ] as const;
 
 export default function BodyAssessment() {
@@ -34,12 +35,10 @@ export default function BodyAssessment() {
     <div className="flex flex-col gap-6">
       <header>
         <p className="text-xs uppercase tracking-widest text-sage-500 font-semibold">
-          Step 1 of 3
+          {t.body.step}
         </p>
-        <h1 className="text-2xl mt-1">Where does it ask for attention?</h1>
-        <p className="text-sm text-sage-700 mt-1">
-          Tap the areas of your body and the type of feeling. Skip what doesn't apply.
-        </p>
+        <h1 className="text-2xl mt-1">{t.body.title}</h1>
+        <p className="text-sm text-sage-700 mt-1">{t.body.subtitle}</p>
       </header>
 
       <section className="card p-4">
@@ -47,7 +46,7 @@ export default function BodyAssessment() {
       </section>
 
       <section className="card p-4">
-        <h2 className="text-sm font-semibold text-sage-800 mb-3">What does it feel like?</h2>
+        <h2 className="text-sm font-semibold text-sage-800 mb-3">{t.body.feelLike}</h2>
         <div className="flex flex-wrap gap-2">
           {DISCOMFORT_TYPES.map((d) => {
             const selected = discomfortTypes.includes(d.id);
@@ -71,7 +70,7 @@ export default function BodyAssessment() {
       </section>
 
       <section className="card p-4">
-        <h2 className="text-sm font-semibold text-sage-800 mb-3">Intensity</h2>
+        <h2 className="text-sm font-semibold text-sage-800 mb-3">{t.body.intensity}</h2>
         <div className="grid grid-cols-3 gap-2">
           {INTENSITIES.map((i) => (
             <button
@@ -91,7 +90,7 @@ export default function BodyAssessment() {
       </section>
 
       <section className="card p-4">
-        <h2 className="text-sm font-semibold text-sage-800 mb-3">How long has it been?</h2>
+        <h2 className="text-sm font-semibold text-sage-800 mb-3">{t.body.duration}</h2>
         <div className="grid grid-cols-3 gap-2">
           {DURATIONS.map((d) => (
             <button
@@ -112,14 +111,14 @@ export default function BodyAssessment() {
 
       <div className="flex items-center justify-between gap-3">
         <Link to="/" className="btn-ghost">
-          Back
+          {t.body.back}
         </Link>
         <button
           className="btn-primary flex-1"
           disabled={!canContinue}
           onClick={() => navigate("/emotions")}
         >
-          Next — emotions
+          {t.body.next}
         </button>
       </div>
     </div>

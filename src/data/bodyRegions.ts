@@ -1,6 +1,8 @@
 import type { BodyRegion, DiscomfortType } from "./types";
+import { LANG } from "../i18n/config";
+import { PT_DISCOMFORT_LABELS, PT_REGION_LABELS } from "../i18n/content";
 
-export const BODY_REGIONS: Array<{
+const RAW_BODY_REGIONS: Array<{
   id: BodyRegion;
   label: string;
   /** Center of the region on the SVG body silhouette (viewBox 0 0 200 480) */
@@ -20,7 +22,12 @@ export const BODY_REGIONS: Array<{
   { id: "feet", label: "Feet", cx: 100, cy: 445, r: 22 },
 ];
 
-export const DISCOMFORT_TYPES: Array<{ id: DiscomfortType; label: string; emoji: string }> = [
+export const BODY_REGIONS =
+  LANG === "pt"
+    ? RAW_BODY_REGIONS.map((r) => ({ ...r, label: PT_REGION_LABELS[r.id] ?? r.label }))
+    : RAW_BODY_REGIONS;
+
+const RAW_DISCOMFORT_TYPES: Array<{ id: DiscomfortType; label: string; emoji: string }> = [
   { id: "headache", label: "Headache", emoji: "🤕" },
   { id: "tension", label: "Tension", emoji: "🧱" },
   { id: "pain", label: "Pain", emoji: "⚡" },
@@ -29,3 +36,8 @@ export const DISCOMFORT_TYPES: Array<{ id: DiscomfortType; label: string; emoji:
   { id: "digestive", label: "Digestive", emoji: "🌀" },
   { id: "stress", label: "Stress", emoji: "🌪️" },
 ];
+
+export const DISCOMFORT_TYPES =
+  LANG === "pt"
+    ? RAW_DISCOMFORT_TYPES.map((d) => ({ ...d, label: PT_DISCOMFORT_LABELS[d.id] ?? d.label }))
+    : RAW_DISCOMFORT_TYPES;

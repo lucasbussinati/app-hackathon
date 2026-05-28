@@ -1,4 +1,5 @@
 import type { ReflexPoint, ReflexZone } from "../data/types";
+import { t } from "../i18n";
 
 interface Props {
   zone: ReflexZone;
@@ -12,7 +13,7 @@ export default function ReflexDiagram({ zone, point, size = 140 }: Props) {
       viewBox="0 0 100 100"
       style={{ width: size, height: size }}
       className="rounded-2xl bg-sand-100/50"
-      aria-label={`${point.name} diagram`}
+      aria-label={t.results.diagram(point.name)}
     >
       <defs>
         <radialGradient id="hl" cx="50%" cy="50%" r="50%">

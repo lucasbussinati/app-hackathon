@@ -5,6 +5,7 @@ import { findEmotion } from "../data/emotions";
 import { BODY_REGIONS, DISCOMFORT_TYPES } from "../data/bodyRegions";
 import { findPointById } from "../data/reflexPoints";
 import type { Session } from "../data/types";
+import { LANG, t } from "../i18n";
 
 export default function History() {
   const [sessions, setSessions] = useState<Session[]>([]);
@@ -17,12 +18,10 @@ export default function History() {
     return (
       <div className="card p-6 text-center flex flex-col items-center gap-3">
         <span className="text-3xl">🌱</span>
-        <h1 className="text-xl">No sessions yet</h1>
-        <p className="text-sm text-sage-700">
-          Once you complete a session, you'll find it here to revisit.
-        </p>
+        <h1 className="text-xl">{t.history.emptyTitle}</h1>
+        <p className="text-sm text-sage-700">{t.history.emptyText}</p>
         <Link to="/body" className="btn-primary mt-2">
-          Start one now
+          {t.history.startNow}
         </Link>
       </div>
     );
@@ -31,17 +30,17 @@ export default function History() {
   return (
     <div className="flex flex-col gap-4">
       <header className="flex items-center justify-between">
-        <h1 className="text-2xl">History</h1>
+        <h1 className="text-2xl">{t.history.title}</h1>
         <button
           onClick={() => {
-            if (confirm("Clear all saved sessions?")) {
+            if (confirm(t.history.clearConfirm)) {
               clearAllSessions();
               setSessions([]);
             }
           }}
           className="text-xs text-sage-600 hover:text-sage-800 underline"
         >
-          Clear all
+          {t.history.clearAll}
         </button>
       </header>
 
@@ -56,13 +55,13 @@ export default function History() {
                   setSessions(loadSessions());
                 }}
                 className="text-xs text-sage-500 hover:text-red-600"
-                aria-label="Delete session"
+                aria-label={t.history.deleteAria}
               >
-                Delete
+                {t.history.delete}
               </button>
             </div>
 
-            <Group label="Body">
+            <Group label={t.history.body}>
               {s.physical.regions.map((id) => (
                 <span key={id} className="chip">
                   {BODY_REGIONS.find((r) => r.id === id)?.label ?? id}
@@ -73,11 +72,11 @@ export default function History() {
                   {DISCOMFORT_TYPES.find((d) => d.id === id)?.label ?? id}
                 </span>
               ))}
-              <span className="chip">{s.physical.intensity}</span>
-              <span className="chip">{s.physical.duration}</span>
+              <span className="chip">{t.enums.intensity[s.physical.intensity]}</span>
+              <span className="chip">{t.enums.duration[s.physical.duration]}</span>
             </Group>
 
-            <Group label="Emotions">
+            <Group label={t.history.emotions}>
               {s.emotions.map((id) => (
                 <span key={id} className="chip">
                   {findEmotion(id)?.label ?? id}
@@ -85,7 +84,7 @@ export default function History() {
               ))}
               {s.emotions.length > 0 && s.emotionalPresence && (
                 <span className="chip bg-sage-100 border-sage-300 text-sage-800">
-                  {s.emotionalPresence} presence
+                  {t.enums.presencePhrase[s.emotionalPresence]}
                 </span>
               )}
               {s.emotions.length === 0 && (
@@ -96,7 +95,7 @@ export default function History() {
             {s.emotionalNote && (
               <div className="mt-2">
                 <p className="text-[10px] uppercase tracking-widest text-sage-500 font-semibold mb-1">
-                  Note
+                  {t.history.note}
                 </p>
                 <p className="text-xs italic text-sage-700 leading-relaxed">
                   "{s.emotionalNote}"
@@ -104,7 +103,7 @@ export default function History() {
               </div>
             )}
 
-            <Group label="Recommended">
+            <Group label={t.history.recommended}>
               {s.recommendedPointIds.map((id) => {
                 const p = findPointById(id);
                 if (!p) return null;
@@ -135,7 +134,7 @@ function Group({ label, children }: { label: string; children: React.ReactNode }
 
 function formatDate(ts: number) {
   const d = new Date(ts);
-  return d.toLocaleString(undefined, {
+  return d.toLocaleString(LANG === "pt" ? "pt-BR" : undefined, {
     weekday: "short",
     month: "short",
     day: "numeric",

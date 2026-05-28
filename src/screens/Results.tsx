@@ -6,7 +6,8 @@ import { findEmotion } from "../data/emotions";
 import { BODY_REGIONS, DISCOMFORT_TYPES } from "../data/bodyRegions";
 import ReflexDiagram from "../components/ReflexDiagram";
 import { saveSession } from "../data/storage";
-import type { Session } from "../data/types";
+import type { EmotionalPresence, Session } from "../data/types";
+import { t, tagLabel } from "../i18n";
 
 export default function Results() {
   const navigate = useNavigate();
@@ -41,11 +42,9 @@ export default function Results() {
   if (!hasAnyInput) {
     return (
       <div className="card p-6 text-center">
-        <p className="text-sage-700 mb-4">
-          Nothing to recommend yet — let's start a session first.
-        </p>
+        <p className="text-sage-700 mb-4">{t.results.emptyText}</p>
         <Link to="/body" className="btn-primary">
-          Begin assessment
+          {t.results.beginAssessment}
         </Link>
       </div>
     );
@@ -55,12 +54,10 @@ export default function Results() {
     <div className="flex flex-col gap-6">
       <header>
         <p className="text-xs uppercase tracking-widest text-sage-500 font-semibold">
-          Step 3 of 3
+          {t.results.step}
         </p>
-        <h1 className="text-2xl mt-1">Your reflexology plan</h1>
-        <p className="text-sm text-sage-700 mt-1">
-          {results.length} points tailored to how you're feeling right now.
-        </p>
+        <h1 className="text-2xl mt-1">{t.results.title}</h1>
+        <p className="text-sm text-sage-700 mt-1">{t.results.subtitle(results.length)}</p>
       </header>
 
       <SignalSummary
@@ -73,7 +70,7 @@ export default function Results() {
       {emotionalNote.trim() && (
         <section className="card p-4 border-l-4 border-sage-400">
           <p className="text-[10px] uppercase tracking-widest font-semibold text-sage-500 mb-1">
-            What you noted
+            {t.results.whatYouNoted}
           </p>
           <p className="text-sm text-sage-800 leading-relaxed italic">
             "{emotionalNote.trim()}"
@@ -89,23 +86,28 @@ export default function Results() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="text-lg leading-tight">{point.name}</h3>
-                  <span className="chip whitespace-nowrap">{point.zone}</span>
+                  <span className="chip whitespace-nowrap">{t.enums.zone[point.zone]}</span>
                 </div>
                 <div className="mt-1 flex flex-wrap gap-1">
-                  <span className="chip">Pressure: {point.pressure}</span>
+                  <span className="chip">
+                    {t.results.pressure} {t.enums.pressure[point.pressure]}
+                  </span>
                   <span className="chip">{point.durationSec}s</span>
                 </div>
                 {matches.length > 0 && matches[0] !== "grounding" && (
                   <p className="text-[11px] mt-2 text-sage-600">
-                    Suggested for: <span className="font-medium">{matches.slice(0, 4).join(", ")}</span>
+                    {t.results.suggestedFor}{" "}
+                    <span className="font-medium">
+                      {matches.slice(0, 4).map(tagLabel).join(", ")}
+                    </span>
                   </p>
                 )}
               </div>
             </div>
 
             <div className="mt-3 space-y-2">
-              <Section title="How to do it">{point.technique}</Section>
-              <Section title="Why it helps">{point.rationale}</Section>
+              <Section title={t.results.howTo}>{point.technique}</Section>
+              <Section title={t.results.whyHelps}>{point.rationale}</Section>
             </div>
           </li>
         ))}
@@ -119,10 +121,10 @@ export default function Results() {
             navigate("/");
           }}
         >
-          Done
+          {t.results.done}
         </button>
         <Link to="/body" className="btn-primary flex-1" onClick={reset}>
-          New session
+          {t.results.newSession}
         </Link>
       </div>
     </div>
@@ -147,13 +149,13 @@ function SignalSummary({
   regions: string[];
   discomfortTypes: string[];
   emotions: string[];
-  emotionalPresence: string;
+  emotionalPresence: EmotionalPresence;
 }) {
   if (!regions.length && !discomfortTypes.length && !emotions.length) return null;
   return (
     <section className="card p-4">
       <p className="text-[11px] uppercase tracking-widest font-semibold text-sage-500 mb-2">
-        Based on
+        {t.results.basedOn}
       </p>
       <div className="flex flex-wrap gap-1.5">
         {regions.map((id) => (
@@ -173,7 +175,7 @@ function SignalSummary({
         ))}
         {emotions.length > 0 && (
           <span className="chip bg-sage-100 border-sage-300 text-sage-800">
-            {emotionalPresence} presence
+            {t.enums.presencePhrase[emotionalPresence]}
           </span>
         )}
       </div>

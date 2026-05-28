@@ -1,18 +1,16 @@
+import { t } from "../i18n";
+
 const WHATSAPP_NUMBER = "5515991733040";
 const WHATSAPP_DISPLAY = "+55 15 99173-3040";
-const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hi Friederike! I tried Sole, the reflexology app, and I'd love to schedule a session with you.",
-);
+const WHATSAPP_MESSAGE = encodeURIComponent(t.about.whatsappMessage);
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
 export default function About() {
   return (
     <div className="flex flex-col gap-4">
       <header>
-        <h1 className="text-2xl">About Sole</h1>
-        <p className="text-sm text-sage-700 mt-1">
-          A small, calm companion for everyday self-care.
-        </p>
+        <h1 className="text-2xl">{t.about.title}</h1>
+        <p className="text-sm text-sage-700 mt-1">{t.about.subtitle}</p>
       </header>
 
       {/* ----------------- Featured: the expert behind Sole ----------------- */}
@@ -22,7 +20,7 @@ export default function About() {
 
         <div className="relative">
           <p className="text-[10px] uppercase tracking-widest font-semibold text-sage-600 mb-2">
-            The brain behind Sole
+            {t.about.brainLabel}
           </p>
 
           <div className="flex items-start gap-3 mb-3">
@@ -31,23 +29,21 @@ export default function About() {
               <h2 className="text-xl font-display leading-tight text-sage-900">
                 Friederike Portella
               </h2>
-              <p className="text-xs text-sage-600 mt-0.5">
-                Certified Reflexology Specialist
-              </p>
+              <p className="text-xs text-sage-600 mt-0.5">{t.about.role}</p>
               <div className="mt-2 flex flex-wrap gap-1">
-                <span className="chip">Feet</span>
-                <span className="chip">Hands</span>
-                <span className="chip">Ears</span>
-                <span className="chip">Holistic care</span>
+                {t.about.chips.map((c) => (
+                  <span key={c} className="chip">
+                    {c}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
 
           <p className="text-sm text-sage-800 leading-relaxed">
-            Every point, every instruction, and every connection between body and emotion in
-            Sole comes from <span className="font-semibold">Friederike's</span> hands-on
-            practice. The app is a small window into her work — for the real depth, the
-            personalized touch, and the listening, you'll want a session with her.
+            {t.about.bioBefore}
+            <span className="font-semibold">{t.about.bioName}</span>
+            {t.about.bioAfter}
           </p>
 
           <a
@@ -57,41 +53,26 @@ export default function About() {
             className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-white font-semibold shadow-soft hover:bg-[#1ebe5d] active:scale-[0.98] transition-all"
           >
             <WhatsAppIcon className="w-5 h-5" />
-            Enjoyed the content? Schedule a session
+            {t.about.cta}
           </a>
 
           <p className="mt-2 text-center text-[11px] text-sage-600">
-            Opens WhatsApp · {WHATSAPP_DISPLAY}
+            {t.about.opensWhatsapp}
+            {WHATSAPP_DISPLAY}
           </p>
         </div>
       </section>
 
       <section className="card p-4 space-y-3 text-sm text-sage-800 leading-relaxed">
-        <h2 className="text-base font-semibold text-sage-900">What Sole is</h2>
-        <p>
-          Reflexology is a touch practice based on the idea that points on the feet, hands and
-          ears correspond to other parts of the body. Sole helps you find a few points to try
-          based on how you say you feel — physically and emotionally — right now.
-        </p>
-        <p>
-          The point catalogue, instructions, and the connections between body areas and
-          emotional states were curated by Friederike Portella. The app is a digital companion;
-          the practice itself is hers.
-        </p>
+        <h2 className="text-base font-semibold text-sage-900">{t.about.whatIsTitle}</h2>
+        <p>{t.about.whatIsP1}</p>
+        <p>{t.about.whatIsP2}</p>
       </section>
 
       <section className="card p-4 space-y-2 text-sm text-sage-800 leading-relaxed">
-        <h2 className="text-base font-semibold text-sage-900">How recommendations work</h2>
-        <p>
-          When you complete an assessment, each saved point is scored by how many of its tags
-          overlap with what you selected (body regions, discomfort types, emotions). Intensity,
-          duration and emotional presence give a small extra weight. The top matches are what
-          you see.
-        </p>
-        <p className="text-sage-600 text-xs">
-          Built as a hackathon MVP — the engine is intentionally transparent so you can see why
-          a point appeared.
-        </p>
+        <h2 className="text-base font-semibold text-sage-900">{t.about.howTitle}</h2>
+        <p>{t.about.howP1}</p>
+        <p className="text-sage-600 text-xs">{t.about.howP2}</p>
       </section>
     </div>
   );

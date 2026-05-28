@@ -1,4 +1,6 @@
 import type { ReflexPoint } from "./types";
+import { LANG } from "../i18n/config";
+import { PT_POINTS } from "../i18n/content";
 
 /**
  * Curated set of common reflexology points used in self-care literature.
@@ -8,7 +10,7 @@ import type { ReflexPoint } from "./types";
  * NOTE: This is educational content for an MVP/hackathon; in production we'd
  * vet the catalogue with a licensed reflexologist and add citations.
  */
-export const REFLEX_POINTS: ReflexPoint[] = [
+const RAW_REFLEX_POINTS: ReflexPoint[] = [
   {
     id: "solar-plexus-foot",
     name: "Solar Plexus (foot)",
@@ -150,6 +152,15 @@ export const REFLEX_POINTS: ReflexPoint[] = [
     tags: ["disconnected", "withdrawn", "tired", "confused", "uneasy"],
   },
 ];
+
+/** Localized at build time: only display text changes for PT; ids/tags are stable. */
+export const REFLEX_POINTS: ReflexPoint[] =
+  LANG === "pt"
+    ? RAW_REFLEX_POINTS.map((p) => {
+        const tr = PT_POINTS[p.id];
+        return tr ? { ...p, name: tr.name, technique: tr.technique, rationale: tr.rationale } : p;
+      })
+    : RAW_REFLEX_POINTS;
 
 export function findPointById(id: string) {
   return REFLEX_POINTS.find((p) => p.id === id);

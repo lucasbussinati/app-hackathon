@@ -1,4 +1,6 @@
 import type { Emotion, EmotionFamily } from "./types";
+import { LANG } from "../i18n/config";
+import { PT_EMOTION_LABELS, PT_FAMILY_LABELS } from "../i18n/content";
 
 /**
  * Three-tier emotion taxonomy inspired by Gloria Wilcox's Feelings Wheel.
@@ -10,7 +12,7 @@ import type { Emotion, EmotionFamily } from "./types";
  * The recommender expands a selection upward (to family) and downward
  * (to descendants), so users can be vague or precise.
  */
-export const EMOTIONS: Emotion[] = [
+const RAW_EMOTIONS: Emotion[] = [
   // ============================ JOY ============================
   { id: "joy", label: "Joy", family: "joy", level: 1 },
   { id: "joy.peaceful", label: "Peaceful", family: "joy", level: 2, parentId: "joy" },
@@ -66,6 +68,12 @@ export const EMOTIONS: Emotion[] = [
   { id: "judgmental", label: "Critical", family: "disgust", level: 3, parentId: "disgust.uneasy" },
 ];
 
+/** Localized at build time: only `label` changes for PT; ids/levels are stable. */
+export const EMOTIONS: Emotion[] =
+  LANG === "pt"
+    ? RAW_EMOTIONS.map((e) => ({ ...e, label: PT_EMOTION_LABELS[e.id] ?? e.label }))
+    : RAW_EMOTIONS;
+
 /** Ordered list of family ids — used by the wheel to lay out wedges. */
 export const FAMILY_ORDER: EmotionFamily[] = [
   "joy",
@@ -76,7 +84,7 @@ export const FAMILY_ORDER: EmotionFamily[] = [
   "anger",
 ];
 
-export const FAMILY_LABELS: Record<EmotionFamily, string> = {
+const RAW_FAMILY_LABELS: Record<EmotionFamily, string> = {
   joy: "Joy",
   surprise: "Surprise",
   fear: "Fear",
@@ -84,6 +92,9 @@ export const FAMILY_LABELS: Record<EmotionFamily, string> = {
   disgust: "Disgust",
   anger: "Anger",
 };
+
+export const FAMILY_LABELS: Record<EmotionFamily, string> =
+  LANG === "pt" ? PT_FAMILY_LABELS : RAW_FAMILY_LABELS;
 
 /**
  * Per-family palette with three shades for the three rings.

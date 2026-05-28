@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAssessment } from "../store/assessment";
+import { t } from "../i18n";
 
 export default function Welcome() {
   const { reset } = useAssessment();
@@ -9,25 +10,22 @@ export default function Welcome() {
         <div className="mx-auto mb-3 w-20 h-20 rounded-full bg-sage-100 flex items-center justify-center text-4xl">
           🌿
         </div>
-        <h1 className="text-3xl mb-1">Hi, take a breath.</h1>
-        <p className="text-sage-700 text-sm leading-relaxed mb-5">
-          Sole maps how your body and feelings show up today, then guides you to reflexology
-          points that may bring relief.
-        </p>
+        <h1 className="text-3xl mb-1">{t.welcome.greeting}</h1>
+        <p className="text-sage-700 text-sm leading-relaxed mb-5">{t.welcome.intro}</p>
         <Link to="/body" onClick={reset} className="btn-primary w-full">
-          Start a session
+          {t.welcome.start}
           <ArrowIcon />
         </Link>
         <Link to="/history" className="block mt-3 text-sm text-sage-600 hover:text-sage-800">
-          View past sessions
+          {t.welcome.viewPast}
         </Link>
       </section>
 
       <section className="grid grid-cols-3 gap-3">
         {[
-          { icon: "🫶", label: "Body" },
-          { icon: "💭", label: "Emotions" },
-          { icon: "🦶", label: "Points" },
+          { icon: "🫶", label: t.welcome.body },
+          { icon: "💭", label: t.welcome.emotions },
+          { icon: "🦶", label: t.welcome.points },
         ].map((s, i) => (
           <div
             key={s.label}

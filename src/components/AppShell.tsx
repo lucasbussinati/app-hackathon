@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { OTHER, t } from "../i18n";
 
 const navItems = [
-  { to: "/", label: "Home", icon: HomeIcon },
-  { to: "/history", label: "History", icon: HistoryIcon },
-  { to: "/about", label: "About", icon: InfoIcon },
+  { to: "/", label: t.nav.home, icon: HomeIcon },
+  { to: "/history", label: t.nav.history, icon: HistoryIcon },
+  { to: "/about", label: t.nav.about, icon: InfoIcon },
 ];
 
 export default function AppShell() {
@@ -13,6 +15,12 @@ export default function AppShell() {
     pathname.startsWith("/emotions") ||
     pathname.startsWith("/results");
 
+  // Reset scroll to the top on each route change, so moving between steps
+  // (1 → 2 → 3) starts at the top instead of keeping the previous position.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div className="min-h-full bg-gradient-to-b from-sand-50 via-sand-50 to-sage-50 flex flex-col">
       <header className="sticky top-0 z-20 backdrop-blur-md bg-sand-50/80 border-b border-sage-100">
@@ -20,9 +28,16 @@ export default function AppShell() {
           <Logo className="w-8 h-8" />
           <div className="flex-1">
             <p className="font-display text-lg leading-none text-sage-800">Sole</p>
-            <p className="text-[11px] text-sage-600 leading-tight">Reflexology, gently guided</p>
+            <p className="text-[11px] text-sage-600 leading-tight">{t.header.tagline}</p>
           </div>
           {onAssessmentFlow && <FlowProgress />}
+          <a
+            href={OTHER.href}
+            aria-label={t.switcher.aria}
+            className="ml-1 shrink-0 rounded-full border border-sage-200 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-sage-700 transition-colors hover:border-sage-400 hover:text-sage-900"
+          >
+            {OTHER.code}
+          </a>
         </div>
       </header>
 
