@@ -17,8 +17,11 @@ export interface Strings {
     start: string;
     viewPast: string;
     body: string;
+    bodyDesc: string;
     emotions: string;
+    emotionsDesc: string;
     points: string;
+    pointsDesc: string;
   };
   body: {
     step: string;
@@ -89,7 +92,6 @@ export interface Strings {
     subtitle: string;
     brainLabel: string;
     role: string;
-    chips: string[];
     bioBefore: string;
     bioName: string;
     bioAfter: string;
@@ -126,8 +128,14 @@ const en: Strings = {
     start: "Start a session",
     viewPast: "View past sessions",
     body: "Body",
+    bodyDesc:
+      "Tension, pain and fatigue leave traces. Reflexology reads the body as a map — each region of discomfort points to specific reflex areas that can help release what's stuck.",
     emotions: "Emotions",
+    emotionsDesc:
+      "What you feel emotionally often shows up physically. Anxiety tightens the chest, sadness weighs on the shoulders. Recognizing the emotion helps us find the right points.",
     points: "Points",
+    pointsDesc:
+      "Feet, hands and ears hold reflex points that mirror the whole body. By connecting what you feel — physically and emotionally — Sole recommends the points that bring it all together.",
   },
   body: {
     step: "Step 1 of 3",
@@ -211,7 +219,6 @@ const en: Strings = {
     subtitle: "A small, calm companion for everyday self-care.",
     brainLabel: "The brain behind Sole",
     role: "Certified Reflexology Specialist",
-    chips: ["Feet", "Hands", "Ears", "Holistic care"],
     bioBefore:
       "Every point, every instruction, and every connection between body and emotion in Sole comes from ",
     bioName: "Friederike's",
@@ -258,8 +265,14 @@ const pt: Strings = {
     start: "Começar uma sessão",
     viewPast: "Ver sessões anteriores",
     body: "Corpo",
+    bodyDesc:
+      "Tensão, dor e cansaço deixam marcas. A reflexologia lê o corpo como um mapa — cada região de desconforto aponta para áreas reflexas específicas que podem ajudar a liberar o que está travado.",
     emotions: "Emoções",
+    emotionsDesc:
+      "O que você sente emocionalmente costuma aparecer no corpo. Ansiedade aperta o peito, tristeza pesa nos ombros. Reconhecer a emoção nos ajuda a encontrar os pontos certos.",
     points: "Pontos",
+    pointsDesc:
+      "Pés, mãos e orelhas têm pontos reflexos que espelham o corpo inteiro. Conectando o que você sente — física e emocionalmente — o Sole recomenda os pontos que unem tudo.",
   },
   body: {
     step: "Etapa 1 de 3",
@@ -344,7 +357,6 @@ const pt: Strings = {
     subtitle: "Um companheiro pequeno e calmo para o autocuidado do dia a dia.",
     brainLabel: "A mente por trás do Sole",
     role: "Especialista Certificada em Reflexologia",
-    chips: ["Pés", "Mãos", "Orelhas", "Cuidado holístico"],
     bioBefore:
       "Cada ponto, cada instrução e cada conexão entre corpo e emoção no Sole vem da prática de ",
     bioName: "Friederike",

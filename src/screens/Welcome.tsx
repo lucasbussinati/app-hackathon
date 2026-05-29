@@ -21,19 +21,22 @@ export default function Welcome() {
         </Link>
       </section>
 
-      <section className="grid grid-cols-3 gap-3">
+      <section className="flex flex-col gap-3">
         {[
-          { icon: "🫶", label: t.welcome.body },
-          { icon: "💭", label: t.welcome.emotions },
-          { icon: "🦶", label: t.welcome.points },
+          { icon: "🫶", label: t.welcome.body, desc: t.welcome.bodyDesc },
+          { icon: "💭", label: t.welcome.emotions, desc: t.welcome.emotionsDesc },
+          { icon: "🦶", label: t.welcome.points, desc: t.welcome.pointsDesc },
         ].map((s, i) => (
           <div
             key={s.label}
-            className="card p-4 flex flex-col items-center text-center gap-1"
+            className="card p-4 flex items-start gap-3"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <span className="text-2xl">{s.icon}</span>
-            <span className="text-xs font-medium text-sage-700">{s.label}</span>
+            <span className="text-2xl mt-0.5 shrink-0">{s.icon}</span>
+            <div>
+              <span className="text-sm font-semibold text-sage-800">{s.label}</span>
+              <p className="text-xs text-sage-600 leading-relaxed mt-1">{s.desc}</p>
+            </div>
           </div>
         ))}
       </section>

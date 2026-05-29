@@ -30,13 +30,6 @@ export default function About() {
                 Friederike Portella
               </h2>
               <p className="text-xs text-sage-600 mt-0.5">{t.about.role}</p>
-              <div className="mt-2 flex flex-wrap gap-1">
-                {t.about.chips.map((c) => (
-                  <span key={c} className="chip">
-                    {c}
-                  </span>
-                ))}
-              </div>
             </div>
           </div>
 
