@@ -103,7 +103,6 @@ export interface Strings {
     whatIsP2: string;
     howTitle: string;
     howP1: string;
-    howP2: string;
   };
   enums: {
     zone: Record<ReflexZone, string>;
@@ -236,8 +235,6 @@ const en: Strings = {
     howTitle: "How recommendations work",
     howP1:
       "When you complete an assessment, each saved point is scored by how many of its tags overlap with what you selected (body regions, discomfort types, emotions). Intensity, duration and emotional presence give a small extra weight. The top matches are what you see.",
-    howP2:
-      "Built as a hackathon MVP — the engine is intentionally transparent so you can see why a point appeared.",
   },
   enums: {
     zone: { foot: "foot", hand: "hand", ear: "ear" },
@@ -374,8 +371,6 @@ const pt: Strings = {
     howTitle: "Como funcionam as recomendações",
     howP1:
       "Quando você conclui uma avaliação, cada ponto salvo recebe uma pontuação pela quantidade de tags que coincidem com o que você selecionou (regiões do corpo, tipos de desconforto, emoções). Intensidade, duração e presença emocional dão um pequeno peso extra. As melhores combinações são o que você vê.",
-    howP2:
-      "Feito como um MVP de hackathon — o mecanismo é propositalmente transparente para você ver por que um ponto apareceu.",
   },
   enums: {
     zone: { foot: "pé", hand: "mão", ear: "orelha" },

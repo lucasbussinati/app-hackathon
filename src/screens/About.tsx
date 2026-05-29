@@ -65,7 +65,6 @@ export default function About() {
       <section className="card p-4 space-y-2 text-sm text-sage-800 leading-relaxed">
         <h2 className="text-base font-semibold text-sage-900">{t.about.howTitle}</h2>
         <p>{t.about.howP1}</p>
-        <p className="text-sage-600 text-xs">{t.about.howP2}</p>
       </section>
     </div>
   );
