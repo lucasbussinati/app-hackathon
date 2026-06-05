@@ -82,3 +82,73 @@ export interface Session {
   emotionalNote?: string;
   recommendedPointIds: string[];
 }
+
+// ---------------------------------------------------------------------------
+// Body–Mind Map ("the brain")
+//
+// A curated knowledge base authored by the reflexology specialist. Each entry
+// connects a body structure (organ, gland, spine segment, joint) to its
+// physical role and the psychosomatic / symbolic theme traditionally
+// associated with it. The app uses this to explain to the user what a given
+// discomfort *may* be communicating — a reflective, complementary lens, never
+// a diagnosis.
+//
+// The schema is intentionally explicit and self-describing so it can also be
+// consumed by an LLM in future AI-driven features (see bodyMindMap.ts).
+// ---------------------------------------------------------------------------
+
+export type BodyMindCategory = "organ" | "gland" | "respiratory" | "spine" | "joint";
+
+/** A named symbolic sub-pattern, e.g. hypo- vs hyperthyroidism. */
+export interface BodyMindPattern {
+  label: string;
+  description: string;
+}
+
+/** All language-dependent text for one body–mind entry. */
+export interface BodyMindContent {
+  /** Display name of the organ / structure. */
+  name: string;
+  /** One-line core psychosomatic theme, e.g. "Self-criticism". */
+  theme: string;
+  /** Physical role of the structure, as short bullets. */
+  physicalFunction: string[];
+  /** Narrative: what discomfort here may be communicating. */
+  meaning: string;
+  /** Reflection / meditation phrases (the specialist's "medite em…"). */
+  reflections: string[];
+  /** Symbolic questions to sit with. */
+  questions: string[];
+  /** Optional sub-patterns (e.g. hypo/hyper, sleep/mood). */
+  patterns?: BodyMindPattern[];
+  /** Optional reminder that physical causes also matter. */
+  note?: string;
+}
+
+/** One body–mind entry: stable matching metadata + localized content. */
+export interface BodyMindEntry {
+  id: string;
+  category: BodyMindCategory;
+  /** Body silhouette regions this maps to (links to the Body step). */
+  relatedRegions: BodyRegion[];
+  /** Discomfort types this commonly shows up as. */
+  relatedDiscomfort?: DiscomfortType[];
+  /** Emotion ids / families / tags that resonate with this entry. */
+  emotionTags: string[];
+  /** Optional reflex points (ids from reflexPoints) that pair well. */
+  relatedPointIds?: string[];
+  /** English content. */
+  en: BodyMindContent;
+  /** Portuguese content (authored by the specialist). */
+  pt: BodyMindContent;
+}
+
+/** Localized, flattened entry used by the UI for the active language. */
+export interface LocalizedBodyMindEntry extends BodyMindContent {
+  id: string;
+  category: BodyMindCategory;
+  relatedRegions: BodyRegion[];
+  relatedDiscomfort: DiscomfortType[];
+  emotionTags: string[];
+  relatedPointIds: string[];
+}

@@ -25,6 +25,7 @@ export default function Welcome() {
         {[
           { icon: "🫶", label: t.welcome.body, desc: t.welcome.bodyDesc },
           { icon: "💭", label: t.welcome.emotions, desc: t.welcome.emotionsDesc },
+          { icon: "🔮", label: t.welcome.understand, desc: t.welcome.understandDesc },
           { icon: "🦶", label: t.welcome.points, desc: t.welcome.pointsDesc },
         ].map((s, i) => (
           <div

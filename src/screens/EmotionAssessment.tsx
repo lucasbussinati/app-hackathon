@@ -116,7 +116,7 @@ export default function EmotionAssessment() {
         </Link>
         <button
           className="btn-primary flex-1"
-          onClick={() => navigate("/results")}
+          onClick={() => navigate("/insights")}
           disabled={emotions.length === 0}
         >
           {t.emotions.next}

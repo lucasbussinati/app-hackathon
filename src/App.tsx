@@ -3,6 +3,7 @@ import AppShell from "./components/AppShell";
 import Welcome from "./screens/Welcome";
 import BodyAssessment from "./screens/BodyAssessment";
 import EmotionAssessment from "./screens/EmotionAssessment";
+import Insights from "./screens/Insights";
 import Results from "./screens/Results";
 import History from "./screens/History";
 import About from "./screens/About";
@@ -17,6 +18,7 @@ export default function App() {
             <Route index element={<Welcome />} />
             <Route path="body" element={<BodyAssessment />} />
             <Route path="emotions" element={<EmotionAssessment />} />
+            <Route path="insights" element={<Insights />} />
             <Route path="results" element={<Results />} />
             <Route path="history" element={<History />} />
             <Route path="about" element={<About />} />

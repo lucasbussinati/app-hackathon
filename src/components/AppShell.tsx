@@ -13,6 +13,7 @@ export default function AppShell() {
   const onAssessmentFlow =
     pathname.startsWith("/body") ||
     pathname.startsWith("/emotions") ||
+    pathname.startsWith("/insights") ||
     pathname.startsWith("/results");
 
   // Reset scroll to the top on each route change, so moving between steps
@@ -70,7 +71,7 @@ export default function AppShell() {
 
 function FlowProgress() {
   const { pathname } = useLocation();
-  const steps = ["/body", "/emotions", "/results"];
+  const steps = ["/body", "/emotions", "/insights", "/results"];
   const currentIdx = steps.findIndex((s) => pathname.startsWith(s));
   return (
     <div className="flex items-center gap-1">

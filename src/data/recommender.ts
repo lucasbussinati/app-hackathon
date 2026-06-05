@@ -1,6 +1,13 @@
-import type { EmotionalPresence, PhysicalAssessment, ReflexPoint } from "./types";
+import type {
+  BodyRegion,
+  EmotionalPresence,
+  LocalizedBodyMindEntry,
+  PhysicalAssessment,
+  ReflexPoint,
+} from "./types";
 import { REFLEX_POINTS } from "./reflexPoints";
 import { expandEmotionSelection } from "./emotions";
+import { BODY_MIND_MAP } from "./bodyMindMap";
 
 interface ScoredPoint {
   point: ReflexPoint;
@@ -65,4 +72,40 @@ export function recommend(
   }
 
   return positives.slice(0, limit);
+}
+
+export interface ScoredInsight {
+  entry: LocalizedBodyMindEntry;
+  score: number;
+  matchedRegions: BodyRegion[];
+  matchedEmotions: string[];
+}
+
+/**
+ * Match the user's selections against the Body–Mind Map ("the brain") to
+ * explain what their discomfort and emotions *may* be communicating.
+ *
+ * Body-region overlaps weigh more than emotion overlaps, since the user
+ * explicitly pointed at a place on the body. This is a transparent,
+ * tag-based lookup — Phase 2 can swap it for an LLM that reads the same map.
+ */
+export function matchBodyMind(
+  physical: PhysicalAssessment,
+  emotionIds: string[],
+  limit = 4,
+): ScoredInsight[] {
+  const expanded = expandEmotionSelection(emotionIds);
+  const regionSet = new Set<BodyRegion>(physical.regions);
+
+  const scored: ScoredInsight[] = BODY_MIND_MAP.map((entry) => {
+    const matchedRegions = entry.relatedRegions.filter((r) => regionSet.has(r));
+    const matchedEmotions = entry.emotionTags.filter((tag) => expanded.has(tag));
+    const score = matchedRegions.length * 2 + matchedEmotions.length;
+    return { entry, score, matchedRegions, matchedEmotions };
+  });
+
+  return scored
+    .filter((s) => s.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
 }

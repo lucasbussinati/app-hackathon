@@ -20,6 +20,8 @@ export interface Strings {
     bodyDesc: string;
     emotions: string;
     emotionsDesc: string;
+    understand: string;
+    understandDesc: string;
     points: string;
     pointsDesc: string;
   };
@@ -54,6 +56,26 @@ export interface Strings {
     familyTag: string;
     clusterTag: string;
     remove: string;
+  };
+  insights: {
+    step: string;
+    title: string;
+    subtitle: string;
+    intro: string;
+    disclaimer: string;
+    theme: string;
+    physicalFunction: string;
+    meaning: string;
+    reflections: string;
+    questions: string;
+    patterns: string;
+    relatedPoints: string;
+    matchedFor: string;
+    emptyText: string;
+    beginAssessment: string;
+    back: string;
+    next: string;
+    categories: Record<"organ" | "gland" | "respiratory" | "spine" | "joint", string>;
   };
   results: {
     step: string;
@@ -132,12 +154,15 @@ const en: Strings = {
     emotions: "Emotions",
     emotionsDesc:
       "What you feel emotionally often shows up physically. Anxiety tightens the chest, sadness weighs on the shoulders. Recognizing the emotion helps us find the right points.",
+    understand: "Meaning",
+    understandDesc:
+      "Before the points, Sole reflects back what your body may be communicating — the symbolic theme each area of discomfort traditionally carries, so you can listen to it more closely.",
     points: "Points",
     pointsDesc:
       "Feet, hands and ears hold reflex points that mirror the whole body. By connecting what you feel — physically and emotionally — Sole recommends the points that bring it all together.",
   },
   body: {
-    step: "Step 1 of 3",
+    step: "Step 1 of 4",
     title: "Where does it ask for attention?",
     subtitle: "Tap the areas of your body and the type of feeling. Skip what doesn't apply.",
     feelLike: "What does it feel like?",
@@ -149,7 +174,7 @@ const en: Strings = {
     durations: { acute: "Just today", recurring: "On and off", chronic: "Ongoing" },
   },
   emotions: {
-    step: "Step 2 of 3",
+    step: "Step 2 of 4",
     title: "How are you feeling?",
     subtitle:
       "Start broad in the middle, or get specific on the edges. Feelings often come in layers — pick as many as resonate.",
@@ -168,13 +193,41 @@ const en: Strings = {
     ackHint: "A line or two for yourself — what's brought this on. Saved with your session.",
     notePlaceholder: "e.g. Sleep was rough last night, and that presentation tomorrow…",
     back: "Back",
-    next: "See my recommendations",
+    next: "Next — what it may mean",
     familyTag: "family ·",
     clusterTag: "cluster ·",
     remove: "Remove",
   },
+  insights: {
+    step: "Step 3 of 4",
+    title: "What your body may be saying",
+    subtitle: "A reflective lens on how your body and feelings may be connected.",
+    intro:
+      "In many traditions, each part of the body carries a symbolic theme. Based on what you shared, here is what these areas may be communicating — something to sit with, not a diagnosis.",
+    disclaimer:
+      "This is a complementary, reflective reading — not medical advice or a diagnosis. Physical symptoms always deserve evaluation by a healthcare professional.",
+    theme: "Emotional theme",
+    physicalFunction: "What it does",
+    meaning: "What it may be saying",
+    reflections: "Reflection",
+    questions: "Sit with",
+    patterns: "Patterns",
+    relatedPoints: "Points that pair well",
+    matchedFor: "Matched from:",
+    emptyText: "Tell us where your body and feelings are first, and we'll reflect it back here.",
+    beginAssessment: "Begin assessment",
+    back: "Back",
+    next: "See my reflexology plan",
+    categories: {
+      organ: "organ",
+      gland: "gland",
+      respiratory: "respiratory",
+      spine: "spine",
+      joint: "joint",
+    },
+  },
   results: {
-    step: "Step 3 of 3",
+    step: "Step 4 of 4",
     title: "Your reflexology plan",
     subtitle: (n) => `${n} points tailored to how you're feeling right now.`,
     basedOn: "Based on",
@@ -267,12 +320,15 @@ const pt: Strings = {
     emotions: "Emoções",
     emotionsDesc:
       "O que você sente emocionalmente costuma aparecer no corpo. Ansiedade aperta o peito, tristeza pesa nos ombros. Reconhecer a emoção nos ajuda a encontrar os pontos certos.",
+    understand: "Significados",
+    understandDesc:
+      "Antes dos pontos, o Sole reflete o que seu corpo pode estar comunicando — o tema simbólico que cada área de desconforto costuma carregar, para você escutá-lo de perto.",
     points: "Pontos",
     pointsDesc:
       "Pés, mãos e orelhas têm pontos reflexos que espelham o corpo inteiro. Conectando o que você sente — física e emocionalmente — o Sole recomenda os pontos que unem tudo.",
   },
   body: {
-    step: "Etapa 1 de 3",
+    step: "Etapa 1 de 4",
     title: "Onde seu corpo pede atenção?",
     subtitle: "Toque nas áreas do corpo e no tipo de sensação. Pule o que não se aplica.",
     feelLike: "Como é a sensação?",
@@ -284,7 +340,7 @@ const pt: Strings = {
     durations: { acute: "Só hoje", recurring: "Vai e volta", chronic: "Contínuo" },
   },
   emotions: {
-    step: "Etapa 2 de 3",
+    step: "Etapa 2 de 4",
     title: "Como você está se sentindo?",
     subtitle:
       "Comece amplo no centro ou seja específico nas bordas. Sentimentos vêm em camadas — escolha quantos fizerem sentido.",
@@ -303,13 +359,41 @@ const pt: Strings = {
     ackHint: "Uma linha ou duas para você — o que trouxe isso. Salvo com sua sessão.",
     notePlaceholder: "ex.: Dormi mal ontem, e tem aquela apresentação amanhã…",
     back: "Voltar",
-    next: "Ver minhas recomendações",
+    next: "Próximo — o que pode significar",
     familyTag: "família ·",
     clusterTag: "grupo ·",
     remove: "Remover",
   },
+  insights: {
+    step: "Etapa 3 de 4",
+    title: "O que seu corpo pode estar dizendo",
+    subtitle: "Uma lente reflexiva sobre como seu corpo e suas emoções podem estar conectados.",
+    intro:
+      "Em muitas tradições, cada parte do corpo carrega um tema simbólico. Com base no que você compartilhou, aqui está o que essas áreas podem estar comunicando — algo para refletir, não um diagnóstico.",
+    disclaimer:
+      "Esta é uma leitura complementar e reflexiva — não é orientação médica nem diagnóstico. Sintomas físicos sempre merecem avaliação de um profissional de saúde.",
+    theme: "Tema emocional",
+    physicalFunction: "O que faz",
+    meaning: "O que pode estar dizendo",
+    reflections: "Reflexão",
+    questions: "Reflita sobre",
+    patterns: "Padrões",
+    relatedPoints: "Pontos que combinam",
+    matchedFor: "Relacionado a:",
+    emptyText: "Conte primeiro onde estão seu corpo e suas emoções, e nós refletimos isso aqui.",
+    beginAssessment: "Iniciar avaliação",
+    back: "Voltar",
+    next: "Ver meu plano de reflexologia",
+    categories: {
+      organ: "órgão",
+      gland: "glândula",
+      respiratory: "respiratório",
+      spine: "coluna",
+      joint: "articulação",
+    },
+  },
   results: {
-    step: "Etapa 3 de 3",
+    step: "Etapa 4 de 4",
     title: "Seu plano de reflexologia",
     subtitle: (n) =>
       `${n} ${n === 1 ? "ponto personalizado" : "pontos personalizados"} para como você está agora.`,
