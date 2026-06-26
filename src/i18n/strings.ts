@@ -92,6 +92,9 @@ export interface Strings {
     emptyText: string;
     beginAssessment: string;
     diagram: (name: string) => string;
+    enlarge: string;
+    enlargeAria: (name: string) => string;
+    closeImage: string;
   };
   history: {
     title: string;
@@ -241,6 +244,9 @@ const en: Strings = {
     emptyText: "Nothing to recommend yet — let's start a session first.",
     beginAssessment: "Begin assessment",
     diagram: (name) => `${name} diagram`,
+    enlarge: "Tap to enlarge",
+    enlargeAria: (name) => `Enlarge the ${name} diagram`,
+    closeImage: "Close",
   },
   history: {
     title: "History",
@@ -408,6 +414,9 @@ const pt: Strings = {
     emptyText: "Nada para recomendar ainda — vamos começar uma sessão primeiro.",
     beginAssessment: "Iniciar avaliação",
     diagram: (name) => `Diagrama de ${name}`,
+    enlarge: "Toque para ampliar",
+    enlargeAria: (name) => `Ampliar o diagrama de ${name}`,
+    closeImage: "Fechar",
   },
   history: {
     title: "Histórico",
@@ -491,8 +500,17 @@ const pt: Strings = {
     impatient: "impaciência",
     tired: "cansaço",
     sad: "tristeza",
+    sadness: "tristeza",
+    lonely: "solidão",
     disconnected: "desconexão",
     withdrawn: "retraimento",
+    anger: "raiva",
+    fear: "medo",
+    resentful: "ressentimento",
+    insecure: "insegurança",
+    hips: "quadril",
+    legs: "pernas",
+    pain: "dor",
   },
 };
 

@@ -8,6 +8,21 @@ interface Props {
 }
 
 export default function ReflexDiagram({ zone, point, size = 140 }: Props) {
+  // Foot points carry a photographic reflexology chart with the point already
+  // highlighted/labelled — render it directly. Hand/ear points fall back to the
+  // generated SVG silhouette below.
+  if (point.image) {
+    return (
+      <img
+        src={point.image}
+        alt={t.results.diagram(point.name)}
+        loading="lazy"
+        style={{ width: size, height: "auto" }}
+        className="shrink-0 rounded-2xl bg-sand-100/50 object-contain"
+      />
+    );
+  }
+
   return (
     <svg
       viewBox="0 0 100 100"

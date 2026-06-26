@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import { useAssessment } from "../store/assessment";
 import { matchBodyMind, type ScoredInsight } from "../data/recommender";
-import { BODY_REGIONS } from "../data/bodyRegions";
+import { BODY_REGIONS, DISCOMFORT_TYPES } from "../data/bodyRegions";
 import { findEmotion, FAMILY_LABELS } from "../data/emotions";
 import { findPointById } from "../data/reflexPoints";
 import type { EmotionFamily } from "../data/types";
@@ -13,7 +13,7 @@ export default function Insights() {
   const { physical, emotions } = useAssessment();
 
   const insights = useMemo(
-    () => matchBodyMind(physical, emotions, 5),
+    () => matchBodyMind(physical, emotions),
     [physical, emotions],
   );
 
@@ -91,10 +91,13 @@ export default function Insights() {
 }
 
 function InsightCard({ insight, idx }: { insight: ScoredInsight; idx: number }) {
-  const { entry, matchedRegions, matchedEmotions } = insight;
+  const { entry, matchedRegions, matchedEmotions, matchedDiscomfort } = insight;
 
   const matchedLabels = [
     ...matchedRegions.map((id) => BODY_REGIONS.find((r) => r.id === id)?.label ?? id),
+    ...matchedDiscomfort.map(
+      (id) => DISCOMFORT_TYPES.find((d) => d.id === id)?.label ?? id,
+    ),
     ...matchedEmotions.map(resolveSignalLabel),
   ];
   // De-duplicate while keeping order (a family + its child can both match).

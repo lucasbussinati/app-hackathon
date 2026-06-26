@@ -71,6 +71,12 @@ export interface ReflexPoint {
   associatedWith: string[];
   /** Tags that the recommender uses to match symptoms/emotions */
   tags: string[];
+  /**
+   * Optional photographic reflexology chart (imported asset URL) showing the
+   * point highlighted on the foot. When present, the Results diagram renders
+   * this image instead of the generated SVG silhouette.
+   */
+  image?: string;
 }
 
 export interface Session {

@@ -121,17 +121,87 @@ export const PT_POINTS: Record<string, PointText> = {
       "O arco do pé esquerdo reflete o estômago — ajuda com desconforto digestivo e a ansiedade do tipo 'frio na barriga'.",
   },
   "spine-foot": {
-    name: "Linha da coluna (borda interna do pé)",
+    name: "Linha da coluna e dos nervos (borda interna)",
     technique:
       "Passe o polegar pela borda interna do pé, do calcanhar ao dedão, com pressão firme e constante.",
     rationale:
-      "A borda interna do pé mapeia a coluna — alivia a tensão nas costas e o desconforto ligado à postura.",
+      "A borda interna do pé mapeia a coluna e os nervos espinhais — alivia a tensão nas costas e o desconforto ligado à postura.",
   },
   "shoulder-foot": {
     name: "Reflexo do ombro (sob o dedinho)",
     technique: "Na base do dedinho do pé, faça pequenos círculos firmes com o polegar.",
     rationale:
       "Reflete a articulação do ombro — libera a tensão acumulada do trabalho na tela ou do estresse.",
+  },
+  "lung-foot": {
+    name: "Pulmões e peito (almofada do pé)",
+    technique:
+      "Na almofada do pé, logo abaixo dos dedos, pressione e deslize o polegar em movimentos horizontais para fora.",
+    rationale:
+      "A almofada do pé espelha os pulmões e o peito — favorece uma respiração mais ampla e, na tradição, está ligada a liberar tristeza e luto guardados.",
+  },
+  "liver-foot": {
+    name: "Reflexo do fígado (pé direito)",
+    technique:
+      "Apenas no pé direito, abaixo da almofada no lado externo, pressione com o polegar em círculos lentos e firmes.",
+    rationale:
+      "O reflexo do fígado fica no pé direito — em muitas tradições carrega a raiva e a frustração, e apoia a sensação de limpeza e renovação do corpo.",
+  },
+  "kidney-foot": {
+    name: "Reflexo do rim (centro do arco)",
+    technique:
+      "No centro do arco do pé, mantenha uma pressão firme com o polegar, respirando devagar por alguns ciclos.",
+    rationale:
+      "O reflexo do rim fica no meio do arco — tradicionalmente associado ao medo e às reservas profundas de energia do corpo, útil quando você se sente esgotado ou tenso.",
+  },
+  "large-intestine-foot": {
+    name: "Intestino grosso (parte inferior da planta)",
+    technique:
+      "Siga o caminho pela parte inferior da planta, trabalhando os dois pés com pequenos passos do polegar.",
+    rationale:
+      "O reflexo do intestino grosso percorre os dois pés — apoia a digestão e a eliminação, e o tema emocional de soltar o que já não te serve.",
+  },
+  "pancreas-foot": {
+    name: "Reflexo do pâncreas (arco interno)",
+    technique:
+      "Ao longo do arco interno, logo abaixo da área do estômago, pressione suavemente e mantenha com o polegar.",
+    rationale:
+      "O reflexo do pâncreas fica no arco — ligado ao equilíbrio do açúcar no sangue e, simbolicamente, à 'doçura' da vida e à estabilidade emocional.",
+  },
+  "thyroid-foot": {
+    name: "Reflexo da tireoide (base do dedão)",
+    technique:
+      "Na base do dedão, trabalhe a faixa curva com pequenas pressões circulares do polegar.",
+    rationale:
+      "O reflexo da tireoide fica na base do dedão — ligado ao metabolismo e à energia, e ao tema de encontrar a própria voz e o próprio ritmo.",
+  },
+  "parathyroid-foot": {
+    name: "Reflexo da paratireoide (base do dedão)",
+    technique:
+      "Logo acima da faixa da tireoide, na base do dedão, aplique pressão firme e precisa com a ponta do polegar.",
+    rationale:
+      "O reflexo da paratireoide regula o equilíbrio do cálcio — associado à estabilidade estrutural e a uma sensação interna de firmeza e segurança.",
+  },
+  "sciatic-foot": {
+    name: "Nervo ciático (linha do calcanhar)",
+    technique:
+      "Na borda superior do calcanhar, pressione e deslize horizontalmente com pressão firme do polegar.",
+    rationale:
+      "O reflexo do ciático atravessa o calcanhar — alivia desconfortos na lombar, no quadril e nas pernas que irradiam pelo corpo.",
+  },
+  "atm-foot": {
+    name: "Reflexo da ATM / mandíbula (base dos dedos)",
+    technique:
+      "Onde o dedão encontra o segundo dedo, pressione e role suavemente o polegar para soltar a articulação.",
+    rationale:
+      "O reflexo da mandíbula (ATM) fica entre os primeiros dedos — útil para o ranger de dentes, a tensão na mandíbula e a frustração que costumamos prender ali.",
+  },
+  "trigeminal-foot": {
+    name: "Nervo trigêmeo (lateral do dedão)",
+    technique:
+      "Pela lateral externa do dedão, caminhe com o polegar em pequenos passos da base em direção à ponta.",
+    rationale:
+      "O reflexo do trigêmeo acompanha o dedão — tradicionalmente usado para tensão facial, dores de cabeça e dor de cabeça ligada à mandíbula.",
   },
   "hand-solar": {
     name: "Plexo solar da mão",
