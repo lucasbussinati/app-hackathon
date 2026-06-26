@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import { useAssessment } from "../store/assessment";
 import { matchBodyMind, type ScoredInsight } from "../data/recommender";
@@ -22,34 +22,11 @@ export default function Insights() {
     physical.discomfortTypes.length > 0 ||
     emotions.length > 0;
 
-  if (!hasAnyInput || insights.length === 0) {
-    return (
-      <div className="flex flex-col gap-6">
-        <header>
-          <p className="text-xs uppercase tracking-widest text-sage-500 font-semibold">
-            {t.insights.step}
-          </p>
-          <h1 className="text-2xl mt-1">{t.insights.title}</h1>
-        </header>
-        <div className="card p-6 text-center">
-          <p className="text-sage-700 mb-4">{t.insights.emptyText}</p>
-          <Link to="/body" className="btn-primary">
-            {t.insights.beginAssessment}
-          </Link>
-        </div>
-        {hasAnyInput && (
-          <div className="flex items-center justify-between gap-3">
-            <Link to="/emotions" className="btn-ghost">
-              {t.insights.back}
-            </Link>
-            <button className="btn-primary flex-1" onClick={() => navigate("/results")}>
-              {t.insights.next}
-            </button>
-          </div>
-        )}
-      </div>
-    );
-  }
+  // Step 3 only exists when there's something to reflect back. With no input,
+  // send the user to the start; with input but no matches, skip straight to the
+  // reflexology plan (step 4) so they never land on an empty insights screen.
+  if (!hasAnyInput) return <Navigate to="/body" replace />;
+  if (insights.length === 0) return <Navigate to="/results" replace />;
 
   return (
     <div className="flex flex-col gap-6">

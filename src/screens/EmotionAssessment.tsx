@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { useAssessment } from "../store/assessment";
 import EmotionWheel from "../components/EmotionWheel";
 import { EMOTION_FAMILY_COLORS, FAMILY_LABELS, findEmotion } from "../data/emotions";
+import { matchBodyMind } from "../data/recommender";
 import type { EmotionalPresence } from "../data/types";
 import { t } from "../i18n";
 
@@ -17,6 +18,7 @@ const NOTE_MAX = 240;
 export default function EmotionAssessment() {
   const navigate = useNavigate();
   const {
+    physical,
     emotions,
     toggleEmotion,
     emotionalPresence,
@@ -26,6 +28,13 @@ export default function EmotionAssessment() {
   } = useAssessment();
 
   const grouped = useMemo(() => groupByFamily(emotions), [emotions]);
+
+  // Whether step 3 (insights) has anything to show. When it doesn't, we skip it
+  // entirely and the button leads straight to the reflexology plan.
+  const hasInsights = useMemo(
+    () => matchBodyMind(physical, emotions).length > 0,
+    [physical, emotions],
+  );
 
   return (
     <div className="flex flex-col gap-6">
@@ -116,10 +125,10 @@ export default function EmotionAssessment() {
         </Link>
         <button
           className="btn-primary flex-1"
-          onClick={() => navigate("/insights")}
+          onClick={() => navigate(hasInsights ? "/insights" : "/results")}
           disabled={emotions.length === 0}
         >
-          {t.emotions.next}
+          {hasInsights ? t.emotions.next : t.insights.next}
         </button>
       </div>
     </div>

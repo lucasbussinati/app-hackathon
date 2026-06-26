@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { useAssessment } from "../store/assessment";
 import { recommend } from "../data/recommender";
 import { findEmotion } from "../data/emotions";
@@ -166,19 +167,19 @@ function Lightbox({ point, onClose }: { point: ReflexPoint; onClose: () => void 
     };
   }, [onClose]);
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-label={point.name}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-sage-900/70 p-4 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 overflow-y-auto bg-sage-900/70 px-4 pb-10 pt-20 backdrop-blur-sm animate-fade-in"
     >
       <button
         type="button"
         onClick={onClose}
         aria-label={t.results.closeImage}
-        className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-sage-800 shadow-soft transition-colors hover:bg-white"
+        className="fixed right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-sage-800 shadow-soft transition-colors hover:bg-white"
       >
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
           <line x1="6" y1="6" x2="18" y2="18" />
@@ -188,16 +189,17 @@ function Lightbox({ point, onClose }: { point: ReflexPoint; onClose: () => void 
 
       <div
         onClick={(e) => e.stopPropagation()}
-        className="flex max-h-[88vh] w-full max-w-md flex-col items-center gap-3 animate-scale-in"
+        className="mx-auto flex w-full max-w-md flex-col items-center gap-3 animate-scale-in"
       >
         <img
           src={point.image}
           alt={t.results.diagram(point.name)}
-          className="max-h-[72vh] w-auto rounded-3xl bg-white object-contain shadow-soft"
+          className="w-full rounded-3xl bg-white object-contain shadow-soft"
         />
         <p className="text-center text-white font-medium drop-shadow">{point.name}</p>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
