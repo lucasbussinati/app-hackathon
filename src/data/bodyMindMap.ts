@@ -277,7 +277,7 @@ const RAW_BODY_MIND_MAP: BodyMindEntry[] = [
   {
     id: "gonads",
     category: "organ",
-    relatedRegions: ["hips"],
+    relatedRegions: ["hips", "pelvis"],
     relatedDiscomfort: ["pain", "tension"],
     emotionTags: ["fear", "insecure", "worried"],
     relatedPointIds: [],
@@ -755,7 +755,7 @@ const RAW_BODY_MIND_MAP: BodyMindEntry[] = [
   {
     id: "knee",
     category: "joint",
-    relatedRegions: ["legs"],
+    relatedRegions: ["legs", "knees"],
     relatedDiscomfort: ["pain", "stiffness"],
     emotionTags: ["frustrated", "fear", "resentful", "anger.resentful"],
     relatedPointIds: [],

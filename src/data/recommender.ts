@@ -16,10 +16,29 @@ interface ScoredPoint {
 }
 
 /**
+ * Deterministic per-selection shuffle key. Several points in the catalogue answer
+ * the exact same signals (e.g. tonsils and vocal cords are both neck + sore throat).
+ * Without this, ties always resolve to catalogue order and the later twin could
+ * never be shown. Hashing the point id together with the selection keeps a given
+ * selection reproducible while spreading equivalent points across selections.
+ */
+function tieBreaker(pointId: string, selectionKey: string): number {
+  let hash = 2166136261;
+  const input = `${pointId}|${selectionKey}`;
+  for (let i = 0; i < input.length; i += 1) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0) / 4294967295;
+}
+
+/**
  * Simple, transparent recommender:
  *   - Build a "signal" set from the user's selections.
  *   - Score each reflex point by how many of its tags match.
  *   - Boost intense or chronic signals so they outweigh mild ones.
+ *   - Break ties by precision, then by the per-selection shuffle, so points that
+ *     answer exactly what was reported win and no point is permanently buried.
  *
  * This is intentionally simple so the user (and reviewer) can see WHY a
  * point was recommended. Phase 2 can replace this with an LLM call that
@@ -46,14 +65,27 @@ export function recommend(
   const presenceBoost =
     emotionalPresence === "intense" ? 1.35 : emotionalPresence === "present" ? 1.15 : 1;
 
-  const scored: ScoredPoint[] = footPoints.map((point) => {
+  const selectionKey = [...signals].sort().join(",");
+
+  const ranked = footPoints.map((point) => {
     const matches = point.tags.filter((tag) => signals.has(tag));
-    const baseScore = matches.length;
-    const score = baseScore * intensityBoost * durationBoost * presenceBoost;
-    return { point, score, matches };
+    const score = matches.length * intensityBoost * durationBoost * presenceBoost;
+    return {
+      point,
+      score,
+      matches,
+      // How much of this point is about what the user actually reported. A point
+      // tagged only "neck, soreThroat" is a tighter answer to that pair than a
+      // broad point that happens to carry those two tags among six.
+      precision: matches.length / point.tags.length,
+      shuffle: tieBreaker(point.id, selectionKey),
+    };
   });
 
-  const positives = scored.filter((s) => s.score > 0).sort((a, b) => b.score - a.score);
+  const positives = ranked
+    .filter((s) => s.score > 0)
+    .sort((a, b) => b.score - a.score || b.precision - a.precision || b.shuffle - a.shuffle)
+    .map(({ point, score, matches }) => ({ point, score, matches }));
 
   // Fallback: if nothing matched, still recommend two foot grounding points so the
   // user never sees an empty results screen.
@@ -87,11 +119,19 @@ export interface ScoredInsight {
  * Match the user's selections against the Body–Mind Map ("the brain") to
  * explain what their discomfort and emotions *may* be communicating.
  *
- * Relevance rules (strict — only show what connects to steps 1 & 2):
- *   - If the user picked body regions → entry MUST overlap at least one.
- *   - If the user picked emotions → entry MUST overlap at least one (expanded).
- *   - Discomfort types add score but never qualify an entry on their own.
- *   - Results must be within 60% of the top score (avoids weak tail matches).
+ * Relevance is tried in tiers, strongest first, and the first tier that yields
+ * anything wins:
+ *   1. entry overlaps BOTH the reported regions and the reported emotions;
+ *   2. entry overlaps the reported regions;
+ *   3. entry overlaps the reported emotions;
+ *   4. entry overlaps the reported discomfort.
+ *
+ * The map is authored region-by-region, so demanding a region *and* an emotion
+ * match left most selections with no reflection at all and silently skipped
+ * step 3. Falling back keeps the connection honest — a card only ever claims the
+ * overlap it actually has, via `matchedRegions`/`matchedEmotions`.
+ *
+ * Results are then capped to within 60% of the top score (avoids weak tails).
  */
 export function matchBodyMind(
   physical: PhysicalAssessment,
@@ -117,12 +157,20 @@ export function matchBodyMind(
     return { entry, score, matchedRegions, matchedEmotions, matchedDiscomfort };
   });
 
-  const relevant = scored.filter((s) => {
-    if (s.score <= 0) return false;
-    if (requireRegion && s.matchedRegions.length === 0) return false;
-    if (requireEmotion && s.matchedEmotions.length === 0) return false;
-    return true;
-  });
+  const withScore = scored.filter((s) => s.score > 0);
+  const tiers = [
+    (s: ScoredInsight) =>
+      (!requireRegion || s.matchedRegions.length > 0) &&
+      (!requireEmotion || s.matchedEmotions.length > 0),
+    (s: ScoredInsight) => requireRegion && s.matchedRegions.length > 0,
+    (s: ScoredInsight) => requireEmotion && s.matchedEmotions.length > 0,
+    (s: ScoredInsight) => s.matchedDiscomfort.length > 0,
+  ];
+
+  const relevant = tiers.reduce<ScoredInsight[]>(
+    (found, accept) => (found.length > 0 ? found : withScore.filter(accept)),
+    [],
+  );
 
   if (relevant.length === 0) return [];
 

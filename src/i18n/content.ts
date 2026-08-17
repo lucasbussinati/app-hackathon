@@ -71,14 +71,22 @@ export const PT_FAMILY_LABELS: Record<EmotionFamily, string> = {
 
 export const PT_REGION_LABELS: Record<BodyRegion, string> = {
   head: "Cabeça",
+  face: "Rosto e mandíbula",
+  ears: "Orelhas",
   neck: "Pescoço",
   shoulders: "Ombros",
+  arms: "Braços",
+  elbows: "Cotovelos",
+  hands: "Mãos",
   chest: "Peitoral",
   upperBack: "Parte superior das costas",
   stomach: "Estômago",
+  intestine: "Intestino",
   trunk: "Tronco",
   lowerBack: "Lombar",
   hips: "Quadril",
+  pelvis: "Pelve",
+  knees: "Joelhos",
   legs: "Pernas",
   feet: "Pés",
 };
@@ -355,6 +363,12 @@ export const PT_POINTS: Record<string, PointText> = {
     technique: "Pressionar com o Polegar a Lateral externa – Sobre o calcâneo – Na porção medial (Pés Esquerdo/Direito)",
     rationale: "A reflexologia pode ajudar no aumento da produção de hormônios sexuais",
   },
+  "p54-penis-vagina": {
+    name: "Pênis/Vagina",
+    technique:
+      "Pressionar com o polegar a lateral interna do calcâneo, da região plantar até o meio do calcanhar, nos dois pés.",
+    rationale: "A reflexologia ajuda a estimular o aparelho dos órgãos reprodutores.",
+  },
   "p55-perna": {
     name: "Perna",
     technique: "Pressionar com o Polegar a Lateral Externa – 5° dedo – Na Lateral Externa do cubóide e calcâneo",
@@ -427,22 +441,117 @@ export const PT_POINTS: Record<string, PointText> = {
   },
   "p160-cabeca": {
     name: "Cabeça",
-    technique: "Pressionar com o polegar na Área Dorsal e Pantar – Do Hálux ao 5o dedo - em todas as falanges distais",
-    rationale: "- Correções da especialista:",
+    technique: "Pressionar com o polegar na Área Dorsal e Plantar – Do Hálux ao 5º dedo – em todas as falanges distais",
+    rationale: "Ponto reflexo da cabeça (área dorsal e plantar, em todas as falanges distais).",
   },
   "p161-pescoco": {
     name: "Pescoço",
-    technique: "Pressionar com o polegar na Área Plantar – Hálux superior da falange proximal",
-    rationale: "Pressionar com o polegar na Área Plantar – Lateral externa no Cubóide",
+    technique: "Pressionar com o polegar na Área Plantar – Hálux, porção superior da falange proximal",
+    rationale: "Ponto reflexo do pescoço (área plantar do hálux, porção superior da falange proximal).",
   },
   "p162-quadril": {
     name: "Quadril",
-    technique: "- Pressão: Médio",
-    rationale: "- Correções da especialista:",
+    technique: "Pressionar com o polegar na Área Plantar – Lateral externa, no Cubóide",
+    rationale: "Ponto reflexo do quadril (área plantar, lateral externa sobre o cuboide).",
   },
   "p163-area-peitoral": {
     name: "Área Peitoral",
-    technique: "Pressionar com o polegar na Área Dorsal do 1º ao 5º Metatarso",
-    rationale: "- Correções da especialista: ============================================================",
+    technique: "Pressionar com o polegar na Área Dorsal, do 1º ao 5º metatarso",
+    rationale: "Ponto reflexo da área peitoral (área dorsal, do 1º ao 5º metatarso).",
+  },
+  "p22-ganglios-basais": {
+    name: "Gânglios Basais",
+    technique: "Na Área Plantar – Hálux – na lateral externa, na epífise superior da falange proximal pressionar como o Polegar",
+    rationale: "A reflexologia estimula os Gânglios Basais a fim melhorar o aprendizado.",
+  },
+  "p27-amigdalas": {
+    name: "Amígdalas",
+    technique: "Pressionar com o Polegar na Área Dorsal – Entre o hálux e o 2º dedo – Acima da articulação metatarso falangiana.",
+    rationale: "A reflexologia ajuda no funcionamento das amígdalas no sistema imunológico.",
+  },
+  "p37-cordas-vocais": {
+    name: "Cordas Vocais",
+    technique: "Pressionar com o Polegar na Área Dorsal – Hálux na lateral externa, na articulação metatarso falangeana",
+    rationale: "A reflexologia ajuda nos movimentos voluntarios e involutários",
+  },
+  "p58-uretra": {
+    name: "Uretra",
+    technique: "Pressionar com o Polegar a Área Plantar – Lateral interna do Calcâneo – Porção Distal",
+    rationale: "A reflexologia ajuda a estimular o sistema urinário",
+  },
+  "p60-vesicula-biliar": {
+    name: "Vesícula Biliar",
+    technique: "Pressionar com o Polegar apenas no Pé Direito – Área Plantar – Sobre o 3° metatarso – Na porção média",
+    rationale: "A reflexologia ajuda a melhorar o armazenamento da Bile",
+  },
+  "p64-amidalas-do-cerebro": {
+    name: "Amídalas do Cérebro",
+    technique: "Pressionar com o Polegar na Área plantar – Hálux na falange proximal, na porção distal",
+    rationale: "A reflexologia ajuda a melhorar a resposta comportamental da pessoa",
+  },
+  "p66-area-motora-pe-esquerdo": {
+    name: "Área Motora",
+    technique: "Pressionar apenas no PÉ ESQUERDO com o Polegar – Área plantar - Hálux – No ápice externo da falange distal - 2º dedo – no ápice externo da falange distal",
+    rationale: "A reflexologia ajuda a melhorar o controle dos movimentos do cerebelo",
+  },
+  "p67-nervo-vago-e-parassimpatico": {
+    name: "Nervo vago e parassimpático",
+    technique: "Pressionar o ponto: Área plantar – entre o 2º e o 3º dedo – desde a lateral interna do cubóide, subindo até a articulação metatarso falangeana",
+    rationale: "Ponto reflexo de Nervo vago e parassimpático.",
+  },
+  "p68-medula-espinhal-e-simpatico": {
+    name: "Medula Espinhal e Simpático",
+    technique: "Pressionar com o Polegar a Lateral interna – desde o hálux na falange distal, porção proximal até a articulação do calcâneo talâmica",
+    rationale: "A reflexologia pode ajudar no funcionamento da medula a melhorar a condutividade no impulsos nervosos.",
+  },
+  "p69-nervos-raquidianos": {
+    name: "Nervos Raquidianos",
+    technique: "Pressionar com o polegar a Lateral interna até a plantar – desde o hálux da falange distal, porção proximal até a articulação do calcâneo.",
+    rationale: "Ponto reflexo dos nervos raquidianos, que acompanham toda a coluna.",
+  },
+  "p71-nervo-optico": {
+    name: "Nervo Óptico",
+    technique: "Com o Polegar pressionar entre o2º e 3º dedo - Na lateral externa e interna das falanges média e proximal",
+    rationale: "A reflexologia pode melhorar sinais nervosos do olho ao cérebro 3º e 4º dedo – Na lateral externa e interna das falanges média e proximal",
+  },
+  "p73-nervo-olfatorio": {
+    name: "Nervo Olfatório",
+    technique: "Com o Polegar pressionar a Área plantar- do 2º ao 5º dedo – Lateral interna e externa da falange distal",
+    rationale: "A reflexologia pode ajudar a melhorar os receptores do nariz até o cérebro, melhorando a percepção dos odores.",
+  },
+  "p76-olfato": {
+    name: "Olfato",
+    technique: "Pressionar com o polegar a Área plantar - do 2º ao 5º dedo - nas falanges distais",
+    rationale: "Ponto reflexo do olfato, na área plantar das falanges distais.",
+  },
+  "p77-paladar": {
+    name: "Paladar",
+    technique: "Pressionar com o Polegar a Área Dorsal – Hálux – Na articulação interfalangeana",
+    rationale: "A reflexologia pode ajudar a detectar e processar as interpretações da substâncias químicas presentes no alimentos.",
+  },
+  "p79-sacro": {
+    name: "Sacro",
+    technique: "Pressionar com o polegar a Lateral interna – Ao longo do tálus até abaixo do maléolo",
+    rationale: "Ponto reflexo do sacro, na base da coluna.",
+  },
+  "p80-coccix": {
+    name: "Cóccix",
+    technique: "Pressionar com o Polegar a Lateral interna – na articulação calcâneo talâmico abaixo do maléolo interno",
+    rationale: "Ponto reflexo do cóccix, na extremidade final da coluna.",
+  },
+  "p82-traqueia": {
+    name: "Traquéia",
+    technique: "Pressionar com polegar a Área Dorsal – Hálux – lateral externa, na extensão da articulação metatarso falangeana",
+    rationale: "A reflexologia pode ajudar no revestimento das paredes da traquéia",
+  },
+  "p84-dentes-inferiores": {
+    name: "Dentes Inferiores",
+    technique: "Pressionar com o polegar na Área Dorsal – 2º ao 5° dedos – Na falange proximal",
+    rationale: "A Reflexologia pode ajudar fortalecer saúde da gengivas",
+  },
+  "p85-dentes-superiores": {
+    name: "Dentes Superiores",
+    technique: "Pressionar com o Polegar na Área Dorsal – 2º ao 5° dedos – Na falange média",
+    rationale: "A Reflexologia pode ajudar fortalecer saúde da gengivas",
   },
 };

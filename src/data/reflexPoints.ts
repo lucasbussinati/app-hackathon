@@ -53,6 +53,7 @@ import img_p50_olho from "../assets/reflex/p50-olho.png";
 import img_p51_osso_hioide from "../assets/reflex/p51-osso-hioide.png";
 import img_p52_ouvido from "../assets/reflex/p52-ouvido.png";
 import img_p53_ovarios_ou_testiculos from "../assets/reflex/p53-ovarios-ou-testiculos.png";
+import img_p54_penis_vagina from "../assets/reflex/p54-penis-vagina.png";
 import img_p55_perna from "../assets/reflex/p55-perna.png";
 import img_p56_pineal from "../assets/reflex/p56-pineal.png";
 import img_p57_ponto_de_tensao from "../assets/reflex/p57-ponto-de-tensao.png";
@@ -71,6 +72,25 @@ import img_p160_cabeca from "../assets/reflex/p160-cabeca.png";
 import img_p161_pescoco from "../assets/reflex/p161-pescoco.png";
 import img_p162_quadril from "../assets/reflex/p162-quadril.png";
 import img_p163_area_peitoral from "../assets/reflex/p163-area-peitoral.png";
+import img_p22_ganglios_basais from "../assets/reflex/p22-ganglios-basais.png";
+import img_p27_amigdalas from "../assets/reflex/p27-amigdalas.png";
+import img_p37_cordas_vocais from "../assets/reflex/p37-cordas-vocais.png";
+import img_p58_uretra from "../assets/reflex/p58-uretra.png";
+import img_p60_vesicula_biliar from "../assets/reflex/p60-vesicula-biliar.png";
+import img_p64_amidalas_do_cerebro from "../assets/reflex/p64-amidalas-do-cerebro.png";
+import img_p66_area_motora_pe_esquerdo from "../assets/reflex/p66-area-motora-pe-esquerdo.png";
+import img_p67_nervo_vago_e_parassimpatico from "../assets/reflex/p67-nervo-vago-e-parassimpatico.png";
+import img_p68_medula_espinhal_e_simpatico from "../assets/reflex/p68-medula-espinhal-e-simpatico.png";
+import img_p69_nervos_raquidianos from "../assets/reflex/p69-nervos-raquidianos.png";
+import img_p71_nervo_optico from "../assets/reflex/p71-nervo-optico.png";
+import img_p73_nervo_olfatorio from "../assets/reflex/p73-nervo-olfatorio.png";
+import img_p76_olfato from "../assets/reflex/p76-olfato.png";
+import img_p77_paladar from "../assets/reflex/p77-paladar.png";
+import img_p79_sacro from "../assets/reflex/p79-sacro.png";
+import img_p80_coccix from "../assets/reflex/p80-coccix.png";
+import img_p82_traqueia from "../assets/reflex/p82-traqueia.png";
+import img_p84_dentes_inferiores from "../assets/reflex/p84-dentes-inferiores.png";
+import img_p85_dentes_superiores from "../assets/reflex/p85-dentes-superiores.png";
 
 const RAW_REFLEX_POINTS: ReflexPoint[] = [
   {
@@ -84,7 +104,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 60,
     rationale: "Reflex point for Solar Plexus (foot).",
     associatedWith: ["Plexo Solar"],
-    tags: ["anxious", "depression", "fatigue", "fibromyalgia", "anger.frustrated", "frustrated", "headache", "insomnia", "intestinalCramp", "legPain", "menstrualCramp", "overwhelmed", "sadness.drained", "shoulderPain", "sinusitis", "soreThroat", "stress", "tension", "tired", "worried"],
+    tags: ["anger.frustrated", "anxious", "depression", "fatigue", "fibromyalgia", "frustrated", "headache", "insomnia", "intestinalCramp", "joy", "legPain", "menstrualCramp", "overwhelmed", "sadness.drained", "shoulderPain", "sinusitis", "soreThroat", "stress", "surprise", "tension", "tired", "worried"],
   },
   {
     id: "head-toes",
@@ -97,7 +117,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Sinuses (toes).",
     associatedWith: ["Sinus"],
-    tags: ["confused", "depression", "irritated", "sinusitis", "soreThroat"],
+    tags: ["confused", "depression", "irritated", "sinusitis", "soreThroat", "face"],
   },
   {
     id: "stomach-foot",
@@ -162,7 +182,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 60,
     rationale: "Reflex point for Liver reflex (right foot).",
     associatedWith: ["Fígado (Pé Direito)"],
-    tags: ["anger", "depression", "digestive", "disappointed", "fatigue", "impatient", "intestinalCramp", "irritated", "menstrualCramp", "resentful", "sadness.drained", "tinnitus", "trunk"],
+    tags: ["anger", "depression", "digestive", "disappointed", "fatigue", "impatient", "intestinalCramp", "irritated", "judgmental", "menstrualCramp", "resentful", "sadness.drained", "tinnitus", "trunk"],
   },
   {
     id: "kidney-foot",
@@ -188,7 +208,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 75,
     rationale: "Reflex point for Large intestine.",
     associatedWith: ["Intestino Grosso"],
-    tags: ["anxious", "depression", "digestive", "disconnected", "fibromyalgia", "intestinalCramp", "resentful", "sadness.hurt", "trunk", "uneasy", "withdrawn"],
+    tags: ["anxious", "depression", "digestive", "disconnected", "fibromyalgia", "intestine", "intestinalCramp", "resentful", "sadness.hurt", "trunk", "uneasy", "withdrawn"],
   },
   {
     id: "pancreas-foot",
@@ -214,7 +234,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 50,
     rationale: "Reflex point for Thyroid reflex.",
     associatedWith: ["Tireoide"],
-    tags: ["anxietyDiscomfort", "anxious", "confused", "depression", "exhaustion", "fatigue", "fear", "fibromyalgia", "headache", "insecure", "irritated", "legPain", "lonely", "menstrualCramp", "overwhelmed", "sad", "sadness.drained", "sadness.hurt", "shoulderPain", "soreThroat", "stiffness", "stress", "tired", "worried"],
+    tags: ["anxietyDiscomfort", "anxious", "confused", "depression", "exhaustion", "fatigue", "fear", "fibromyalgia", "headache", "insecure", "irritated", "legPain", "lonely", "menstrualCramp", "neck", "overwhelmed", "sad", "sadness.drained", "sadness.hurt", "shoulderPain", "soreThroat", "stiffness", "stress", "tired", "worried"],
   },
   {
     id: "parathyroid-foot",
@@ -227,7 +247,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 40,
     rationale: "Reflex point for Parathyroid reflex.",
     associatedWith: ["Paratireóide"],
-    tags: ["anxious", "confused", "fear", "fibromyalgia", "headache", "insecure", "legPain", "lonely", "menstrualCramp", "sad", "sadness.drained", "sadness.hurt", "shoulderPain", "soreThroat", "stiffness", "stress", "tension", "tired", "worried"],
+    tags: ["anxious", "confused", "fear", "fibromyalgia", "headache", "insecure", "legPain", "lonely", "menstrualCramp", "neck", "sad", "sadness.drained", "sadness.hurt", "shoulderPain", "soreThroat", "stiffness", "stress", "tension", "tired", "worried"],
   },
   {
     id: "sciatic-foot",
@@ -240,7 +260,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 60,
     rationale: "Reflex point for Sensory sciatic nerve.",
     associatedWith: ["Nervo Ciático Sensorial"],
-    tags: ["fear", "insecure", "pain", "stiffness"],
+    tags: ["fear", "insecure", "legs", "pain", "sciatica", "stiffness"],
   },
   {
     id: "atm-foot",
@@ -253,7 +273,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for TMJ / jaw reflex.",
     associatedWith: ["ATM"],
-    tags: ["anger", "headache", "impatient", "irritated", "tension"],
+    tags: ["anger", "face", "headache", "impatient", "irritated", "tension"],
   },
   {
     id: "trigeminal-foot",
@@ -266,7 +286,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Trigeminal nerve.",
     associatedWith: ["Nervo trigêmeo"],
-    tags: ["confused", "fibromyalgia", "headache", "insomnia", "overwhelmed", "tension"],
+    tags: ["confused", "face", "fibromyalgia", "headache", "insomnia", "overwhelmed", "tension"],
   },
   {
     id: "p16-bulbo",
@@ -331,7 +351,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Heart (left foot).",
     associatedWith: ["Coração (Pé Esquerdo)"],
-    tags: ["depression", "anger.frustrated", "frustrated", "trunk"],
+    tags: ["chest", "depression", "anger.frustrated", "frustrated", "trunk"],
   },
   {
     id: "p21-esgotamento",
@@ -357,7 +377,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Small intestine & duodenum.",
     associatedWith: ["Intestino delgado e Duodeno"],
-    tags: ["fear", "fibromyalgia", "intestinalCramp"],
+    tags: ["fear", "fibromyalgia", "intestine", "intestinalCramp"],
   },
   {
     id: "p24-intestino-reto-e-anus",
@@ -370,7 +390,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Rectum & anus.",
     associatedWith: ["Intestino Reto e Ânus"],
-    tags: ["fear"],
+    tags: ["fear", "intestine"],
   },
   {
     id: "p25-joelho",
@@ -383,7 +403,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Knee.",
     associatedWith: ["Joelho"],
-    tags: ["fear", "insecure", "spinePain", "tension", "tinnitus"],
+    tags: ["elbows", "fear", "insecure", "knees", "spinePain", "tension", "tinnitus"],
   },
   {
     id: "p26-timo",
@@ -396,7 +416,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Thymus.",
     associatedWith: ["Timo"],
-    tags: ["disappointed", "insecure"],
+    tags: ["chest", "disappointed", "insecure"],
   },
   {
     id: "p29-baco-pe-esquerdo",
@@ -422,7 +442,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Bladder.",
     associatedWith: ["Bexiga"],
-    tags: ["fear"],
+    tags: ["fear", "pelvis"],
   },
   {
     id: "p31-boca",
@@ -435,7 +455,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Mouth.",
     associatedWith: ["Boca"],
-    tags: ["fear"],
+    tags: ["face", "fear"],
   },
   {
     id: "p32-bronquios",
@@ -500,7 +520,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Peripheral blood circulation.",
     associatedWith: ["Circulação Sanguínea Periférica"],
-    tags: ["fibromyalgia", "worried"],
+    tags: ["arms", "elbows", "fibromyalgia", "legs", "worried"],
   },
   {
     id: "p38-cortex",
@@ -513,7 +533,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Cortex.",
     associatedWith: ["Córtex"],
-    tags: ["disappointed", "tinnitus"],
+    tags: ["disappointed", "surprise", "tinnitus"],
   },
   {
     id: "p39-diafragma",
@@ -526,7 +546,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Diaphragm.",
     associatedWith: ["Diafragma"],
-    tags: ["depression", "fatigue", "fibromyalgia", "intestinalCramp", "pain", "sciatica", "stiffness"],
+    tags: ["chest", "depression", "fatigue", "fibromyalgia", "intestinalCramp", "joy", "pain", "sciatica", "stiffness"],
   },
   {
     id: "p40-faringe",
@@ -539,7 +559,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Pharynx.",
     associatedWith: ["Faringe"],
-    tags: ["soreThroat"],
+    tags: ["neck", "soreThroat"],
   },
   {
     id: "p41-ganglios-linfaticos-inferiores",
@@ -604,7 +624,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Larynx.",
     associatedWith: ["Laringe"],
-    tags: ["soreThroat"],
+    tags: ["neck", "soreThroat"],
   },
   {
     id: "p47-mamas",
@@ -630,7 +650,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Hands & feet.",
     associatedWith: ["Mão e Pés"],
-    tags: ["feet"],
+    tags: ["feet", "hands"],
   },
   {
     id: "p49-nariz",
@@ -643,7 +663,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Nose.",
     associatedWith: ["Nariz"],
-    tags: ["head"],
+    tags: ["face", "head"],
   },
   {
     id: "p50-olho",
@@ -682,7 +702,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Ear.",
     associatedWith: ["Ouvido"],
-    tags: ["tinnitus"],
+    tags: ["ears", "tinnitus"],
   },
   {
     id: "p53-ovarios-ou-testiculos",
@@ -698,6 +718,20 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     tags: ["depression", "fear", "hips", "insecure", "legPain", "menstrualCramp"],
   },
   {
+    id: "p54-penis-vagina",
+    name: "Penis / vagina",
+    zone: "foot",
+    position: { x: 42, y: 82 },
+    image: img_p54_penis_vagina,
+    technique:
+      "On the inner heel, press with the thumb from the plantar side to the mid-heel, on both feet.",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflexology helps stimulate the reproductive organs.",
+    associatedWith: ["Pênis/Vagina"],
+    tags: ["pelvis"],
+  },
+  {
     id: "p55-perna",
     name: "Leg",
     zone: "foot",
@@ -708,7 +742,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Leg.",
     associatedWith: ["Perna"],
-    tags: ["confused", "legs"],
+    tags: ["arms", "confused", "elbows", "legs"],
   },
   {
     id: "p56-pineal",
@@ -721,7 +755,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Pineal.",
     associatedWith: ["Pineal"],
-    tags: ["anxietyDiscomfort", "confused", "depression", "digestive", "exhaustion", "anger.frustrated", "frustrated", "headache", "insomnia", "lonely", "sad", "stress"],
+    tags: ["anger.frustrated", "anxietyDiscomfort", "confused", "depression", "digestive", "exhaustion", "frustrated", "headache", "insomnia", "joy", "lonely", "sad", "stress"],
   },
   {
     id: "p57-ponto-de-tensao",
@@ -747,7 +781,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Uterus / prostate.",
     associatedWith: ["Útero ou Próstata"],
-    tags: ["depression", "legPain", "menstrualCramp"],
+    tags: ["depression", "legPain", "menstrualCramp", "pelvis"],
   },
   {
     id: "p61-cerebro",
@@ -773,7 +807,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Limbic system.",
     associatedWith: ["Sistema Límbico"],
-    tags: ["stress"],
+    tags: ["stress", "surprise"],
   },
   {
     id: "p63-hipocampo",
@@ -812,7 +846,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Auditory nerve.",
     associatedWith: ["Nervo Auditivo"],
-    tags: ["tinnitus"],
+    tags: ["ears", "tinnitus"],
   },
   {
     id: "p74-area-auditiva-orelha-media-e-interna",
@@ -825,7 +859,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Auditory area.",
     associatedWith: ["Área Auditiva (orelha média e interna)"],
-    tags: ["tinnitus"],
+    tags: ["ears", "tinnitus"],
   },
   {
     id: "p75-tuba-auditiva",
@@ -838,7 +872,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Eustachian tube.",
     associatedWith: ["Tuba Auditiva"],
-    tags: ["tinnitus"],
+    tags: ["ears", "tinnitus"],
   },
   {
     id: "p81-nervo-ciatico-motor",
@@ -851,7 +885,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Motor sciatic nerve.",
     associatedWith: ["Nervo Ciático Motor"],
-    tags: ["sciatica"],
+    tags: ["legs", "sciatica"],
   },
   {
     id: "p83-bronquios",
@@ -877,7 +911,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Adrenal glands.",
     associatedWith: ["Supra Renal"],
-    tags: ["anxietyDiscomfort", "depression", "exhaustion", "fibromyalgia", "insomnia", "spinePain", "stress", "tension"],
+    tags: ["anxietyDiscomfort", "depression", "exhaustion", "fibromyalgia", "insomnia", "shocked", "spinePain", "stress", "tension"],
   },
   {
     id: "p160-cabeca",
@@ -930,6 +964,253 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     rationale: "Reflex point for Pectoral area.",
     associatedWith: ["Área Peitoral"],
     tags: ["chest"],
+  },
+  {
+    id: "p22-ganglios-basais",
+    name: "Basal ganglia",
+    zone: "foot",
+    position: { x: 68, y: 72 },
+    image: img_p22_ganglios_basais,
+    technique: "Stimulate: Área plantar e lateral interna – Hálux - Falange proximal na porção distal",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Basal ganglia.",
+    associatedWith: ["Gânglios basais"],
+    tags: ["head", "stiffness"],
+  },
+  {
+    id: "p27-amigdalas",
+    name: "Tonsils",
+    zone: "foot",
+    position: { x: 58, y: 42 },
+    image: img_p27_amigdalas,
+    technique: "Stimulate: Área Dorsal – Entre o hálux e o 2º dedo – Acima da articulação metatarso falangiana.",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Tonsils.",
+    associatedWith: ["Amígdalas"],
+    tags: ["neck", "soreThroat"],
+  },
+  {
+    id: "p37-cordas-vocais",
+    name: "Vocal cords",
+    zone: "foot",
+    position: { x: 38, y: 62 },
+    image: img_p37_cordas_vocais,
+    technique: "Stimulate: Área Dorsal – Hálux na lateral externa, na articulação metatarso falangeana",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Vocal cords.",
+    associatedWith: ["Cordas Vocais"],
+    tags: ["neck", "soreThroat"],
+  },
+  {
+    id: "p58-uretra",
+    name: "Urethra",
+    zone: "foot",
+    position: { x: 68, y: 32 },
+    image: img_p58_uretra,
+    technique: "Stimulate: Área Plantar – Lateral interna do Calcâneo – Porção Distal",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Urethra.",
+    associatedWith: ["Uretra"],
+    tags: ["pelvis"],
+  },
+  {
+    id: "p60-vesicula-biliar",
+    name: "Gallbladder",
+    zone: "foot",
+    position: { x: 28, y: 52 },
+    image: img_p60_vesicula_biliar,
+    technique: "Stimulate: Pé Direito – Área Plantar – Sobre o 3° metatarso – Na porção média",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Gallbladder.",
+    associatedWith: ["Vesícula Biliar"],
+    tags: ["digestive", "judgmental", "trunk"],
+  },
+  {
+    id: "p64-amidalas-do-cerebro",
+    name: "Brain amygdalae",
+    zone: "foot",
+    position: { x: 68, y: 12 },
+    image: img_p64_amidalas_do_cerebro,
+    technique: "Stimulate: Área plantar – Hálux na falange proximal, na porção distal",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Brain amygdalae.",
+    associatedWith: ["Amídalas do Cérebro"],
+    tags: ["anxietyDiscomfort", "fear", "head"],
+  },
+  {
+    id: "p66-area-motora-pe-esquerdo",
+    name: "Motor area (left foot)",
+    zone: "foot",
+    position: { x: 28, y: 32 },
+    image: img_p66_area_motora_pe_esquerdo,
+    technique: "Stimulate: PÉ ESQUERDO – Área plantar - Hálux – No ápice externo da falange distal - 2º dedo – no ápice externo da falange distal",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Motor area (left foot).",
+    associatedWith: ["Área Motora (Pé Esquerdo)"],
+    tags: ["head", "stiffness"],
+  },
+  {
+    id: "p67-nervo-vago-e-parassimpatico",
+    name: "Vagus & parasympathetic nerve",
+    zone: "foot",
+    position: { x: 38, y: 42 },
+    image: img_p67_nervo_vago_e_parassimpatico,
+    technique: "Stimulate: Área plantar – entre o 2º e o 3º dedo – desde a lateral interna do cubóide, subindo até a articulação metatarso falangeana",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Vagus & parasympathetic nerve.",
+    associatedWith: ["Nervo vago e parassimpático"],
+    tags: ["digestive", "stress", "trunk"],
+  },
+  {
+    id: "p68-medula-espinhal-e-simpatico",
+    name: "Spinal cord & sympathetic",
+    zone: "foot",
+    position: { x: 48, y: 52 },
+    image: img_p68_medula_espinhal_e_simpatico,
+    technique: "Stimulate: Lateral interna – desde o hálux na falange distal, porção proximal até a articulação do calcâneo talâmica",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Spinal cord & sympathetic.",
+    associatedWith: ["Medula Espinhal e Simpático"],
+    tags: ["spinePain", "stress", "upperBack"],
+  },
+  {
+    id: "p69-nervos-raquidianos",
+    name: "Spinal nerves",
+    zone: "foot",
+    position: { x: 58, y: 62 },
+    image: img_p69_nervos_raquidianos,
+    technique: "Stimulate: Lateral interna até a plantar – desde o hálux da falange distal, porção proximal até a articulação do calcâneo.",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Spinal nerves.",
+    associatedWith: ["Nervos Raquidianos"],
+    tags: ["lowerBack", "spinePain"],
+  },
+  {
+    id: "p71-nervo-optico",
+    name: "Optic nerve",
+    zone: "foot",
+    position: { x: 78, y: 82 },
+    image: img_p71_nervo_optico,
+    technique: "Stimulate: 2º e 3º dedo - Na lateral externa e interna das falanges média e proxima 3º e 4º dedo – Na lateral externa e interna das falanges média e proximal",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Optic nerve.",
+    associatedWith: ["Nervo Óptico"],
+    tags: ["face", "head"],
+  },
+  {
+    id: "p73-nervo-olfatorio",
+    name: "Olfactory nerve",
+    zone: "foot",
+    position: { x: 38, y: 22 },
+    image: img_p73_nervo_olfatorio,
+    technique: "Stimulate: Área plantar - do 2º ao 5º dedo - nas falanges médias",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Olfactory nerve.",
+    associatedWith: ["Nervo Olfatório"],
+    tags: ["face", "sinusitis"],
+  },
+  {
+    id: "p76-olfato",
+    name: "Smell",
+    zone: "foot",
+    position: { x: 68, y: 52 },
+    image: img_p76_olfato,
+    technique: "Stimulate: Área plantar - do 2º ao 5º dedo - nas falanges distais",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Smell.",
+    associatedWith: ["Olfato"],
+    tags: ["face", "sinusitis"],
+  },
+  {
+    id: "p77-paladar",
+    name: "Taste",
+    zone: "foot",
+    position: { x: 78, y: 62 },
+    image: img_p77_paladar,
+    technique: "Stimulate: Área Dorsal – Hálux – Na articulação interfalangeana",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Taste.",
+    associatedWith: ["Paladar"],
+    tags: ["face"],
+  },
+  {
+    id: "p79-sacro",
+    name: "Sacrum",
+    zone: "foot",
+    position: { x: 38, y: 82 },
+    image: img_p79_sacro,
+    technique: "Stimulate: Lateral interna – Ao longo do tálus até abaixo do maléolo",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Sacrum.",
+    associatedWith: ["Sacro"],
+    tags: ["hips", "lowerBack"],
+  },
+  {
+    id: "p80-coccix",
+    name: "Coccyx",
+    zone: "foot",
+    position: { x: 48, y: 12 },
+    image: img_p80_coccix,
+    technique: "Stimulate: Lateral interna – na articulação calcâneo talâmico abaixo do maléolo interno",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Coccyx.",
+    associatedWith: ["Cóccix"],
+    tags: ["lowerBack", "pelvis"],
+  },
+  {
+    id: "p82-traqueia",
+    name: "Trachea",
+    zone: "foot",
+    position: { x: 68, y: 32 },
+    image: img_p82_traqueia,
+    technique: "Stimulate: Área Dorsal – Hálux – lateral externa, na extensão da articulação metatarso falangeana",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Trachea.",
+    associatedWith: ["Traquéia"],
+    tags: ["chest", "neck", "soreThroat"],
+  },
+  {
+    id: "p84-dentes-inferiores",
+    name: "Lower teeth",
+    zone: "foot",
+    position: { x: 28, y: 52 },
+    image: img_p84_dentes_inferiores,
+    technique: "Stimulate: Área Dorsal – 2º ao 5° dedos – Na falange proximal",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Lower teeth.",
+    associatedWith: ["Dentes Inferiores"],
+    tags: ["face"],
+  },
+  {
+    id: "p85-dentes-superiores",
+    name: "Upper teeth",
+    zone: "foot",
+    position: { x: 38, y: 62 },
+    image: img_p85_dentes_superiores,
+    technique: "Stimulate: Área Dorsal – 2º ao 5° dedos – Na falange média",
+    pressure: "medium",
+    durationSec: 45,
+    rationale: "Reflex point for Upper teeth.",
+    associatedWith: ["Dentes Superiores"],
+    tags: ["face"],
   }
 ];
 

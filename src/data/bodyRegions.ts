@@ -1,29 +1,38 @@
-import type { BodyRegion, DiscomfortType } from "./types";
+import type { BodyRegion, BodyView, DiscomfortType } from "./types";
 import { LANG } from "../i18n/config";
 import { PT_DISCOMFORT_LABELS, PT_REGION_LABELS } from "../i18n/content";
 
-const RAW_BODY_REGIONS: Array<{
+export type { BodyView };
+
+export interface BodyRegionDef {
   id: BodyRegion;
   label: string;
-  /** Center of the region on the SVG body silhouette (viewBox 0 0 200 480) */
-  cx: number;
-  cy: number;
-  r: number;
-}> = [
-  { id: "head", label: "Head", cx: 100, cy: 38, r: 26 },
-  { id: "neck", label: "Neck", cx: 100, cy: 78, r: 14 },
-  { id: "shoulders", label: "Shoulders", cx: 100, cy: 102, r: 36 },
-  { id: "chest", label: "Chest", cx: 100, cy: 142, r: 28 },
-  { id: "upperBack", label: "Upper back", cx: 100, cy: 175, r: 24 },
-  { id: "stomach", label: "Stomach", cx: 100, cy: 200, r: 22 },
-  { id: "trunk", label: "Trunk", cx: 100, cy: 218, r: 26 },
-  { id: "lowerBack", label: "Lower back", cx: 100, cy: 245, r: 22 },
-  { id: "hips", label: "Hips", cx: 100, cy: 280, r: 26 },
-  { id: "legs", label: "Legs", cx: 100, cy: 350, r: 30 },
-  { id: "feet", label: "Feet", cx: 100, cy: 445, r: 22 },
+  views: BodyView[];
+}
+
+const RAW_BODY_REGIONS: BodyRegionDef[] = [
+  { id: "head", label: "Head", views: ["front", "back"] },
+  { id: "face", label: "Face & jaw", views: ["front"] },
+  { id: "ears", label: "Ears", views: ["front", "back"] },
+  { id: "neck", label: "Neck", views: ["front", "back"] },
+  { id: "shoulders", label: "Shoulders", views: ["front", "back"] },
+  { id: "arms", label: "Arms", views: ["front", "back"] },
+  { id: "elbows", label: "Elbows", views: ["front", "back"] },
+  { id: "hands", label: "Hands", views: ["front", "back"] },
+  { id: "chest", label: "Chest", views: ["front"] },
+  { id: "upperBack", label: "Upper back", views: ["back"] },
+  { id: "stomach", label: "Stomach", views: ["front"] },
+  { id: "intestine", label: "Intestine", views: ["front"] },
+  { id: "trunk", label: "Trunk", views: ["front"] },
+  { id: "lowerBack", label: "Lower back", views: ["back"] },
+  { id: "hips", label: "Hips", views: ["front", "back"] },
+  { id: "pelvis", label: "Pelvis", views: ["front"] },
+  { id: "knees", label: "Knees", views: ["front", "back"] },
+  { id: "legs", label: "Legs", views: ["front", "back"] },
+  { id: "feet", label: "Feet", views: ["front", "back"] },
 ];
 
-export const BODY_REGIONS =
+export const BODY_REGIONS: BodyRegionDef[] =
   LANG === "pt"
     ? RAW_BODY_REGIONS.map((r) => ({ ...r, label: PT_REGION_LABELS[r.id] ?? r.label }))
     : RAW_BODY_REGIONS;

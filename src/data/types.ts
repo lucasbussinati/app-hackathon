@@ -1,13 +1,23 @@
+export type BodyView = "front" | "back";
+
 export type BodyRegion =
   | "head"
+  | "face"
+  | "ears"
   | "neck"
   | "shoulders"
+  | "arms"
+  | "elbows"
+  | "hands"
   | "upperBack"
   | "chest"
   | "stomach"
+  | "intestine"
   | "trunk"
   | "lowerBack"
   | "hips"
+  | "pelvis"
+  | "knees"
   | "legs"
   | "feet";
 

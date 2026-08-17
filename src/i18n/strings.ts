@@ -111,7 +111,7 @@ export interface Strings {
     note: string;
   };
   wheel: { aria: string; center: string; empty: string; picked: (n: number) => string };
-  bodyMap: { aria: string; hint: string };
+  bodyMap: { aria: string; hint: string; front: string; back: string; areas: string };
   about: {
     title: string;
     subtitle: string;
@@ -270,7 +270,10 @@ const en: Strings = {
   },
   bodyMap: {
     aria: "Human body silhouette",
-    hint: "Tap any area where you feel discomfort.",
+    hint: "Tap a region on the figure or pick from the list.",
+    front: "Front",
+    back: "Back",
+    areas: "All areas",
   },
   about: {
     title: "About Sole",
@@ -440,7 +443,10 @@ const pt: Strings = {
   },
   bodyMap: {
     aria: "Silhueta do corpo humano",
-    hint: "Toque em qualquer área onde sente desconforto.",
+    hint: "Toque uma região na figura ou escolha na lista.",
+    front: "Frente",
+    back: "Costas",
+    areas: "Todas as áreas",
   },
   about: {
     title: "Sobre o Sole",
@@ -482,6 +488,14 @@ const pt: Strings = {
     overwhelmed: "sobrecarga",
     worried: "preocupação",
     chest: "peitoral",
+    face: "rosto",
+    ears: "orelhas",
+    arms: "braços",
+    elbows: "cotovelos",
+    hands: "mãos",
+    intestine: "intestino",
+    pelvis: "pelve",
+    knees: "joelhos",
     fatigue: "fadiga",
     headache: "dor de cabeça",
     head: "cabeça",
