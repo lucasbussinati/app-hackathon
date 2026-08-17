@@ -1,0 +1,354 @@
+============================================================
+  SOLE — REGRAS DE RECOMENDAÇÃO DOS PONTOS DO PÉ
+  Documento para a especialista preencher / revisar
+============================================================
+
+Olá! Este documento é o "mapa" que decide QUAIS pontos do pé o app
+recomenda para a pessoa, dependendo do que ela marca nas etapas 1 e 2
+(onde dói no corpo, que tipo de desconforto, e como ela está se sentindo).
+
+Você NÃO precisa mexer em nada de programação. Basta revisar e preencher
+este texto. Depois a gente transcreve para o app.
+
+Para facilitar, já deixamos PREENCHIDO com a sugestão que o app usa hoje
+(marcada como "(hoje)"). É só você confirmar, tirar ou acrescentar números
+de pontos em cada linha. Onde estiver vazio, é porque hoje nenhum ponto é
+recomendado — você decide se quer incluir algum.
+
+------------------------------------------------------------
+ COMO FUNCIONA (em palavras simples)
+------------------------------------------------------------
+
+1) A pessoa marca, nas etapas do app:
+   - ÁREAS DO CORPO onde sente algo (ex.: cabeça, ombros, estômago...)
+   - TIPOS DE DESCONFORTO (ex.: dor, tensão, fadiga...)
+   - EMOÇÕES (ex.: ansiedade, raiva, tristeza...)
+
+2) Cada uma dessas escolhas é um "sinal". O app olha a sua tabela abaixo e
+   junta todos os pontos ligados aos sinais que a pessoa marcou.
+
+3) Quanto MAIS sinais um ponto atende, mais "forte" ele fica e mais no topo
+   da lista ele aparece. O app mostra os 5 pontos mais fortes.
+   (Ou seja: você NÃO precisa pensar em todas as combinações possíveis —
+    basta dizer, para cada sinal isolado, quais pontos ajudam. O app combina
+    sozinho quando a pessoa marca vários sinais ao mesmo tempo.)
+
+4) Intensidade ("leve/moderada/intensa"), há quanto tempo dura, e a força da
+   emoção dão só um pequeno empurrão extra na ordenação. Isso é automático —
+   você não precisa preencher (mas há uma seção opcional no fim, se quiser
+   opinar).
+
+------------------------------------------------------------
+ OS 15 PONTOS (legenda — use os NÚMEROS na tabela)
+------------------------------------------------------------
+
+Cada ponto tem a foto que você preparou (nome do arquivo entre parênteses).
+Se quiser renomear um ponto, corrigir a técnica, a pressão, a duração ou a
+explicação, edite direto na ficha de cada um (mais abaixo).
+
+  1  = Plexo Solar (foto: solar-plexus.jpeg)
+  2  = Cabeça e seios da face / dedos (foto: sinus.jpeg)
+  3  = Estômago — arco do pé esquerdo (foto: stomach.jpeg)
+  4  = Coluna e nervos — borda interna (foto: nerve-fibers.jpeg)
+  5  = Ombro — sob o dedinho (foto: shoulder.jpeg)
+  6  = Pulmões e peito — almofada do pé (foto: lung.jpeg)
+  7  = Fígado — pé direito (foto: liver.jpeg)
+  8  = Rim — centro do arco (foto: kidney.jpeg)
+  9  = Intestino grosso — parte inferior da planta (foto: large-intestine.jpeg)
+  10 = Pâncreas — arco interno (foto: pancreas.jpeg)
+  11 = Tireoide — base do dedão (foto: thyroid.jpeg)
+  12 = Paratireoide — base do dedão (foto: parathyroid.jpeg)
+  13 = Nervo ciático — linha do calcanhar (foto: sciatic.jpeg)
+  14 = ATM / mandíbula — base dos dedos (foto: atm.jpeg)
+  15 = Trigêmeo — lateral do dedão (foto: trigeminal.jpeg)
+
+============================================================
+ PARTE A — ÁREAS DO CORPO  →  QUAIS PONTOS RECOMENDAR
+============================================================
+(Para cada região onde a pessoa diz sentir algo, escreva os números dos
+ pontos. Pode deixar como está, tirar ou somar.)
+
+Cabeça .......................... pontos: 2, 14, 15        (hoje)
+Pescoço ......................... pontos: 2, 4, 11, 12, 14, 15   (hoje)
+Ombros .......................... pontos: 4, 5             (hoje)
+Peito ........................... pontos: 1, 6             (hoje)
+Parte superior das costas ....... pontos: 4               (hoje)
+Estômago ........................ pontos: 3, 9, 10         (hoje)
+Lombar (parte baixa das costas) . pontos: 4, 8, 13        (hoje)
+Quadril ......................... pontos: 13               (hoje)
+Pernas .......................... pontos: 13               (hoje)
+Pés ............................. pontos: __________   (hoje: nenhum — incluir algum?)
+
+============================================================
+ PARTE B — TIPO DE DESCONFORTO  →  QUAIS PONTOS RECOMENDAR
+============================================================
+
+Dor de cabeça ................... pontos: 1, 2, 14, 15        (hoje)
+Tensão .......................... pontos: 2, 4, 5, 12, 14, 15 (hoje)
+Dor ............................. pontos: 13                  (hoje)
+Rigidez ......................... pontos: 4, 12, 13           (hoje)
+Fadiga (cansaço físico) ......... pontos: 1, 6, 7, 8, 10, 11  (hoje)
+Digestivo ....................... pontos: 3, 7, 9, 10         (hoje)
+Estresse ........................ pontos: 1, 5, 6, 11, 14, 15 (hoje)
+
+============================================================
+ PARTE C — EMOÇÕES  →  QUAIS PONTOS RECOMENDAR
+============================================================
+As emoções no app são organizadas em 6 "famílias", cada uma com sentimentos
+mais específicos. Você pode dizer os pontos para um sentimento específico OU
+para a família inteira (nesse caso vale para todos os sentimentos dela).
+
+----- ALEGRIA -----
+Alegria (família) ............... pontos: __________   (hoje: nenhum)
+  • Contente .................... pontos: __________   (hoje: nenhum)
+  • Grato ....................... pontos: __________   (hoje: nenhum)
+  • Radiante .................... pontos: __________   (hoje: nenhum)
+  • Esperançoso ................. pontos: __________   (hoje: nenhum)
+  (Obs.: emoções positivas talvez não precisem de ponto, ou você pode
+   sugerir um ponto de "aterramento"/relaxamento. Você decide.)
+
+----- TRISTEZA -----
+Tristeza (família) .............. pontos: 6            (hoje)
+  • Magoado ..................... pontos: __________   (hoje: nenhum)
+  • Desapontado ................. pontos: __________   (hoje: nenhum)
+  • Solitário ................... pontos: 6            (hoje)
+  • Esgotado .................... pontos: __________   (hoje: nenhum)
+  • Cansado ..................... pontos: 6, 8, 10, 11 (hoje)
+  • Triste ...................... pontos: 6, 10        (hoje)
+
+----- RAIVA -----
+Raiva (família) ................. pontos: 7, 14        (hoje)
+  • Frustrado ................... pontos: 5, 7, 11, 14 (hoje)
+  • Irritado .................... pontos: 7, 14        (hoje)
+  • Impaciente .................. pontos: 7, 14        (hoje)
+  • Ressentido .................. pontos: 7            (hoje)
+
+----- MEDO -----
+Medo (família) .................. pontos: 8, 13        (hoje)
+  • Ansioso ..................... pontos: 1, 3, 8, 9, 12   (hoje)
+  • Preocupado .................. pontos: 1, 6, 8, 10, 11  (hoje)
+  • Sobrecarregado .............. pontos: 1, 11        (hoje)
+  • Inseguro .................... pontos: 8, 12, 13    (hoje)
+
+----- SURPRESA -----
+Surpresa (família) .............. pontos: __________   (hoje: nenhum)
+  • Maravilhado ................. pontos: __________   (hoje: nenhum)
+  • Curioso ..................... pontos: __________   (hoje: nenhum)
+  • Confuso ..................... pontos: 2, 15        (hoje)
+  • Chocado ..................... pontos: __________   (hoje: nenhum)
+
+----- AVERSÃO -----
+Aversão (família) ............... pontos: __________   (hoje: nenhum)
+  • Retraído .................... pontos: 6, 9         (hoje)
+  • Distante .................... pontos: 9            (hoje)
+  • Incomodado .................. pontos: 3, 9         (hoje)
+  • Crítico ..................... pontos: __________   (hoje: nenhum)
+
+============================================================
+ PARTE D — FICHAS DOS PONTOS (revise o texto, se quiser)
+============================================================
+Estes são os nomes e textos que aparecem para a pessoa no app. Edite à
+vontade. "Pressão" pode ser: leve, média ou firme.
+
+----------------------------------------
+PONTO 1 — Plexo Solar  (foto: solar-plexus.jpeg)
+- Nome exibido: Plexo solar (pé)
+- Como pressionar: Pressione o centro da almofada do pé com a polpa do polegar
+  em círculos lentos e cada vez mais profundos.
+- Pressão: média
+- Duração (segundos): 60
+- Por que ajuda: O reflexo do plexo solar acalma o sistema nervoso autônomo —
+  é o ponto certo para estresse, ansiedade e respiração curta.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 2 — Cabeça e seios da face  (foto: sinus.jpeg)
+- Nome exibido: Cabeça e seios da face (dedos do pé)
+- Como pressionar: Caminhe com o polegar por cada dedo do pé, da base à ponta,
+  e depois aperte suavemente as pontas por 3 segundos.
+- Pressão: leve
+- Duração (segundos): 45
+- Por que ajuda: As pontas dos dedos mapeiam a cabeça e os seios da face —
+  úteis para dores de cabeça, cansaço visual e névoa mental.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 3 — Estômago  (foto: stomach.jpeg)
+- Nome exibido: Reflexo do estômago (arco do pé esquerdo)
+- Como pressionar: No arco interno do pé esquerdo, pressione e deslize
+  lentamente o polegar em linhas horizontais.
+- Pressão: média
+- Duração (segundos): 60
+- Por que ajuda: O arco do pé esquerdo reflete o estômago — ajuda com
+  desconforto digestivo e a ansiedade do tipo "frio na barriga".
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 4 — Coluna e nervos  (foto: nerve-fibers.jpeg)
+- Nome exibido: Linha da coluna e dos nervos (borda interna)
+- Como pressionar: Passe o polegar pela borda interna do pé, do calcanhar ao
+  dedão, com pressão firme e constante.
+- Pressão: firme
+- Duração (segundos): 75
+- Por que ajuda: A borda interna do pé mapeia a coluna e os nervos espinhais —
+  alivia a tensão nas costas e o desconforto ligado à postura.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 5 — Ombro  (foto: shoulder.jpeg)
+- Nome exibido: Reflexo do ombro (sob o dedinho)
+- Como pressionar: Na base do dedinho do pé, faça pequenos círculos firmes com
+  o polegar.
+- Pressão: firme
+- Duração (segundos): 45
+- Por que ajuda: Reflete a articulação do ombro — libera a tensão acumulada do
+  trabalho na tela ou do estresse.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 6 — Pulmões e peito  (foto: lung.jpeg)
+- Nome exibido: Pulmões e peito (almofada do pé)
+- Como pressionar: Na almofada do pé, logo abaixo dos dedos, pressione e
+  deslize o polegar em movimentos horizontais para fora.
+- Pressão: média
+- Duração (segundos): 60
+- Por que ajuda: A almofada do pé espelha os pulmões e o peito — favorece uma
+  respiração mais ampla e, na tradição, está ligada a liberar tristeza e luto
+  guardados.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 7 — Fígado  (foto: liver.jpeg)
+- Nome exibido: Reflexo do fígado (pé direito)
+- Como pressionar: Apenas no pé direito, abaixo da almofada no lado externo,
+  pressione com o polegar em círculos lentos e firmes.
+- Pressão: média
+- Duração (segundos): 60
+- Por que ajuda: O reflexo do fígado fica no pé direito — em muitas tradições
+  carrega a raiva e a frustração, e apoia a sensação de limpeza e renovação.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 8 — Rim  (foto: kidney.jpeg)
+- Nome exibido: Reflexo do rim (centro do arco)
+- Como pressionar: No centro do arco do pé, mantenha uma pressão firme com o
+  polegar, respirando devagar por alguns ciclos.
+- Pressão: média
+- Duração (segundos): 60
+- Por que ajuda: O reflexo do rim fica no meio do arco — tradicionalmente
+  associado ao medo e às reservas profundas de energia do corpo, útil quando a
+  pessoa se sente esgotada ou tensa.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 9 — Intestino grosso  (foto: large-intestine.jpeg)
+- Nome exibido: Intestino grosso (parte inferior da planta)
+- Como pressionar: Siga o caminho pela parte inferior da planta, trabalhando os
+  dois pés com pequenos passos do polegar.
+- Pressão: média
+- Duração (segundos): 75
+- Por que ajuda: O reflexo do intestino grosso percorre os dois pés — apoia a
+  digestão e a eliminação, e o tema emocional de soltar o que já não serve.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 10 — Pâncreas  (foto: pancreas.jpeg)
+- Nome exibido: Reflexo do pâncreas (arco interno)
+- Como pressionar: Ao longo do arco interno, logo abaixo da área do estômago,
+  pressione suavemente e mantenha com o polegar.
+- Pressão: leve
+- Duração (segundos): 50
+- Por que ajuda: O reflexo do pâncreas fica no arco — ligado ao equilíbrio do
+  açúcar no sangue e, simbolicamente, à "doçura" da vida e à estabilidade
+  emocional.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 11 — Tireoide  (foto: thyroid.jpeg)
+- Nome exibido: Reflexo da tireoide (base do dedão)
+- Como pressionar: Na base do dedão, trabalhe a faixa curva com pequenas
+  pressões circulares do polegar.
+- Pressão: média
+- Duração (segundos): 50
+- Por que ajuda: O reflexo da tireoide fica na base do dedão — ligado ao
+  metabolismo e à energia, e ao tema de encontrar a própria voz e o próprio
+  ritmo.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 12 — Paratireoide  (foto: parathyroid.jpeg)
+- Nome exibido: Reflexo da paratireoide (base do dedão)
+- Como pressionar: Logo acima da faixa da tireoide, na base do dedão, aplique
+  pressão firme e precisa com a ponta do polegar.
+- Pressão: firme
+- Duração (segundos): 40
+- Por que ajuda: O reflexo da paratireoide regula o equilíbrio do cálcio —
+  associado à estabilidade estrutural e a uma sensação interna de firmeza e
+  segurança.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 13 — Nervo ciático  (foto: sciatic.jpeg)
+- Nome exibido: Nervo ciático (linha do calcanhar)
+- Como pressionar: Na borda superior do calcanhar, pressione e deslize
+  horizontalmente com pressão firme do polegar.
+- Pressão: firme
+- Duração (segundos): 60
+- Por que ajuda: O reflexo do ciático atravessa o calcanhar — alivia
+  desconfortos na lombar, no quadril e nas pernas que irradiam pelo corpo.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 14 — ATM / mandíbula  (foto: atm.jpeg)
+- Nome exibido: Reflexo da ATM / mandíbula (base dos dedos)
+- Como pressionar: Onde o dedão encontra o segundo dedo, pressione e role
+  suavemente o polegar para soltar a articulação.
+- Pressão: média
+- Duração (segundos): 45
+- Por que ajuda: O reflexo da mandíbula (ATM) fica entre os primeiros dedos —
+  útil para o ranger de dentes, a tensão na mandíbula e a frustração que
+  costumamos prender ali.
+- Correções da especialista: ______________________________________________
+
+----------------------------------------
+PONTO 15 — Trigêmeo  (foto: trigeminal.jpeg)
+- Nome exibido: Nervo trigêmeo (lateral do dedão)
+- Como pressionar: Pela lateral externa do dedão, caminhe com o polegar em
+  pequenos passos da base em direção à ponta.
+- Pressão: leve
+- Duração (segundos): 45
+- Por que ajuda: O reflexo do trigêmeo acompanha o dedão — tradicionalmente
+  usado para tensão facial, dores de cabeça e dor de cabeça ligada à mandíbula.
+- Correções da especialista: ______________________________________________
+
+============================================================
+ PARTE E — (OPCIONAL) AJUSTES FINOS DE ORDENAÇÃO
+============================================================
+Hoje o app dá um pequeno peso extra conforme:
+- Intensidade: leve = normal | moderada = +20% | intensa = +50%
+- Tempo: só hoje = normal | vai e volta = +15% | contínuo = +30%
+- Força da emoção: sutil = normal | presente = +15% | intensa = +35%
+Se quiser mudar algum desses pesos, anote aqui (senão, deixe em branco):
+__________________________________________________________________________
+
+============================================================
+ INSTRUÇÃO PARA A IA (ao reimportar este documento preenchido)
+============================================================
+Quando este arquivo voltar preenchido, use-o como fonte para atualizar as
+regras do app. Como ler:
+
+- PARTES A, B e C estão no formato "sinal -> pontos". Para CADA ponto (1 a 15),
+  reúna todos os sinais que citam o número desse ponto e grave esse conjunto no
+  campo `tags` do ponto em src/data/reflexPoints.ts (array RAW_REFLEX_POINTS).
+  Use os ids internos: as regiões do corpo e os tipos de desconforto já têm ids
+  próprios; as emoções usam os ids de src/data/emotions.ts (as famílias são
+  joy, sadness, anger, fear, surprise, disgust). Uma linha de "família" vale
+  para a família inteira; uma linha de sentimento específico vale só para ele.
+- PARTE D traz os textos exibidos. Aplique qualquer alteração de nome, técnica,
+  pressão, duração e "por que ajuda" no inglês em src/data/reflexPoints.ts e no
+  português em src/i18n/content.ts (objeto PT_POINTS), mantendo os mesmos ids.
+- PARTE E (se preenchida) ajusta os multiplicadores em recommend()
+  (src/data/reflexPoints.ts -> usado por src/data/recommender.ts).
+- Numeração dos pontos = a legenda no topo deste documento. Não invente pontos
+  novos sem foto correspondente; se algo no documento pedir um ponto sem
+  imagem, confirme com o usuário antes.

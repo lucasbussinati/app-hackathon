@@ -5,6 +5,7 @@ export type BodyRegion =
   | "upperBack"
   | "chest"
   | "stomach"
+  | "trunk"
   | "lowerBack"
   | "hips"
   | "legs"
@@ -17,7 +18,22 @@ export type DiscomfortType =
   | "fatigue"
   | "digestive"
   | "headache"
-  | "stress";
+  | "stress"
+  | "spinePain"
+  | "napePain"
+  | "sciatica"
+  | "anxietyDiscomfort"
+  | "exhaustion"
+  | "insomnia"
+  | "sinusitis"
+  | "soreThroat"
+  | "shoulderPain"
+  | "legPain"
+  | "menstrualCramp"
+  | "intestinalCramp"
+  | "tinnitus"
+  | "depression"
+  | "fibromyalgia";
 
 export type Intensity = "mild" | "moderate" | "intense";
 export type Duration = "acute" | "recurring" | "chronic";
