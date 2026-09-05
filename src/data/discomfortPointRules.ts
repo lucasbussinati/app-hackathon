@@ -11,7 +11,7 @@ import type { DiscomfortType } from "./types.ts";
  * because the same reflex point should not be rendered twice in one plan.
  */
 export const DISCOMFORT_POINT_NUMBERS = {
-  headache: [17, 43, 44, 11, 12, 57, 14, 15, 1, 108, 56, 35, 34],
+  headache: [17, 43, 44, 11, 12, 57, 14, 15, 1, 56, 35, 34],
   tension: [17, 43, 44, 117, 1, 25, 57, 14, 5, 12, 15, 21],
   pain: [17, 43, 44, 39, 33, 34, 35, 34, 13],
   stiffness: [17, 43, 44, 4, 11, 12, 13, 39],
@@ -85,7 +85,6 @@ export const POINT_ID_BY_REFERENCE_NUMBER: Readonly<Record<number, string>> = {
   75: "p75-tuba-auditiva",
   81: "p81-nervo-ciatico-motor",
   83: "p83-bronquios",
-  108: "p108-referencia",
   117: "p117-supra-renal",
 };
 

@@ -434,13 +434,6 @@ export const PT_POINTS: Record<string, PointText> = {
     technique: "Pressionar com o polegar na Área Plantar - 3º dedo na falange proximal na raiz do dedo",
     rationale: "A reflexologia ajuda a melhorar o sistema respiratório",
   },
-  "p108-referencia": {
-    name: "Ponto 108",
-    technique:
-      "Siga o protocolo da especialista para o ponto 108. A localização e a técnica não estão descritas no documento de referência fornecido.",
-    rationale:
-      "O documento preenchido inclui explicitamente o ponto 108 para dor de cabeça, mas não apresenta os detalhes desse ponto no catálogo.",
-  },
   "p117-supra-renal": {
     name: "Supra Renal",
     technique: "Pressionar com o polegar na Área Plantar – Abaixo da epífise do 2º metatarso do lado externo",

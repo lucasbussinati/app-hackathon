@@ -67,7 +67,6 @@ import img_p74_area_auditiva_orelha_media_e_interna from "../assets/reflex/p74-a
 import img_p75_tuba_auditiva from "../assets/reflex/p75-tuba-auditiva.png";
 import img_p81_nervo_ciatico_motor from "../assets/reflex/p81-nervo-ciatico-motor.png";
 import img_p83_bronquios from "../assets/reflex/p83-bronquios.png";
-import img_p108_referencia from "../assets/reflex/p108-referencia.svg";
 import img_p117_supra_renal from "../assets/reflex/p117-supra-renal.png";
 import img_p160_cabeca from "../assets/reflex/p160-cabeca.png";
 import img_p161_pescoco from "../assets/reflex/p161-pescoco.png";
@@ -900,21 +899,6 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     rationale: "Reflex point for Bronchi.",
     associatedWith: ["Brônquios"],
     tags: ["depression"],
-  },
-  {
-    id: "p108-referencia",
-    name: "Reference point 108",
-    zone: "foot",
-    position: { x: 50, y: 50 },
-    image: img_p108_referencia,
-    technique:
-      "Follow the specialist's protocol for point 108. Its location and technique are not described in the provided reference document.",
-    pressure: "medium",
-    durationSec: 45,
-    rationale:
-      "The filled recommendation document explicitly includes point 108 for headaches, but does not provide its catalogue details.",
-    associatedWith: ["Reference point 108"],
-    tags: ["headache"],
   },
   {
     id: "p117-supra-renal",

@@ -10,11 +10,11 @@ import {
 
 test("dor de cabeça segue exatamente a ordem da Parte B", () => {
   assert.deepEqual(DISCOMFORT_POINT_NUMBERS.headache, [
-    17, 43, 44, 11, 12, 57, 14, 15, 1, 108, 56, 35, 34,
+    17, 43, 44, 11, 12, 57, 14, 15, 1, 56, 35, 34,
   ]);
-  assert.equal(DISCOMFORT_POINT_NUMBERS.headache.length, 13);
+  assert.equal(DISCOMFORT_POINT_NUMBERS.headache.length, 12);
   assert.deepEqual(pointNumbersForDiscomforts(["headache"]), [
-    17, 43, 44, 11, 12, 57, 14, 15, 1, 108, 56, 35, 34,
+    17, 43, 44, 11, 12, 57, 14, 15, 1, 56, 35, 34,
   ]);
 });
 
@@ -38,11 +38,11 @@ test("repetições editoriais são exibidas uma vez, na primeira posição", () 
 
 test("múltiplos desconfortos formam uma união ordenada sem pontos repetidos", () => {
   assert.deepEqual(pointNumbersForDiscomforts(["headache", "napePain"]), [
-    17, 43, 44, 11, 12, 57, 14, 15, 1, 108, 56, 35, 34, 19,
+    17, 43, 44, 11, 12, 57, 14, 15, 1, 56, 35, 34, 19,
   ]);
 });
 
-test("os ids de dor de cabeça incluem todos os 13 pontos", () => {
+test("os ids de dor de cabeça incluem todos os 12 pontos", () => {
   assert.deepEqual(pointIdsForDiscomforts(["headache"]), [
     "p17-coluna-cervical",
     "p43-hipotalamo",
@@ -53,7 +53,6 @@ test("os ids de dor de cabeça incluem todos os 13 pontos", () => {
     "atm-foot",
     "trigeminal-foot",
     "solar-plexus-foot",
-    "p108-referencia",
     "p56-pineal",
     "p35-circulacao-sanguinea-central",
     "p34-circulacao-linfatica",
