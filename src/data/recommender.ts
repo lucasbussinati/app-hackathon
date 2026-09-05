@@ -8,6 +8,11 @@ import type {
 import { REFLEX_POINTS } from "./reflexPoints";
 import { expandEmotionSelection } from "./emotions";
 import { BODY_MIND_MAP } from "./bodyMindMap";
+import {
+  DISCOMFORT_POINT_NUMBERS,
+  POINT_ID_BY_REFERENCE_NUMBER,
+  pointIdsForDiscomforts,
+} from "./discomfortPointRules";
 
 interface ScoredPoint {
   point: ReflexPoint;
@@ -34,7 +39,10 @@ function tieBreaker(pointId: string, selectionKey: string): number {
 
 /**
  * Simple, transparent recommender:
- *   - Build a "signal" set from the user's selections.
+ *   - If the user selected a discomfort, use PARTE B of the specialist's
+ *     document as the authoritative, ordered rule. These rules are not capped
+ *     by `limit`; every listed point must be displayed.
+ *   - Otherwise, build a "signal" set from the user's selections.
  *   - Score each reflex point by how many of its tags match.
  *   - Boost intense or chronic signals so they outweigh mild ones.
  *   - Break ties by precision, then by the per-selection shuffle, so points that
@@ -51,6 +59,29 @@ export function recommend(
   limit = 5,
 ): ScoredPoint[] {
   const footPoints = REFLEX_POINTS.filter((p) => p.zone === "foot");
+  const discomfortPointIds = pointIdsForDiscomforts(physical.discomfortTypes);
+
+  if (discomfortPointIds.length > 0) {
+    return discomfortPointIds.map((pointId, index) => {
+      const point = footPoints.find((candidate) => candidate.id === pointId);
+      if (!point) {
+        throw new Error(`Ponto ${pointId} da Parte B não existe no catálogo.`);
+      }
+
+      const matches = physical.discomfortTypes.filter((discomfort) =>
+        DISCOMFORT_POINT_NUMBERS[discomfort].some(
+          (pointNumber) => POINT_ID_BY_REFERENCE_NUMBER[pointNumber] === pointId,
+        ),
+      );
+
+      return {
+        point,
+        score: discomfortPointIds.length - index,
+        matches,
+      };
+    });
+  }
+
   const expandedEmotions = expandEmotionSelection(emotionIds);
   const signals = new Set<string>([
     ...physical.regions,

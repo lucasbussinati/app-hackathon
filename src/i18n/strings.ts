@@ -1,6 +1,8 @@
 import type { Duration, EmotionalPresence, Intensity, ReflexZone } from "../data/types";
 import { LANG } from "./config";
 
+export type JourneyStepId = "body" | "emotions" | "meaning" | "points";
+
 /**
  * All user-facing UI copy, plus labels for the raw enums/tags that screens
  * render directly. Content that lives in the data modules (emotion names,
@@ -16,15 +18,11 @@ export interface Strings {
     intro: string;
     start: string;
     viewPast: string;
-    body: string;
-    bodyDesc: string;
-    emotions: string;
-    emotionsDesc: string;
-    understand: string;
-    understandDesc: string;
-    points: string;
-    pointsDesc: string;
+    journeyLead: string;
+    learnMore: string;
   };
+  /** The four steps of a session: named on the home screen, explained in About. */
+  journey: Array<{ id: JourneyStepId; label: string; desc: string }>;
   body: {
     step: string;
     title: string;
@@ -109,6 +107,11 @@ export interface Strings {
     emotions: string;
     recommended: string;
     note: string;
+    viewPlan: string;
+    hidePlan: string;
+    regeneratedPlan: string;
+    howTo: string;
+    whyHelps: string;
   };
   wheel: { aria: string; center: string; empty: string; picked: (n: number) => string };
   bodyMap: { aria: string; hint: string; front: string; back: string; areas: string };
@@ -116,18 +119,33 @@ export interface Strings {
     title: string;
     subtitle: string;
     brainLabel: string;
+    expertName: string;
     role: string;
-    bioBefore: string;
-    bioName: string;
-    bioAfter: string;
+    origin: string;
+    bio: string[];
+    questionsLead: string;
+    questions: string[];
+    proverbLead: string;
+    proverb: string;
+    closing: string[];
     cta: string;
     opensWhatsapp: string;
     whatsappMessage: string;
+    teamTitle: string;
+    teamIntro: string;
+    edsonRole: string;
+    edsonCredential: string;
+    edsonBio: string;
+    edsonFocusTitle: string;
+    edsonFocus: string[];
+    lucasRole: string;
+    lucasBio: string;
+    lucasCta: string;
+    opensLinkedin: string;
     whatIsTitle: string;
     whatIsP1: string;
     whatIsP2: string;
-    howTitle: string;
-    howP1: string;
+    journeyTitle: string;
   };
   enums: {
     zone: Record<ReflexZone, string>;
@@ -151,19 +169,31 @@ const en: Strings = {
       "Sole maps how your body and feelings show up today, then guides you to reflexology points that may bring relief.",
     start: "Start a session",
     viewPast: "View past sessions",
-    body: "Body",
-    bodyDesc:
-      "Tension, pain and fatigue leave traces. Reflexology reads the body as a map — each region of discomfort points to specific reflex areas that can help release what's stuck.",
-    emotions: "Emotions",
-    emotionsDesc:
-      "What you feel emotionally often shows up physically. Anxiety tightens the chest, sadness weighs on the shoulders. Recognizing the emotion helps us find the right points.",
-    understand: "Meaning",
-    understandDesc:
-      "Before the points, Sole reflects back what your body may be communicating — the symbolic theme each area of discomfort traditionally carries, so you can listen to it more closely.",
-    points: "Points",
-    pointsDesc:
-      "Feet, hands and ears hold reflex points that mirror the whole body. By connecting what you feel — physically and emotionally — Sole recommends the points that bring it all together.",
+    journeyLead: "Four quick steps, about two minutes",
+    learnMore: "How Sole works",
   },
+  journey: [
+    {
+      id: "body",
+      label: "Body",
+      desc: "Tension, pain and fatigue leave traces. Reflexology reads the body as a map — each region of discomfort points to specific reflex areas that can help release what's stuck.",
+    },
+    {
+      id: "emotions",
+      label: "Emotions",
+      desc: "What you feel emotionally often shows up physically. Anxiety tightens the chest, sadness weighs on the shoulders. Recognizing the emotion helps us find the right points.",
+    },
+    {
+      id: "meaning",
+      label: "Meaning",
+      desc: "Before the points, Sole reflects back what your body may be communicating — the symbolic theme each area of discomfort traditionally carries, so you can listen to it more closely.",
+    },
+    {
+      id: "points",
+      label: "Points",
+      desc: "Feet, hands and ears hold reflex points that mirror the whole body. By connecting what you feel — physically and emotionally — Sole recommends the points that bring it all together.",
+    },
+  ],
   body: {
     step: "Step 1 of 4",
     title: "Where does it ask for attention?",
@@ -261,6 +291,11 @@ const en: Strings = {
     emotions: "Emotions",
     recommended: "Recommended",
     note: "Note",
+    viewPlan: "View past recommendations",
+    hidePlan: "Hide recommendations",
+    regeneratedPlan: "Recreated from everything you recorded in this session.",
+    howTo: "How to do it",
+    whyHelps: "Why it helps",
   },
   wheel: {
     aria: "Wheel of emotions",
@@ -278,25 +313,54 @@ const en: Strings = {
   about: {
     title: "About Sole",
     subtitle: "A small, calm companion for everyday self-care.",
-    brainLabel: "The brain behind Sole",
-    role: "Certified Reflexology Specialist",
-    bioBefore:
-      "Every point, every instruction, and every connection between body and emotion in Sole comes from ",
-    bioName: "Friederike's",
-    bioAfter:
-      " hands-on practice. The app is a small window into her work — for the real depth, the personalized touch, and the listening, you'll want a session with her.",
+    brainLabel: "The expert behind Sole",
+    expertName: "Friderike Lich Portella",
+    role: "Reflexologist",
+    origin: "German",
+    bio: [
+      "Friderike Lich Portella is a German reflexologist with more than 27 years of practice — years spent sharing, and receiving, moving stories from patients who today are friends.",
+      "After more than 5,000 sessions in the consulting room, we have seen how the body was made, and how wonderfully it answers.",
+      "The central nervous system tries, in ways we can hardly imagine, to recover and find balance in the situations we live through every minute.",
+    ],
+    questionsLead: "When we ask ourselves:",
+    questions: [
+      "What would we be without anxiety?",
+      "What would we be without fear?",
+      "What would we be without insecurity?",
+    ],
+    proverbLead: "And that brings to mind a German saying:",
+    proverb: "Too much of anything is too much…",
+    closing: [
+      "Reflexology helps the central nervous system identify and release what is in excess.",
+      "Its main aim is to restore physical and emotional balance through stimulation of specific points on the feet.",
+    ],
     cta: "Enjoyed the content? Schedule a session",
     opensWhatsapp: "Opens WhatsApp · ",
     whatsappMessage:
-      "Hi Friederike! I tried Sole, the reflexology app, and I'd love to schedule a session with you.",
+      "Hi Friderike! I tried Sole, the reflexology app, and I'd love to schedule a session with you.",
+    teamTitle: "The team behind Sole",
+    teamIntro: "The people who help Sole exist — in human development and in technology.",
+    edsonRole: "Business Consultant, Speaker and Instructor",
+    edsonCredential: "Technologist in Human Resources Management",
+    edsonBio:
+      "Edson Fernandes Portella brings a multidisciplinary career that joins human development with operational efficiency. He works strategically to align how teams behave and grow with the business goals of the companies he advises.",
+    edsonFocusTitle: "People management and human resources",
+    edsonFocus: [
+      "Leadership training and development.",
+      "Group dynamics for team integration.",
+      "Organizational culture focused on productivity.",
+    ],
+    lucasRole: "Product Manager & Software Engineer",
+    lucasBio:
+      "Lucas Hideki Bussinati is the product and engineering mind behind Sole. As a software engineer, he built the app end to end — from the interface to the recommendation engine that turns Friderike's knowledge into working code. As a product manager, he shaped a dense, nuanced practice into a three-step experience with no jargon and no unnecessary decisions. Sole comes from that rare combination: the sensitivity of someone who designs for people, paired with the rigor of someone who writes the code that holds the experience together.",
+    lucasCta: "Connect on LinkedIn",
+    opensLinkedin: "Opens LinkedIn · ",
     whatIsTitle: "What Sole is",
     whatIsP1:
       "Reflexology is a touch practice based on the idea that points on the feet, hands and ears correspond to other parts of the body. Sole helps you find a few points to try based on how you say you feel — physically and emotionally — right now.",
     whatIsP2:
-      "The point catalogue, instructions, and the connections between body areas and emotional states were curated by Friederike Portella. The app is a digital companion; the practice itself is hers.",
-    howTitle: "How recommendations work",
-    howP1:
-      "When you complete an assessment, each saved point is scored by how many of its tags overlap with what you selected (body regions, discomfort types, emotions). Intensity, duration and emotional presence give a small extra weight. The top matches are what you see.",
+      "The point catalogue, instructions, and the connections between body areas and emotional states were curated by Friderike Lich Portella. The app is a digital companion; the practice itself is hers.",
+    journeyTitle: "What happens in a session",
   },
   enums: {
     zone: { foot: "foot", hand: "hand", ear: "ear" },
@@ -323,19 +387,31 @@ const pt: Strings = {
       "O Sole mapeia como seu corpo e suas emoções estão hoje e indica pontos de reflexologia que podem trazer alívio.",
     start: "Começar uma sessão",
     viewPast: "Ver sessões anteriores",
-    body: "Corpo",
-    bodyDesc:
-      "Tensão, dor e cansaço deixam marcas. A reflexologia lê o corpo como um mapa — cada região de desconforto aponta para áreas reflexas específicas que podem ajudar a liberar o que está travado.",
-    emotions: "Emoções",
-    emotionsDesc:
-      "O que você sente emocionalmente costuma aparecer no corpo. Ansiedade aperta o peito, tristeza pesa nos ombros. Reconhecer a emoção nos ajuda a encontrar os pontos certos.",
-    understand: "Significados",
-    understandDesc:
-      "Antes dos pontos, o Sole reflete o que seu corpo pode estar comunicando — o tema simbólico que cada área de desconforto costuma carregar, para você escutá-lo de perto.",
-    points: "Pontos",
-    pointsDesc:
-      "Pés, mãos e orelhas têm pontos reflexos que espelham o corpo inteiro. Conectando o que você sente — física e emocionalmente — o Sole recomenda os pontos que unem tudo.",
+    journeyLead: "Quatro passos rápidos, cerca de dois minutos",
+    learnMore: "Como o Sole funciona",
   },
+  journey: [
+    {
+      id: "body",
+      label: "Corpo",
+      desc: "Tensão, dor e cansaço deixam marcas. A reflexologia lê o corpo como um mapa — cada região de desconforto aponta para áreas reflexas específicas que podem ajudar a liberar o que está travado.",
+    },
+    {
+      id: "emotions",
+      label: "Emoções",
+      desc: "O que você sente emocionalmente costuma aparecer no corpo. Ansiedade aperta o peito, tristeza pesa nos ombros. Reconhecer a emoção nos ajuda a encontrar os pontos certos.",
+    },
+    {
+      id: "meaning",
+      label: "Significados",
+      desc: "Antes dos pontos, o Sole reflete o que seu corpo pode estar comunicando — o tema simbólico que cada área de desconforto costuma carregar, para você escutá-lo de perto.",
+    },
+    {
+      id: "points",
+      label: "Pontos",
+      desc: "Pés, mãos e orelhas têm pontos reflexos que espelham o corpo inteiro. Conectando o que você sente — física e emocionalmente — o Sole recomenda os pontos que unem tudo.",
+    },
+  ],
   body: {
     step: "Etapa 1 de 4",
     title: "Onde seu corpo pede atenção?",
@@ -434,6 +510,11 @@ const pt: Strings = {
     emotions: "Emoções",
     recommended: "Recomendados",
     note: "Nota",
+    viewPlan: "Ver recomendações anteriores",
+    hidePlan: "Ocultar recomendações",
+    regeneratedPlan: "Recriadas a partir de tudo o que você registrou nesta sessão.",
+    howTo: "Como fazer",
+    whyHelps: "Por que ajuda",
   },
   wheel: {
     aria: "Roda das emoções",
@@ -451,25 +532,54 @@ const pt: Strings = {
   about: {
     title: "Sobre o Sole",
     subtitle: "Um companheiro pequeno e calmo para o autocuidado do dia a dia.",
-    brainLabel: "A mente por trás do Sole",
-    role: "Especialista Certificada em Reflexologia",
-    bioBefore:
-      "Cada ponto, cada instrução e cada conexão entre corpo e emoção no Sole vem da prática de ",
-    bioName: "Friederike",
-    bioAfter:
-      ". O app é uma pequena janela para o trabalho dela — para a profundidade real, o toque personalizado e a escuta, você vai querer uma sessão com ela.",
+    brainLabel: "A especialista por trás do Sole",
+    expertName: "Friderike Lich Portella",
+    role: "Reflexoterapeuta",
+    origin: "Alemã",
+    bio: [
+      "Friderike Lich Portella é reflexoterapeuta alemã, com mais de 27 anos de experiência — tempo em que teve a oportunidade de compartilhar e receber relatos emocionantes de pacientes que hoje são amigos.",
+      "Depois de mais de 5.000 atendimentos no consultório, vivenciamos como o nosso corpo foi criado e responde de maneira maravilhosa.",
+      "O sistema nervoso central tenta, de formas inimagináveis, se recuperar e encontrar o equilíbrio das situações que passamos a cada minuto.",
+    ],
+    questionsLead: "Quando nos perguntamos:",
+    questions: [
+      "O que seríamos, sem ansiedade?",
+      "O que seríamos sem medo?",
+      "O que seríamos sem insegurança?",
+    ],
+    proverbLead: "E isso nos faz lembrar um ditado alemão:",
+    proverb: "Tudo que é demais, é demais…",
+    closing: [
+      "A reflexologia ajuda o sistema nervoso central a identificar e eliminar os excessos.",
+      "O objetivo principal da reflexologia é trazer o equilíbrio físico e emocional através de estímulos em pontos específicos nos pés.",
+    ],
     cta: "Gostou do conteúdo? Agende uma sessão",
     opensWhatsapp: "Abre o WhatsApp · ",
     whatsappMessage:
-      "Oi, Friederike! Testei o Sole, o app de reflexologia, e adoraria agendar uma sessão com você.",
+      "Oi, Friderike! Testei o Sole, o app de reflexologia, e adoraria agendar uma sessão com você.",
+    teamTitle: "O time por trás do Sole",
+    teamIntro: "Quem ajuda o Sole a existir — no desenvolvimento humano e na tecnologia.",
+    edsonRole: "Consultor de Empresas, Palestrante e Instrutor",
+    edsonCredential: "Tecnólogo em Gestão de Recursos Humanos",
+    edsonBio:
+      "Edson Fernandes Portella tem uma trajetória multidisciplinar que une o desenvolvimento humano à eficiência operacional. Atua de forma estratégica para alinhar o comportamento e o desenvolvimento das equipes aos objetivos de negócio das empresas que acompanha.",
+    edsonFocusTitle: "Gestão de pessoas e recursos humanos",
+    edsonFocus: [
+      "Treinamento e desenvolvimento de lideranças.",
+      "Dinâmicas de grupo voltadas à integração de equipes.",
+      "Cultura organizacional focada em produtividade.",
+    ],
+    lucasRole: "Product Manager e Desenvolvedor de Software",
+    lucasBio:
+      "Lucas Hideki Bussinati é a mente de produto e engenharia por trás do Sole. Como desenvolvedor de software, construiu o app de ponta a ponta — da interface ao motor de recomendação que traduz o conhecimento da Friderike em código. Como product manager, transformou um saber denso e cheio de nuances em uma experiência de três passos, sem jargão e sem decisão desnecessária. É dessa combinação rara que o Sole nasce: a sensibilidade de quem desenha para pessoas somada ao rigor de quem sustenta a experiência em código.",
+    lucasCta: "Conecte-se no LinkedIn",
+    opensLinkedin: "Abre o LinkedIn · ",
     whatIsTitle: "O que é o Sole",
     whatIsP1:
       "Reflexologia é uma prática de toque baseada na ideia de que pontos nos pés, nas mãos e nas orelhas correspondem a outras partes do corpo. O Sole ajuda você a encontrar alguns pontos para experimentar com base em como você diz que se sente — física e emocionalmente — agora.",
     whatIsP2:
-      "O catálogo de pontos, as instruções e as conexões entre áreas do corpo e estados emocionais foram curados por Friederike Portella. O app é um companheiro digital; a prática em si é dela.",
-    howTitle: "Como funcionam as recomendações",
-    howP1:
-      "Quando você conclui uma avaliação, cada ponto salvo recebe uma pontuação pela quantidade de tags que coincidem com o que você selecionou (regiões do corpo, tipos de desconforto, emoções). Intensidade, duração e presença emocional dão um pequeno peso extra. As melhores combinações são o que você vê.",
+      "O catálogo de pontos, as instruções e as conexões entre áreas do corpo e estados emocionais foram curados por Friderike Lich Portella. O app é um companheiro digital; a prática em si é dela.",
+    journeyTitle: "O que acontece em uma sessão",
   },
   enums: {
     zone: { foot: "pé", hand: "mão", ear: "orelha" },

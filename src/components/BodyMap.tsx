@@ -226,7 +226,7 @@ export default function BodyMap({ selected, onToggle }: Props) {
         </svg>
 
         <p className="text-center text-xs text-sage-600 h-4 mt-1">
-          {hoverLabel ?? t.bodyMap.hint}
+          {hoverLabel ?? ""}
         </p>
       </div>
 

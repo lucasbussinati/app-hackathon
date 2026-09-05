@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useAssessment } from "../store/assessment";
+import { JOURNEY_ICONS } from "../data/journey";
 import { t } from "../i18n";
 
 export default function Welcome() {
   const { reset } = useAssessment();
   return (
-    <div className="flex flex-col gap-6 animate-fade-in">
+    <div className="flex flex-col gap-4 animate-fade-in">
       <section className="card p-6 text-center">
         <div className="mx-auto mb-3 w-20 h-20 rounded-full bg-sage-100 flex items-center justify-center text-4xl">
           🌿
@@ -21,25 +22,33 @@ export default function Welcome() {
         </Link>
       </section>
 
-      <section className="flex flex-col gap-3">
-        {[
-          { icon: "🫶", label: t.welcome.body, desc: t.welcome.bodyDesc },
-          { icon: "💭", label: t.welcome.emotions, desc: t.welcome.emotionsDesc },
-          { icon: "🔮", label: t.welcome.understand, desc: t.welcome.understandDesc },
-          { icon: "🦶", label: t.welcome.points, desc: t.welcome.pointsDesc },
-        ].map((s, i) => (
-          <div
-            key={s.label}
-            className="card p-4 flex items-start gap-3"
-            style={{ animationDelay: `${i * 80}ms` }}
-          >
-            <span className="text-2xl mt-0.5 shrink-0">{s.icon}</span>
-            <div>
-              <span className="text-sm font-semibold text-sage-800">{s.label}</span>
-              <p className="text-xs text-sage-600 leading-relaxed mt-1">{s.desc}</p>
-            </div>
-          </div>
-        ))}
+      <section className="card p-4">
+        <p className="text-[11px] uppercase tracking-widest font-semibold text-sage-500 text-center">
+          {t.welcome.journeyLead}
+        </p>
+        <ol className="mt-3 flex items-start">
+          {t.journey.map((step, i) => (
+            <li key={step.id} className="flex flex-1 items-start">
+              {i > 0 && (
+                <span className="text-sage-300 text-xs self-center px-0.5" aria-hidden>
+                  ›
+                </span>
+              )}
+              <div className="flex-1 flex flex-col items-center gap-1 text-center">
+                <span className="text-xl leading-none">{JOURNEY_ICONS[step.id]}</span>
+                <span className="text-[11px] font-medium text-sage-700 leading-tight">
+                  {step.label}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <Link
+          to="/about"
+          className="mt-4 block text-center text-xs text-sage-600 hover:text-sage-800 underline underline-offset-2"
+        >
+          {t.welcome.learnMore}
+        </Link>
       </section>
     </div>
   );

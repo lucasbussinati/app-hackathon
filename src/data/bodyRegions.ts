@@ -66,3 +66,7 @@ export const DISCOMFORT_TYPES =
   LANG === "pt"
     ? RAW_DISCOMFORT_TYPES.map((d) => ({ ...d, label: PT_DISCOMFORT_LABELS[d.id] ?? d.label }))
     : RAW_DISCOMFORT_TYPES;
+
+export function discomfortLabel(id: string): string {
+  return DISCOMFORT_TYPES.find((d) => d.id === id)?.label ?? id;
+}
