@@ -13,6 +13,7 @@ export interface Strings {
   header: { tagline: string };
   nav: { home: string; history: string; about: string };
   switcher: { aria: string };
+  music: { mute: string; unmute: string };
   welcome: {
     greeting: string;
     intro: string;
@@ -163,6 +164,7 @@ const en: Strings = {
   header: { tagline: "Reflexology, gently guided" },
   nav: { home: "Home", history: "History", about: "About" },
   switcher: { aria: "Switch language" },
+  music: { mute: "Mute background music", unmute: "Turn background music on" },
   welcome: {
     greeting: "Hi, take a breath.",
     intro:
@@ -381,6 +383,7 @@ const pt: Strings = {
   header: { tagline: "Reflexologia, com cuidado" },
   nav: { home: "Início", history: "Histórico", about: "Sobre" },
   switcher: { aria: "Trocar idioma" },
+  music: { mute: "Silenciar música de fundo", unmute: "Ativar música de fundo" },
   welcome: {
     greeting: "Oi, respire fundo.",
     intro:
