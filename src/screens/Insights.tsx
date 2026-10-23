@@ -18,7 +18,7 @@ export default function Insights() {
   const { physical, emotions, emotionalPresence } = useAssessment();
 
   const plan = useMemo(
-    () => recommend(physical, emotions, emotionalPresence, 5),
+    () => recommend(physical, emotions, emotionalPresence),
     [physical, emotions, emotionalPresence],
   );
 

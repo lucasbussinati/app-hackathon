@@ -15,7 +15,7 @@ export default function Results() {
   const [zoomed, setZoomed] = useState<ReflexPoint | null>(null);
 
   const results = useMemo(
-    () => recommend(physical, emotions, emotionalPresence, 5),
+    () => recommend(physical, emotions, emotionalPresence),
     [physical, emotions, emotionalPresence],
   );
 

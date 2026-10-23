@@ -3,8 +3,8 @@
  *
  *   A. every signal a user can select must reach at least one reflex point;
  *   B. every reflex point in the catalogue must be able to appear in a result
- *      (not just be tagged — recommend() only returns the top 5, so this
- *      brute-forces every 1-, 2- and 3-signal selection and checks the output);
+ *      (this brute-forces every 1-, 2- and 3-signal selection and checks the
+ *      output);
  *   C. no point carries a tag that no selection can ever produce;
  *   D. data integrity: unique ids, PT translations, image files, valid tags.
  *
@@ -20,8 +20,6 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = resolve(ROOT, "src");
-const LIMIT = 5;
-
 const read = (p) => readFileSync(resolve(SRC, p), "utf8");
 const pointsTs = read("data/reflexPoints.ts");
 const regionsTs = read("data/bodyRegions.ts");
@@ -132,7 +130,7 @@ function topPoints(signals) {
   }
   if (ranked.length === 0) return ["solar-plexus-foot", "spine-foot"];
   ranked.sort((a, b) => b.score - a.score || b.precision - a.precision || b.shuffle - a.shuffle);
-  return ranked.slice(0, LIMIT).map((r) => r.id);
+  return ranked.map((r) => r.id);
 }
 
 const shown = new Set();
@@ -161,7 +159,7 @@ report(
   `${selections.toLocaleString()} selections of 1-3 signals all returned points`,
 );
 report(
-  `every point can reach the top ${LIMIT}`,
+  "every point can appear in a result",
   points.filter((p) => !shown.has(p.id)).map((p) => p.id),
   `all ${points.length} points surface in some selection`,
 );

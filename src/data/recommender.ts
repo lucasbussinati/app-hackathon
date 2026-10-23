@@ -31,15 +31,15 @@ function tieBreaker(pointId: string, selectionKey: string): number {
 }
 
 /**
- * Simple, transparent recommender:
- *   - If the user selected a discomfort, use PARTE B of the specialist's
- *     document as the authoritative, ordered rule. These rules are not capped
- *     by `limit`; every listed point must be displayed.
- *   - Otherwise, build a "signal" set from the user's selections.
- *   - Score each reflex point by how many of its tags match.
- *   - Boost intense or chronic signals so they outweigh mild ones.
- *   - Break ties by precision, then by the per-selection shuffle, so points that
- *     answer exactly what was reported win and no point is permanently buried.
+ * Simple, transparent recommender. Every point related to what the user
+ * reported is returned, uncapped:
+ *   - First, the points PARTE B of the specialist's document lists for the
+ *     selected discomforts, in her order.
+ *   - Then every other point whose tags match a selected region, discomfort or
+ *     emotion, scored by how many tags match. Intense or chronic signals are
+ *     boosted so they outweigh mild ones.
+ *   - Ties break by precision, then by the per-selection shuffle, so points that
+ *     answer exactly what was reported come first.
  *
  * This is intentionally simple so the user (and reviewer) can see WHY a
  * point was recommended. Phase 2 can replace this with an LLM call that
@@ -49,31 +49,9 @@ export function recommend(
   physical: PhysicalAssessment,
   emotionIds: string[],
   emotionalPresence: EmotionalPresence = "present",
-  limit = 5,
 ): ScoredPoint[] {
   const footPoints = REFLEX_POINTS.filter((p) => p.zone === "foot");
   const discomfortPointIds = pointIdsForDiscomforts(physical.discomfortTypes);
-
-  if (discomfortPointIds.length > 0) {
-    return discomfortPointIds.map((pointId, index) => {
-      const point = footPoints.find((candidate) => candidate.id === pointId);
-      if (!point) {
-        throw new Error(`Ponto ${pointId} da Parte B não existe no catálogo.`);
-      }
-
-      const matches = physical.discomfortTypes.filter((discomfort) =>
-        DISCOMFORT_POINT_NUMBERS[discomfort].some(
-          (pointNumber) => POINT_ID_BY_REFERENCE_NUMBER[pointNumber] === pointId,
-        ),
-      );
-
-      return {
-        point,
-        score: discomfortPointIds.length - index,
-        matches,
-      };
-    });
-  }
 
   const expandedEmotions = expandEmotionSelection(emotionIds);
   const signals = new Set<string>([
@@ -106,10 +84,32 @@ export function recommend(
     };
   });
 
-  const positives = ranked
-    .filter((s) => s.score > 0)
+  const specialistOrdered = discomfortPointIds.map((pointId, index) => {
+    const scored = ranked.find((candidate) => candidate.point.id === pointId);
+    if (!scored) {
+      throw new Error(`Ponto ${pointId} da Parte B não existe no catálogo.`);
+    }
+
+    const discomforts = physical.discomfortTypes.filter((discomfort) =>
+      DISCOMFORT_POINT_NUMBERS[discomfort].some(
+        (pointNumber) => POINT_ID_BY_REFERENCE_NUMBER[pointNumber] === pointId,
+      ),
+    );
+
+    return {
+      point: scored.point,
+      score: Number.MAX_SAFE_INTEGER - index,
+      matches: [...new Set([...discomforts, ...scored.matches])],
+    };
+  });
+
+  const specialistIds = new Set(discomfortPointIds);
+  const tagMatched = ranked
+    .filter((s) => s.score > 0 && !specialistIds.has(s.point.id))
     .sort((a, b) => b.score - a.score || b.precision - a.precision || b.shuffle - a.shuffle)
     .map(({ point, score, matches }) => ({ point, score, matches }));
+
+  const positives = [...specialistOrdered, ...tagMatched];
 
   // Fallback: if nothing matched, still recommend two foot grounding points so the
   // user never sees an empty results screen.
@@ -128,5 +128,5 @@ export function recommend(
     ];
   }
 
-  return positives.slice(0, limit);
+  return positives;
 }

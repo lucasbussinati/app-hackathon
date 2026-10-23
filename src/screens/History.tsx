@@ -51,7 +51,7 @@ export default function History() {
         {sessions.map((s) => {
           const isExpanded = expandedId === s.id;
           const recommendations = isExpanded
-            ? recommend(s.physical, s.emotions, s.emotionalPresence ?? "present", 5)
+            ? recommend(s.physical, s.emotions, s.emotionalPresence ?? "present")
             : [];
 
           return (
