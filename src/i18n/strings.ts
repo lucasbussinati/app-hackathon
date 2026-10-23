@@ -89,7 +89,7 @@ export interface Strings {
     whyHelps: string;
     suggestedFor: string;
     pressure: string;
-    done: string;
+    back: string;
     newSession: string;
     emptyText: string;
     beginAssessment: string;
@@ -271,7 +271,7 @@ const en: Strings = {
     whyHelps: "Why it helps",
     suggestedFor: "Suggested for:",
     pressure: "Pressure:",
-    done: "Done",
+    back: "Back",
     newSession: "New session",
     emptyText: "Nothing to recommend yet — let's start a session first.",
     beginAssessment: "Begin assessment",
@@ -488,7 +488,7 @@ const pt: Strings = {
     whyHelps: "Por que ajuda",
     suggestedFor: "Indicado para:",
     pressure: "Pressão:",
-    done: "Concluir",
+    back: "Voltar",
     newSession: "Nova sessão",
     emptyText: "Nada para recomendar ainda — vamos começar uma sessão primeiro.",
     beginAssessment: "Iniciar avaliação",

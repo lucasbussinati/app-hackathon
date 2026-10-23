@@ -10,8 +10,8 @@ import { t } from "../i18n";
 
 export default function Results() {
   const navigate = useNavigate();
-  const { physical, emotions, emotionalPresence, emotionalNote, reset } = useAssessment();
-  const [saved, setSaved] = useState(false);
+  const { sessionId, physical, emotions, emotionalPresence, emotionalNote, reset } =
+    useAssessment();
   const [zoomed, setZoomed] = useState<ReflexPoint | null>(null);
 
   const results = useMemo(
@@ -25,9 +25,9 @@ export default function Results() {
     emotions.length > 0;
 
   useEffect(() => {
-    if (!hasAnyInput || saved) return;
+    if (!hasAnyInput) return;
     const session: Session = {
-      id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+      id: sessionId,
       createdAt: Date.now(),
       physical,
       emotions,
@@ -36,8 +36,7 @@ export default function Results() {
       recommendedPointIds: results.map((r) => r.point.id),
     };
     saveSession(session);
-    setSaved(true);
-  }, [hasAnyInput, physical, emotions, emotionalPresence, emotionalNote, results, saved]);
+  }, [hasAnyInput, sessionId, physical, emotions, emotionalPresence, emotionalNote, results]);
 
   if (!hasAnyInput) {
     return (
@@ -106,16 +105,10 @@ export default function Results() {
       </ol>
 
       <div className="flex items-center justify-between gap-3">
-        <button
-          className="btn-ghost"
-          onClick={() => {
-            reset();
-            navigate("/");
-          }}
-        >
-          {t.results.done}
+        <button className="btn-ghost" onClick={() => navigate("/insights")}>
+          {t.results.back}
         </button>
-        <Link to="/body" className="btn-primary flex-1" onClick={reset}>
+        <Link to="/" className="btn-primary flex-1" onClick={reset}>
           {t.results.newSession}
         </Link>
       </div>

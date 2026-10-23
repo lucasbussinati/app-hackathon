@@ -9,6 +9,8 @@ import type {
 } from "../data/types";
 
 interface AssessmentState {
+  /** Identifies this assessment in History, so revisiting step 4 updates it instead of duplicating it. */
+  sessionId: string;
   regions: BodyRegion[];
   discomfortTypes: DiscomfortType[];
   intensity: Intensity;
@@ -30,7 +32,8 @@ interface AssessmentContextValue extends AssessmentState {
   physical: PhysicalAssessment;
 }
 
-const defaultState: AssessmentState = {
+const freshState = (): AssessmentState => ({
+  sessionId: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
   regions: [],
   discomfortTypes: [],
   intensity: "moderate",
@@ -38,12 +41,12 @@ const defaultState: AssessmentState = {
   emotions: [],
   emotionalPresence: "present",
   emotionalNote: "",
-};
+});
 
 const AssessmentContext = createContext<AssessmentContextValue | null>(null);
 
 export function AssessmentProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<AssessmentState>(defaultState);
+  const [state, setState] = useState<AssessmentState>(freshState);
 
   const value = useMemo<AssessmentContextValue>(
     () => ({
@@ -73,7 +76,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
         })),
       setEmotionalPresence: (p) => setState((s) => ({ ...s, emotionalPresence: p })),
       setEmotionalNote: (note) => setState((s) => ({ ...s, emotionalNote: note })),
-      reset: () => setState(defaultState),
+      reset: () => setState(freshState()),
       physical: {
         regions: state.regions,
         discomfortTypes: state.discomfortTypes,

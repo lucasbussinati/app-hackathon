@@ -13,10 +13,13 @@ export function loadSessions(): Session[] {
   }
 }
 
+/** Inserts the session, or replaces the saved one with the same id (keeping its original date). */
 export function saveSession(session: Session) {
   const all = loadSessions();
-  all.unshift(session);
-  localStorage.setItem(KEY, JSON.stringify(all.slice(0, 50)));
+  const previous = all.find((s) => s.id === session.id);
+  const next = previous ? { ...session, createdAt: previous.createdAt } : session;
+  const others = all.filter((s) => s.id !== session.id);
+  localStorage.setItem(KEY, JSON.stringify([next, ...others].slice(0, 50)));
 }
 
 export function deleteSession(id: string) {
