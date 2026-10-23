@@ -1,6 +1,7 @@
 import type { ReflexPoint } from "./types";
 import { LANG } from "../i18n/config";
 import { PT_POINTS } from "../i18n/content";
+import { POINT_COPY } from "./specialist";
 
 // Photographic reflexology charts imported from the specialist catalogue
 // (regras-de-recomendacao-PONTOS-TEMPLATE PREENCHIDO.docx).
@@ -416,7 +417,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Thymus.",
     associatedWith: ["Timo"],
-    tags: ["chest", "disappointed", "insecure"],
+    tags: ["anguished", "chest", "disappointed", "insecure"],
   },
   {
     id: "p29-baco-pe-esquerdo",
@@ -429,7 +430,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Spleen (left foot).",
     associatedWith: ["Baço (Pé Esquerdo)"],
-    tags: ["overwhelmed", "resentful", "sadness.hurt", "trunk"],
+    tags: ["guilty", "overwhelmed", "resentful", "sadness.hurt", "trunk"],
   },
   {
     id: "p30-bexiga",
@@ -976,7 +977,7 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
     durationSec: 45,
     rationale: "Reflex point for Basal ganglia.",
     associatedWith: ["Gânglios basais"],
-    tags: ["head", "stiffness"],
+    tags: ["expectant", "head", "stiffness"],
   },
   {
     id: "p27-amigdalas",
@@ -1214,14 +1215,28 @@ const RAW_REFLEX_POINTS: ReflexPoint[] = [
   }
 ];
 
-/** Localized at build time: only display text changes for PT; ids/tags are stable. */
-export const REFLEX_POINTS: ReflexPoint[] =
-  LANG === "pt"
-    ? RAW_REFLEX_POINTS.map((p) => {
-        const tr = PT_POINTS[p.id];
-        return tr ? { ...p, name: tr.name, technique: tr.technique, rationale: tr.rationale } : p;
-      })
-    : RAW_REFLEX_POINTS;
+/**
+ * Localized at build time: only display text changes; ids/tags are stable.
+ * Part D of the specialist's document (POINT_COPY) wins over the older
+ * catalogue text, field by field, so a point she left blank keeps its text.
+ */
+function localize(point: ReflexPoint): ReflexPoint {
+  const base = LANG === "pt" ? { ...point, ...PT_POINTS[point.id] } : point;
+  const copy = POINT_COPY[point.id];
+  if (!copy) return base;
+  return {
+    ...base,
+    name: copy.name ?? base.name,
+    technique: copy.technique ?? base.technique,
+    // A reading without a rationale means the specialist's rationale was
+    // unusable; the old catalogue text must not resurface in its place.
+    rationale: copy.rationale ?? (copy.reading ? "" : base.rationale),
+    pressure: copy.pressure ?? base.pressure,
+    durationSec: copy.durationSec ?? base.durationSec,
+  };
+}
+
+export const REFLEX_POINTS: ReflexPoint[] = RAW_REFLEX_POINTS.map(localize);
 
 export function findPointById(id: string) {
   return REFLEX_POINTS.find((p) => p.id === id);

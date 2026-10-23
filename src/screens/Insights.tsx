@@ -1,32 +1,51 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useAssessment } from "../store/assessment";
-import { matchBodyMind, type ScoredInsight } from "../data/recommender";
-import { BODY_REGIONS, discomfortLabel } from "../data/bodyRegions";
-import { findEmotion, FAMILY_LABELS } from "../data/emotions";
-import { findPointById } from "../data/reflexPoints";
-import type { EmotionFamily } from "../data/types";
-import { t, tagLabel } from "../i18n";
+import { recommend } from "../data/recommender";
+import { signalLabel } from "../data/bodyRegions";
+import { readingFor, type RichBlock, type SpecialistReading } from "../data/specialist";
+import { PointLightbox, PointThumbnail } from "../components/PointZoom";
+import type { ReflexPoint } from "../data/types";
+import { t } from "../i18n";
 
+/**
+ * Step 3 — the specialist's reading of every point in the reflexology plan.
+ * It lists exactly the points step 4 recommends, in the same order, so the
+ * reflection and the plan always tell the same story.
+ */
 export default function Insights() {
   const navigate = useNavigate();
-  const { physical, emotions } = useAssessment();
+  const { physical, emotions, emotionalPresence } = useAssessment();
 
-  const insights = useMemo(
-    () => matchBodyMind(physical, emotions),
-    [physical, emotions],
+  const plan = useMemo(
+    () => recommend(physical, emotions, emotionalPresence, 5),
+    [physical, emotions, emotionalPresence],
   );
+
+  const [openIds, setOpenIds] = useState<Set<string>>(
+    () => new Set(plan.length > 0 ? [plan[0].point.id] : []),
+  );
+  const [zoomed, setZoomed] = useState<ReflexPoint | null>(null);
 
   const hasAnyInput =
     physical.regions.length > 0 ||
     physical.discomfortTypes.length > 0 ||
     emotions.length > 0;
 
-  // Step 3 only exists when there's something to reflect back. With no input,
-  // send the user to the start; with input but no matches, skip straight to the
-  // reflexology plan (step 4) so they never land on an empty insights screen.
   if (!hasAnyInput) return <Navigate to="/body" replace />;
-  if (insights.length === 0) return <Navigate to="/results" replace />;
+
+  const allOpen = plan.every(({ point }) => openIds.has(point.id));
+
+  const toggle = (id: string) =>
+    setOpenIds((current) => {
+      const next = new Set(current);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+
+  const toggleAll = () =>
+    setOpenIds(allOpen ? new Set() : new Set(plan.map(({ point }) => point.id)));
 
   return (
     <div className="flex flex-col gap-6">
@@ -42,11 +61,34 @@ export default function Insights() {
         <p className="text-sm text-sage-700 leading-relaxed">{t.insights.intro}</p>
       </section>
 
-      <ol className="flex flex-col gap-4">
-        {insights.map((insight, idx) => (
-          <InsightCard key={insight.entry.id} insight={insight} idx={idx} />
-        ))}
-      </ol>
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-xs font-medium text-sage-600">{t.insights.count(plan.length)}</p>
+          {plan.length > 1 && (
+            <button
+              type="button"
+              onClick={toggleAll}
+              className="text-xs font-semibold text-sage-700 underline-offset-2 hover:underline"
+            >
+              {allOpen ? t.insights.collapseAll : t.insights.expandAll}
+            </button>
+          )}
+        </div>
+
+        <ol className="flex flex-col gap-3">
+          {plan.map(({ point, matches }, idx) => (
+            <ReadingCard
+              key={point.id}
+              point={point}
+              matches={matches}
+              index={idx}
+              open={openIds.has(point.id)}
+              onToggle={() => toggle(point.id)}
+              onZoom={setZoomed}
+            />
+          ))}
+        </ol>
+      </div>
 
       <section className="card p-3 border-l-4 border-sand-300 bg-sand-50/70">
         <p className="text-[11px] text-sage-600 leading-relaxed">
@@ -63,136 +105,222 @@ export default function Insights() {
           {t.insights.next}
         </button>
       </div>
+
+      {zoomed && <PointLightbox point={zoomed} onClose={() => setZoomed(null)} />}
     </div>
   );
 }
 
-function InsightCard({ insight, idx }: { insight: ScoredInsight; idx: number }) {
-  const { entry, matchedRegions, matchedEmotions, matchedDiscomfort } = insight;
-
-  const matchedLabels = [
-    ...matchedRegions.map((id) => BODY_REGIONS.find((r) => r.id === id)?.label ?? id),
-    ...matchedDiscomfort.map((id) => discomfortLabel(id)),
-    ...matchedEmotions.map(resolveSignalLabel),
-  ];
-  // De-duplicate while keeping order (a family + its child can both match).
-  const uniqueMatched = Array.from(new Set(matchedLabels));
-
-  const relatedPoints = entry.relatedPointIds
-    .map((id) => findPointById(id)?.name)
-    .filter((name): name is string => Boolean(name));
+function ReadingCard({
+  point,
+  matches,
+  index,
+  open,
+  onToggle,
+  onZoom,
+}: {
+  point: ReflexPoint;
+  matches: string[];
+  index: number;
+  open: boolean;
+  onToggle: () => void;
+  onZoom: (point: ReflexPoint) => void;
+}) {
+  const reading = readingFor(point.id);
+  const panelId = `reading-${point.id}`;
+  const matchedLabels = Array.from(
+    new Set(matches.filter((m) => m !== "grounding").map(signalLabel)),
+  );
 
   return (
-    <li className="card p-4 animate-fade-in" style={{ animationDelay: `${idx * 70}ms` }}>
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <h3 className="text-lg leading-tight">{entry.name}</h3>
-          <p className="text-sm font-medium text-sage-700 mt-0.5">{entry.theme}</p>
-        </div>
-        <span className="chip whitespace-nowrap shrink-0">{t.insights.categories[entry.category]}</span>
-      </div>
-
-      {uniqueMatched.length > 0 && (
-        <p className="text-[11px] mt-2 text-sage-600">
-          {t.insights.matchedFor}{" "}
-          <span className="font-medium">{uniqueMatched.join(", ")}</span>
-        </p>
-      )}
-
-      <div className="mt-3 space-y-3">
-        <Block title={t.insights.meaning}>
-          <p className="text-sm text-sage-800 leading-relaxed">{entry.meaning}</p>
-        </Block>
-
-        <Block title={t.insights.physicalFunction}>
-          <ul className="text-sm text-sage-700 leading-relaxed list-disc pl-4 space-y-0.5">
-            {entry.physicalFunction.map((fn, i) => (
-              <li key={i}>{fn}</li>
-            ))}
-          </ul>
-        </Block>
-
-        {entry.patterns && entry.patterns.length > 0 && (
-          <Block title={t.insights.patterns}>
-            <div className="flex flex-col gap-1.5">
-              {entry.patterns.map((p, i) => (
-                <div key={i} className="text-sm text-sage-700 leading-relaxed">
-                  <span className="font-semibold text-sage-800">{p.label}:</span> {p.description}
-                </div>
-              ))}
-            </div>
-          </Block>
-        )}
-
-        {entry.reflections.length > 0 && (
-          <div className="rounded-2xl bg-sage-50 border border-sage-100 p-3">
-            <p className="text-[11px] uppercase tracking-widest font-semibold text-sage-500 mb-1">
-              {t.insights.reflections}
-            </p>
-            {entry.reflections.map((r, i) => (
-              <p key={i} className="text-sm text-sage-800 leading-relaxed italic">
-                “{r}”
-              </p>
-            ))}
-          </div>
-        )}
-
-        {entry.questions.length > 0 && (
-          <Block title={t.insights.questions}>
-            <ul className="text-sm text-sage-800 leading-relaxed space-y-1">
-              {entry.questions.map((q, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="text-sage-400" aria-hidden>
-                    ›
-                  </span>
-                  <span>{q}</span>
-                </li>
-              ))}
-            </ul>
-          </Block>
-        )}
-
-        {relatedPoints.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5 pt-1">
-            <span className="text-[11px] text-sage-500 font-medium">
-              {t.insights.relatedPoints}
+    <li
+      className="card overflow-hidden animate-fade-in"
+      style={{ animationDelay: `${index * 60}ms` }}
+    >
+      <div className="flex items-center gap-3 p-3">
+        <PointThumbnail point={point} size={64} onZoom={onZoom} />
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={open}
+          aria-controls={panelId}
+          className="flex min-w-0 flex-1 items-center gap-2 self-stretch rounded-xl text-left outline-none focus-visible:ring-2 focus-visible:ring-sage-400"
+        >
+          <span className="min-w-0 flex-1">
+            <span className="block text-[10px] font-semibold uppercase tracking-widest text-sage-500">
+              {index + 1}
             </span>
-            {relatedPoints.map((name) => (
-              <span key={name} className="chip">
-                {name}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {entry.note && (
-          <p className="text-[11px] text-sage-500 leading-relaxed border-t border-sage-100 pt-2">
-            {entry.note}
-          </p>
-        )}
+            <span className="block font-display text-lg leading-tight text-sage-900">
+              {point.name}
+            </span>
+            <span className="mt-0.5 block text-sm leading-snug text-sage-700">
+              {reading ? reading.theme : t.insights.fallbackTitle}
+            </span>
+          </span>
+          <Chevron open={open} />
+        </button>
       </div>
+
+      {open && (
+        <div
+          id={panelId}
+          className="space-y-4 border-t border-sage-100 px-4 pb-4 pt-3 animate-fade-in"
+        >
+          {matchedLabels.length > 0 && (
+            <p className="text-[11px] text-sage-600">
+              {t.insights.matchedFor}{" "}
+              <span className="font-medium">{matchedLabels.slice(0, 4).join(", ")}</span>
+            </p>
+          )}
+          {reading ? <ReadingBody reading={reading} /> : <Fallback point={point} />}
+        </div>
+      )}
     </li>
   );
 }
 
-function Block({ title, children }: { title: string; children: React.ReactNode }) {
+function ReadingBody({ reading }: { reading: SpecialistReading }) {
+  const s = t.insights.sections;
+  return (
+    <>
+      {reading.physical && (
+        <Section title={s.physical}>
+          <Rich blocks={reading.physical} />
+        </Section>
+      )}
+      {reading.emotional && (
+        <Section title={s.emotional}>
+          <Rich blocks={reading.emotional} emphasis />
+        </Section>
+      )}
+      {reading.symbolic && (
+        <Section title={s.symbolic}>
+          <Rich blocks={reading.symbolic} />
+        </Section>
+      )}
+      {reading.expressions && reading.expressions.length > 0 && (
+        <Section title={s.expressions}>
+          <div className="flex flex-wrap gap-1.5">
+            {reading.expressions.map((e, i) => (
+              <span
+                key={i}
+                className="rounded-full border border-sand-200 bg-sand-50 px-2.5 py-1 text-xs italic text-sage-800"
+              >
+                “{e}”
+              </span>
+            ))}
+          </div>
+        </Section>
+      )}
+      {reading.reflections && reading.reflections.length > 0 && (
+        <div className="rounded-2xl border border-sage-100 bg-sage-50 p-3">
+          <SectionTitle>{s.reflections}</SectionTitle>
+          <div className="space-y-2">
+            {reading.reflections.map((r, i) => (
+              <p key={i} className="text-sm italic leading-relaxed text-sage-800">
+                “{r}”
+              </p>
+            ))}
+          </div>
+        </div>
+      )}
+      {reading.questions && reading.questions.length > 0 && (
+        <Section title={s.questions}>
+          <ul className="space-y-1.5 text-sm leading-relaxed text-sage-800">
+            {reading.questions.map((q, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="text-sage-400" aria-hidden>
+                  ›
+                </span>
+                <span>{q}</span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+      {reading.note && (
+        <p className="border-t border-sage-100 pt-2 text-[11px] leading-relaxed text-sage-500">
+          {reading.note}
+        </p>
+      )}
+    </>
+  );
+}
+
+function Fallback({ point }: { point: ReflexPoint }) {
+  return (
+    <>
+      <Section title={t.insights.fallbackTitle}>
+        <p className="text-sm leading-relaxed text-sage-800">{point.rationale}</p>
+      </Section>
+      <p className="text-[11px] italic leading-relaxed text-sage-500">{t.insights.fallbackNote}</p>
+    </>
+  );
+}
+
+function Rich({ blocks, emphasis = false }: { blocks: RichBlock[]; emphasis?: boolean }) {
+  const text = emphasis ? "text-sage-900" : "text-sage-700";
+  return (
+    <div className="space-y-2">
+      {blocks.map((block, i) => {
+        if (typeof block === "string") {
+          return (
+            <p key={i} className={`text-sm leading-relaxed ${text}`}>
+              {block}
+            </p>
+          );
+        }
+        if (Array.isArray(block)) {
+          return (
+            <ul key={i} className={`list-disc space-y-0.5 pl-4 text-sm leading-relaxed ${text}`}>
+              {block.map((item, j) => (
+                <li key={j}>{item}</li>
+              ))}
+            </ul>
+          );
+        }
+        return (
+          <p key={i} className="pt-1 text-sm font-semibold text-sage-800">
+            {block.heading}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-widest font-semibold text-sage-500 mb-1">
-        {title}
-      </p>
+      <SectionTitle>{title}</SectionTitle>
       {children}
     </div>
   );
 }
 
-/**
- * Resolve an emotion tag to a readable label: a specific emotion name, a
- * family name, or the localized recommender tag as a fallback.
- */
-function resolveSignalLabel(tag: string): string {
-  const emotion = findEmotion(tag);
-  if (emotion) return emotion.label;
-  if (tag in FAMILY_LABELS) return FAMILY_LABELS[tag as EmotionFamily];
-  return tagLabel(tag);
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mb-1 text-[11px] font-semibold uppercase tracking-widest text-sage-500">
+      {children}
+    </p>
+  );
+}
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className={`shrink-0 text-sage-500 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
 }

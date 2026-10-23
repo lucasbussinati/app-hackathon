@@ -1,13 +1,6 @@
-import type {
-  BodyRegion,
-  EmotionalPresence,
-  LocalizedBodyMindEntry,
-  PhysicalAssessment,
-  ReflexPoint,
-} from "./types";
+import type { EmotionalPresence, PhysicalAssessment, ReflexPoint } from "./types";
 import { REFLEX_POINTS } from "./reflexPoints";
 import { expandEmotionSelection } from "./emotions";
-import { BODY_MIND_MAP } from "./bodyMindMap";
 import {
   DISCOMFORT_POINT_NUMBERS,
   POINT_ID_BY_REFERENCE_NUMBER,
@@ -136,79 +129,4 @@ export function recommend(
   }
 
   return positives.slice(0, limit);
-}
-
-export interface ScoredInsight {
-  entry: LocalizedBodyMindEntry;
-  score: number;
-  matchedRegions: BodyRegion[];
-  matchedEmotions: string[];
-  matchedDiscomfort: string[];
-}
-
-/**
- * Match the user's selections against the Body–Mind Map ("the brain") to
- * explain what their discomfort and emotions *may* be communicating.
- *
- * Relevance is tried in tiers, strongest first, and the first tier that yields
- * anything wins:
- *   1. entry overlaps BOTH the reported regions and the reported emotions;
- *   2. entry overlaps the reported regions;
- *   3. entry overlaps the reported emotions;
- *   4. entry overlaps the reported discomfort.
- *
- * The map is authored region-by-region, so demanding a region *and* an emotion
- * match left most selections with no reflection at all and silently skipped
- * step 3. Falling back keeps the connection honest — a card only ever claims the
- * overlap it actually has, via `matchedRegions`/`matchedEmotions`.
- *
- * Results are then capped to within 60% of the top score (avoids weak tails).
- */
-export function matchBodyMind(
-  physical: PhysicalAssessment,
-  emotionIds: string[],
-  limit = 3,
-): ScoredInsight[] {
-  const expanded = expandEmotionSelection(emotionIds);
-  const regionSet = new Set<BodyRegion>(physical.regions);
-  const discomfortSet = new Set(physical.discomfortTypes);
-  const requireRegion = physical.regions.length > 0;
-  const requireEmotion = emotionIds.length > 0;
-
-  const scored: ScoredInsight[] = BODY_MIND_MAP.map((entry) => {
-    const matchedRegions = entry.relatedRegions.filter((r) => regionSet.has(r));
-    const matchedEmotions = entry.emotionTags.filter((tag) => expanded.has(tag));
-    const matchedDiscomfort = entry.relatedDiscomfort.filter((d) => discomfortSet.has(d));
-
-    const score =
-      matchedRegions.length * 3 +
-      matchedEmotions.length * 2 +
-      matchedDiscomfort.length * 2;
-
-    return { entry, score, matchedRegions, matchedEmotions, matchedDiscomfort };
-  });
-
-  const withScore = scored.filter((s) => s.score > 0);
-  const tiers = [
-    (s: ScoredInsight) =>
-      (!requireRegion || s.matchedRegions.length > 0) &&
-      (!requireEmotion || s.matchedEmotions.length > 0),
-    (s: ScoredInsight) => requireRegion && s.matchedRegions.length > 0,
-    (s: ScoredInsight) => requireEmotion && s.matchedEmotions.length > 0,
-    (s: ScoredInsight) => s.matchedDiscomfort.length > 0,
-  ];
-
-  const relevant = tiers.reduce<ScoredInsight[]>(
-    (found, accept) => (found.length > 0 ? found : withScore.filter(accept)),
-    [],
-  );
-
-  if (relevant.length === 0) return [];
-
-  relevant.sort((a, b) => b.score - a.score);
-
-  const topScore = relevant[0].score;
-  const minScore = Math.max(topScore * 0.6, 3);
-
-  return relevant.filter((s) => s.score >= minScore).slice(0, limit);
 }

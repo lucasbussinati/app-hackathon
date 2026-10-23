@@ -5,7 +5,8 @@ import { recommend } from "../data/recommender";
 import { PointLightbox, PointThumbnail } from "../components/PointZoom";
 import { saveSession } from "../data/storage";
 import type { ReflexPoint, Session } from "../data/types";
-import { t, tagLabel } from "../i18n";
+import { signalLabel } from "../data/bodyRegions";
+import { t } from "../i18n";
 
 export default function Results() {
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ export default function Results() {
                   <p className="text-[11px] mt-2 text-sage-600">
                     {t.results.suggestedFor}{" "}
                     <span className="font-medium">
-                      {matches.slice(0, 4).map(tagLabel).join(", ")}
+                      {Array.from(new Set(matches.map(signalLabel))).slice(0, 4).join(", ")}
                     </span>
                   </p>
                 )}
@@ -96,7 +97,9 @@ export default function Results() {
 
             <div className="mt-3 space-y-2">
               <Section title={t.results.howTo}>{point.technique}</Section>
-              <Section title={t.results.whyHelps}>{point.rationale}</Section>
+              {point.rationale && (
+                <Section title={t.results.whyHelps}>{point.rationale}</Section>
+              )}
             </div>
           </li>
         ))}

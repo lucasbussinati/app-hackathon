@@ -27,6 +27,7 @@ const RAW_EMOTIONS: Emotion[] = [
   { id: "sadness.hurt", label: "Hurt", family: "sadness", level: 2, parentId: "sadness" },
   { id: "disappointed", label: "Let down", family: "sadness", level: 3, parentId: "sadness.hurt" },
   { id: "lonely", label: "Lonely", family: "sadness", level: 3, parentId: "sadness.hurt" },
+  { id: "guilty", label: "Guilty", family: "sadness", level: 3, parentId: "sadness.hurt" },
   { id: "sadness.drained", label: "Drained", family: "sadness", level: 2, parentId: "sadness" },
   { id: "tired", label: "Tired", family: "sadness", level: 3, parentId: "sadness.drained" },
   { id: "sad", label: "Sad", family: "sadness", level: 3, parentId: "sadness.drained" },
@@ -45,9 +46,11 @@ const RAW_EMOTIONS: Emotion[] = [
   { id: "fear.anxious", label: "Anxious", family: "fear", level: 2, parentId: "fear" },
   { id: "anxious", label: "Anxious", family: "fear", level: 3, parentId: "fear.anxious" },
   { id: "worried", label: "Worried", family: "fear", level: 3, parentId: "fear.anxious" },
+  { id: "expectant", label: "Expectant", family: "fear", level: 3, parentId: "fear.anxious" },
   { id: "fear.overwhelmed", label: "Overwhelmed", family: "fear", level: 2, parentId: "fear" },
   { id: "overwhelmed", label: "Overwhelmed", family: "fear", level: 3, parentId: "fear.overwhelmed" },
   { id: "insecure", label: "Insecure", family: "fear", level: 3, parentId: "fear.overwhelmed" },
+  { id: "anguished", label: "Anguished", family: "fear", level: 3, parentId: "fear.overwhelmed" },
 
   // ============================ SURPRISE ============================
   { id: "surprise", label: "Surprise", family: "surprise", level: 1 },

@@ -153,9 +153,11 @@ export default function History() {
                         <RecommendationText title={t.history.howTo}>
                           {point.technique}
                         </RecommendationText>
-                        <RecommendationText title={t.history.whyHelps}>
-                          {point.rationale}
-                        </RecommendationText>
+                        {point.rationale && (
+                          <RecommendationText title={t.history.whyHelps}>
+                            {point.rationale}
+                          </RecommendationText>
+                        )}
                       </li>
                     ))}
                   </ol>

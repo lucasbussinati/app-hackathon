@@ -62,19 +62,22 @@ export interface Strings {
     subtitle: string;
     intro: string;
     disclaimer: string;
-    theme: string;
-    physicalFunction: string;
-    meaning: string;
-    reflections: string;
-    questions: string;
-    patterns: string;
-    relatedPoints: string;
+    count: (n: number) => string;
+    expandAll: string;
+    collapseAll: string;
+    sections: {
+      physical: string;
+      emotional: string;
+      symbolic: string;
+      expressions: string;
+      reflections: string;
+      questions: string;
+    };
+    fallbackTitle: string;
+    fallbackNote: string;
     matchedFor: string;
-    emptyText: string;
-    beginAssessment: string;
     back: string;
     next: string;
-    categories: Record<"organ" | "gland" | "respiratory" | "spine" | "joint", string>;
   };
   results: {
     step: string;
@@ -238,28 +241,25 @@ const en: Strings = {
     title: "What your body may be saying",
     subtitle: "A reflective lens on how your body and feelings may be connected.",
     intro:
-      "In many traditions, each part of the body carries a symbolic theme. Based on what you shared, here is what these areas may be communicating — something to sit with, not a diagnosis.",
+      "Each point in your reflexology plan comes with our specialist's reading of what that part of the body may be expressing. Open a card to read it — something to sit with, not a diagnosis.",
     disclaimer:
       "This is a complementary, reflective reading — not medical advice or a diagnosis. Physical symptoms always deserve evaluation by a healthcare professional.",
-    theme: "Emotional theme",
-    physicalFunction: "What it does",
-    meaning: "What it may be saying",
-    reflections: "Reflection",
-    questions: "Sit with",
-    patterns: "Patterns",
-    relatedPoints: "Points that pair well",
-    matchedFor: "Matched from:",
-    emptyText: "Tell us where your body and feelings are first, and we'll reflect it back here.",
-    beginAssessment: "Begin assessment",
+    count: (n) => `${n} ${n === 1 ? "point" : "points"} in your plan`,
+    expandAll: "Expand all",
+    collapseAll: "Collapse all",
+    sections: {
+      physical: "What it does in the body",
+      emotional: "Emotional association",
+      symbolic: "Between body and emotion",
+      expressions: "In everyday words",
+      reflections: "To meditate on",
+      questions: "Questions to reflect on",
+    },
+    fallbackTitle: "Why it helps",
+    fallbackNote: "Our specialist's emotional reading for this point is still being written.",
+    matchedFor: "Suggested for:",
     back: "Back",
     next: "See my reflexology plan",
-    categories: {
-      organ: "organ",
-      gland: "gland",
-      respiratory: "respiratory",
-      spine: "spine",
-      joint: "joint",
-    },
   },
   results: {
     step: "Step 4 of 4",
@@ -457,28 +457,25 @@ const pt: Strings = {
     title: "O que seu corpo pode estar dizendo",
     subtitle: "Uma lente reflexiva sobre como seu corpo e suas emoções podem estar conectados.",
     intro:
-      "Em muitas tradições, cada parte do corpo carrega um tema simbólico. Com base no que você compartilhou, aqui está o que essas áreas podem estar comunicando — algo para refletir, não um diagnóstico.",
+      "Cada ponto do seu plano de reflexologia vem com a leitura da nossa especialista sobre o que aquela parte do corpo pode estar expressando. Abra um card para ler — algo para refletir, não um diagnóstico.",
     disclaimer:
       "Esta é uma leitura complementar e reflexiva — não é orientação médica nem diagnóstico. Sintomas físicos sempre merecem avaliação de um profissional de saúde.",
-    theme: "Tema emocional",
-    physicalFunction: "O que faz",
-    meaning: "O que pode estar dizendo",
-    reflections: "Reflexão",
-    questions: "Reflita sobre",
-    patterns: "Padrões",
-    relatedPoints: "Pontos que combinam",
-    matchedFor: "Relacionado a:",
-    emptyText: "Conte primeiro onde estão seu corpo e suas emoções, e nós refletimos isso aqui.",
-    beginAssessment: "Iniciar avaliação",
+    count: (n) => `${n} ${n === 1 ? "ponto" : "pontos"} no seu plano`,
+    expandAll: "Abrir todos",
+    collapseAll: "Fechar todos",
+    sections: {
+      physical: "Função física",
+      emotional: "Associação emocional",
+      symbolic: "Entre o corpo e a emoção",
+      expressions: "No dia a dia, dizemos",
+      reflections: "Para meditar",
+      questions: "Perguntas para reflexão",
+    },
+    fallbackTitle: "Por que ajuda",
+    fallbackNote: "A leitura emocional da especialista para este ponto ainda está sendo escrita.",
+    matchedFor: "Indicado para:",
     back: "Voltar",
     next: "Ver meu plano de reflexologia",
-    categories: {
-      organ: "órgão",
-      gland: "glândula",
-      respiratory: "respiratório",
-      spine: "coluna",
-      joint: "articulação",
-    },
   },
   results: {
     step: "Etapa 4 de 4",
@@ -639,6 +636,9 @@ const pt: Strings = {
     fear: "medo",
     resentful: "ressentimento",
     insecure: "insegurança",
+    guilty: "culpa",
+    expectant: "expectativa",
+    anguished: "angústia",
     hips: "quadril",
     legs: "pernas",
     feet: "pés",

@@ -29,8 +29,7 @@ const R2 = 108; // secondary ring outer
 const R3 = 146; // tertiary ring outer
 
 const PRIMARY_SWEEP = 360 / 6; // 60°
-const SECONDARY_SWEEP = PRIMARY_SWEEP / 2; // 30°
-const TERTIARY_SWEEP = SECONDARY_SWEEP / 2; // 15°
+const SECONDARY_SWEEP = PRIMARY_SWEEP / 2; // 30°, split evenly among its feelings
 
 export default function EmotionWheel({ selected, onToggle }: Props) {
   // Compute, for each wedge, whether it's directly selected and whether
@@ -80,9 +79,11 @@ export default function EmotionWheel({ selected, onToggle }: Props) {
               {/* ---------- Tertiary ring (outermost, selectable) ---------- */}
               {getSecondaries(family).map((secondary, s) => {
                 const secStart = primaryStart + s * SECONDARY_SWEEP;
-                return getTertiaries(secondary.id).map((tertiary, ti) => {
-                  const a0 = secStart + ti * TERTIARY_SWEEP;
-                  const a1 = a0 + TERTIARY_SWEEP;
+                const tertiaries = getTertiaries(secondary.id);
+                const tertiarySweep = SECONDARY_SWEEP / tertiaries.length;
+                return tertiaries.map((tertiary, ti) => {
+                  const a0 = secStart + ti * tertiarySweep;
+                  const a1 = a0 + tertiarySweep;
                   const isSelected = sel.has(tertiary.id);
                   const path = arcPath(CENTER, CENTER, R2, R3, a0, a1);
                   return (

@@ -1,6 +1,8 @@
-import type { BodyRegion, BodyView, DiscomfortType } from "./types";
+import type { BodyRegion, BodyView, DiscomfortType, EmotionFamily } from "./types";
 import { LANG } from "../i18n/config";
 import { PT_DISCOMFORT_LABELS, PT_REGION_LABELS } from "../i18n/content";
+import { t } from "../i18n/strings";
+import { FAMILY_LABELS, findEmotion } from "./emotions";
 
 export type { BodyView };
 
@@ -69,4 +71,20 @@ export const DISCOMFORT_TYPES =
 
 export function discomfortLabel(id: string): string {
   return DISCOMFORT_TYPES.find((d) => d.id === id)?.label ?? id;
+}
+
+/**
+ * Readable label for any recommender signal — a body region, a discomfort
+ * type, an emotion or an emotion family — in the active language. Curated
+ * `tagLabels` (noun forms such as "ansiedade") win when present.
+ */
+export function signalLabel(tag: string): string {
+  const curated = t.tagLabels[tag];
+  if (curated) return curated;
+  const label =
+    BODY_REGIONS.find((r) => r.id === tag)?.label ??
+    DISCOMFORT_TYPES.find((d) => d.id === tag)?.label ??
+    findEmotion(tag)?.label ??
+    (tag in FAMILY_LABELS ? FAMILY_LABELS[tag as EmotionFamily] : undefined);
+  return label ? label.toLowerCase() : tag;
 }
