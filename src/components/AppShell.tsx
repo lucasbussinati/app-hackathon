@@ -12,8 +12,8 @@ const navItems = [
 export default function AppShell() {
   const { pathname } = useLocation();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [musicMuted, setMusicMuted] = useState(
-    () => window.localStorage.getItem("sole:music-muted") === "true",
+  const [musicOn, setMusicOn] = useState(
+    () => window.localStorage.getItem("sole:music-on") === "true",
   );
   const onAssessmentFlow =
     pathname.startsWith("/body") ||
@@ -32,9 +32,11 @@ export default function AppShell() {
     if (!audio) return;
 
     audio.volume = 0.16;
-    audio.muted = musicMuted;
 
-    if (musicMuted) return;
+    if (!musicOn) {
+      audio.pause();
+      return;
+    }
 
     const startMusic = () => {
       void audio.play().catch(() => {
@@ -51,12 +53,12 @@ export default function AppShell() {
       document.removeEventListener("pointerdown", startMusic);
       document.removeEventListener("keydown", startMusic);
     };
-  }, [musicMuted]);
+  }, [musicOn]);
 
   const toggleMusic = () => {
-    setMusicMuted((current) => {
+    setMusicOn((current) => {
       const next = !current;
-      window.localStorage.setItem("sole:music-muted", String(next));
+      window.localStorage.setItem("sole:music-on", String(next));
       return next;
     });
   };
@@ -75,15 +77,14 @@ export default function AppShell() {
           <button
             type="button"
             onClick={toggleMusic}
-            aria-label={musicMuted ? t.music.unmute : t.music.mute}
-            aria-pressed={musicMuted}
-            title={musicMuted ? t.music.unmute : t.music.mute}
+            aria-label={musicOn ? t.music.mute : t.music.unmute}
+            title={musicOn ? t.music.mute : t.music.unmute}
             className="ml-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sage-500 transition-colors hover:bg-white/70 hover:text-sage-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400"
           >
-            {musicMuted ? (
-              <MusicMutedIcon className="h-[18px] w-[18px]" />
-            ) : (
+            {musicOn ? (
               <MusicPlayingIcon className="h-[18px] w-[18px]" />
+            ) : (
+              <MusicMutedIcon className="h-[18px] w-[18px]" />
             )}
           </button>
           <a
