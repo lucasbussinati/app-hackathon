@@ -354,7 +354,7 @@ const en: Strings = {
     ],
     lucasRole: "Product Manager & Software Engineer",
     lucasBio:
-      "Lucas Hideki Bussinati is the product and engineering mind behind Sole. As a software engineer, he built the app end to end — from the interface to the recommendation engine that turns Friderike's knowledge into working code. As a product manager, he shaped a dense, nuanced practice into a three-step experience with no jargon and no unnecessary decisions. Sole comes from that rare combination: the sensitivity of someone who designs for people, paired with the rigor of someone who writes the code that holds the experience together.",
+      "Lucas Hideki Bussinati is the product and engineering mind behind Sole. As a software engineer, he built the app end to end — from the interface to the recommendation engine that turns Friderike's knowledge into working code. As a product manager, he is committed to turning a dense, nuanced practice into an experience that feels simple, welcoming and free of jargon — and to keep refining it with every lesson learned from the people who use it. Sole comes from that combination: the sensitivity of someone who designs for people, paired with the rigor of someone who writes the code that holds the experience together, always in pursuit of the best possible experience.",
     linkedinCta: "Connect on LinkedIn",
     opensLinkedin: "Opens LinkedIn · ",
     whatIsTitle: "What Sole is",
@@ -571,7 +571,7 @@ const pt: Strings = {
     ],
     lucasRole: "Product Manager e Desenvolvedor de Software",
     lucasBio:
-      "Lucas Hideki Bussinati é a mente de produto e engenharia por trás do Sole. Como desenvolvedor de software, construiu o app de ponta a ponta — da interface ao motor de recomendação que traduz o conhecimento da Friderike em código. Como product manager, transformou um saber denso e cheio de nuances em uma experiência de três passos, sem jargão e sem decisão desnecessária. É dessa combinação rara que o Sole nasce: a sensibilidade de quem desenha para pessoas somada ao rigor de quem sustenta a experiência em código.",
+      "Lucas Hideki Bussinati é a mente de produto e engenharia por trás do Sole. Como desenvolvedor de software, construiu o app de ponta a ponta — da interface ao motor de recomendação que traduz o conhecimento da Friderike em código. Como product manager, tem um compromisso contínuo: transformar um saber denso e cheio de nuances em uma experiência simples, acolhedora e sem jargão, e seguir aprimorando-a a cada aprendizado com quem a utiliza. É dessa combinação que o Sole nasce: a sensibilidade de quem desenha para pessoas somada ao rigor de quem sustenta a experiência em código, sempre em busca da melhor experiência possível.",
     linkedinCta: "Conecte-se no LinkedIn",
     opensLinkedin: "Abre o LinkedIn · ",
     whatIsTitle: "O que é o Sole",
