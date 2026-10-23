@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { JOURNEY_ICONS } from "../data/journey";
 import { t } from "../i18n";
+import { AUTHOR_STORY, STORY_MINUTES } from "../i18n/authorStory";
 import photoFriderike from "../assets/team/friderike.jpeg";
 import photoEdson from "../assets/team/edson.jpeg";
 import photoLucas from "../assets/team/lucas.jpg";
@@ -68,6 +70,35 @@ export default function About() {
               {p}
             </p>
           ))}
+
+          <Link
+            to="/about/story"
+            className="group flex items-center gap-3 rounded-2xl border border-sand-200 bg-sand-50 p-3 transition-colors hover:border-sand-300 hover:bg-sand-100"
+          >
+            <span
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white font-display text-xl italic text-sage-700 shadow-soft"
+              aria-hidden
+            >
+              F
+            </span>
+            <span className="flex-1">
+              <span className="block text-[11px] uppercase tracking-widest font-semibold text-sage-500">
+                {AUTHOR_STORY.entryTitle}
+              </span>
+              <span className="block text-sm font-semibold text-sage-800">
+                {AUTHOR_STORY.entryCta}
+              </span>
+              <span className="block text-xs text-sage-600">
+                {AUTHOR_STORY.readingTime(STORY_MINUTES)}
+              </span>
+            </span>
+            <span
+              className="text-xl text-sage-500 transition-transform group-hover:translate-x-0.5"
+              aria-hidden
+            >
+              ›
+            </span>
+          </Link>
 
           <div className="rounded-2xl bg-sage-50 border border-sage-100 p-3">
             <p className="text-[11px] uppercase tracking-widest font-semibold text-sage-500 mb-1.5">

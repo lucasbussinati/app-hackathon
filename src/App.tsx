@@ -7,6 +7,7 @@ import Insights from "./screens/Insights";
 import Results from "./screens/Results";
 import History from "./screens/History";
 import About from "./screens/About";
+import AuthorStory from "./screens/AuthorStory";
 import { AssessmentProvider } from "./store/assessment";
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="results" element={<Results />} />
             <Route path="history" element={<History />} />
             <Route path="about" element={<About />} />
+            <Route path="about/story" element={<AuthorStory />} />
           </Route>
         </Routes>
       </HashRouter>
